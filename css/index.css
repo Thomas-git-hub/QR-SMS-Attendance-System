@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,300&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+
+body{
+	font-family: 'Montserrat', sans-serif;
+}
+
+.text-label{
+	color: #000033;
+}
+
+.card{
+	box-shadow: 8px 9px 15px 1px rgba(0,0,0,0.27);
+	-webkit-box-shadow: 8px 9px 15px 1px rgba(0,0,0,0.27);
+	-moz-box-shadow: 8px 9px 15px 1px rgba(0,0,0,0.27);
+	background-color: #f6f8fd;
+	border: none;
+}
+
+.card-header{
+	background-color: #f6f8fd;
+	color: #000033;
+	border-bottom: none;
+}
+
+.btn-submit{
+	width: 300px;
+	color: #f1f1f1;
+	background-color: #3895d3;
+	border: none;
+}
+
+.btn-submit:hover{
+	color: #ffffff;
+	background-color: #1261a0;
+	border: none;
+}
+
+.col-img{
+	background: rgb(88,204,237);
+	background: linear-gradient(180deg, rgba(88,204,237,1) 28%, rgba(56,149,211,1) 68%, rgba(18,97,160,1) 100%);
+}
+
+.col-img-title{
+	color: #ffffff;
+}
+
+.bi-facebook{
+	color: #ffff;
+	font-size: 120%;
+}
+
+.bi-instagram{
+	color: #ffff;
+	font-size: 120%;
+}
+
+.bi-youtube{
+	color: #ffff;
+	font-size: 120%;
+}
+
+.h6-system-title{
+	color: #1261a0;
+	font-size: 130%;
+	font-weight: bold;
+}
+
+.h3-login-title{
+	font-size: 100%;
+}
+
+.p-footer{
+	font-size: 60%;
+}
