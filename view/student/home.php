@@ -23,16 +23,16 @@
 <?php include 'includes/topnav.php';
 include 'includes/sidenav.php';
 ?>
-
+<div class="container-fluid">
 <div class="body-content">
 
 <div class="title">
 	<h3> Attendance Status </h3>
 </div>
 	
-	<div class="container-fluid">
+	
 		<div class="row table">
-			<table id="attendance" class="table display" >
+			<table id="datatable" class="table display" >
         <thead>
             <tr>
                 <th>Date</th>
@@ -230,7 +230,7 @@ include 'includes/sidenav.php';
 
 <script>
 	$(document).ready(function () {
-    $('#attendance').DataTable();
+    $('#datatable').DataTable();
 });
 </script>
 

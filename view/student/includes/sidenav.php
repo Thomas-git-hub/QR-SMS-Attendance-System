@@ -8,21 +8,21 @@
     <div class="nav-list">
       
       <li>
-       <a href="#">
+       <a href="home.php">
          <i class='bx bx-table' ></i>
          <span class="links_name">Attendance Status</span>
        </a>
        <span class="tooltip">Attendance Status</span>
      </li>
      <li>
-       <a href="#">
+       <a href="activities.php">
        <i class='bx bxs-file'></i>
          <span class="links_name">Activities</span>
        </a>
        <span class="tooltip">Activities</span>
      </li>
      <li>
-       <a href="#">
+       <a href="settings.php">
          <i class='bx bx-cog' ></i>
          <span class="links_name">Settings</span>
        </a>
