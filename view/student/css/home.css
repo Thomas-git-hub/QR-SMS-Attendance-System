@@ -1,0 +1,17 @@
+.body-content{
+	margin-left: 100px;
+	margin-top: 20px;
+}
+.title{
+	margin-bottom: 10px;
+}
+#attendance{
+	border: 1px solid #1261A0;
+	border-radius: 20px;
+	width: 100%;
+	padding: 10px;
+
+}
+.table{
+	overflow: scroll;
+}
