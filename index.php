@@ -6,10 +6,9 @@
 		<title>Qr Attendance System</title>
 	
 
-	<link rel="stylesheet" type="text/css" href="bootstrap/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="bootstrap/bootstrap.bundle.min.js">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/index.css">
-	<link rel="stylesheet" type="text/css" href="boxicon/boxicons.min.css">
+	<link rel="stylesheet" type="text/css" href="css/boxicons.min.css">
 
 	<!-- Option 1: Include in HTML -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
@@ -114,5 +113,7 @@
 		</footer>
 	</div> -->
 </div>
+
+  
 </body>
 </html>
