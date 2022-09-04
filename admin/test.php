@@ -48,7 +48,7 @@
       </div>
       <div class="modal-body">
         <form action=""  method="post" id="strandFrm">
-            <input name="id"  type="hidden">
+            <input  name="id"  type="hidden" value="0">
             <input  class="form-control" type="text" name="strandName" placeholder="strandName" required> <br>
             <select class="form-select"  name="strandGrade"  required>
                     <option value="11">Grade 11</option>
@@ -102,23 +102,92 @@ $(function() {
     }
 
     get();
-
+   
+    //  add and update
     $(document).on('submit', '#strandFrm', function(event){
         event.preventDefault();
+
+      
+
+        if($("input[name=id]").val()==0 ||  $("input[name=id]").val()=='')
+          var action ='add';
+        else
+          var action ='update';
+        
         $.ajax({
           type: 'POST',
-          url: './query/strandExe.php?action=add',
+          url: `./query/strandExe.php?action=${action}`,
           dataType: 'JSON',
           data: $('#strandFrm').serialize(),
           success: function (response) {
             console.log(response);
-            if(response.res){
+            if(response.res=='exist'){
+                alert("Duplicate");
+            }else  if(response.res){
                 alert('success');
                 $("#exampleModal").modal('hide');
+                $('#strand_tbl').DataTable().draw(); 
+                $('#strandFrm').trigger("reset");
+              
             }
           }
         });
     });
+
+    //  gettting the info
+    $(document).on('click', '.btn-update__strand', function(event){
+        event.preventDefault();
+        var id = this.id;
+        $.ajax({
+          type: 'POST',
+          url: './query/strandExe.php?action=getone',
+          dataType: 'JSON',
+          data: {"id":id},
+          success: function (response) {
+            console.log(response);
+            $("input[name=id]").val(response.str_ref_id);
+            $("input[name=strandName]").val(response.str_name);
+            $("input[name=strandGrade]").val(response.grade);
+            $("#exampleModal").modal('show');
+          }
+        });
+
+    });
+
+
+    // toggle
+
+    
+    $(document).on('click', '.btn-toggle__strand', function () {
+        var id = this.id;
+        var status = $(this).attr("data-status");
+       $.ajax({
+           type: 'POST',
+           url: './query/strandExe.php?action=toggle',
+           dataType: 'JSON',
+           data: {
+             'id' : id,
+             'status' :status,
+           },
+           success: function (response) {
+               console.log (response);
+            if(response.res){
+               if(response.status==1)
+                   $("#" + response.id ).removeClass("btn-success").addClass("btn-danger").attr("data-status",1).html('Disable');
+               else
+                   $("#" + response.id ).removeClass("btn-danger").addClass("btn-success").attr("data-status",0).html('Enable');
+            }else{
+               alert('Fail')
+            }
+              
+           }
+       });
+        
+      });
+    
+
+
+    
 
    
 
