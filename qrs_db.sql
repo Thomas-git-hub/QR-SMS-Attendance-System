@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 31, 2022 at 04:25 PM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.1
+-- Generation Time: Sep 04, 2022 at 09:55 AM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 7.4.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -174,16 +174,18 @@ CREATE TABLE `strand_tbl` (
   `str_id` int(11) NOT NULL,
   `str_ref_id` varchar(50) NOT NULL,
   `str_name` varchar(50) NOT NULL,
-  `grade` int(11) NOT NULL
+  `grade` int(11) NOT NULL,
+  `str_active` tinyint(4) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `strand_tbl`
 --
 
-INSERT INTO `strand_tbl` (`str_id`, `str_ref_id`, `str_name`, `grade`) VALUES
-(1, 'str1', 'ABM', 11),
-(2, 'str2', 'HUMMS', 12);
+INSERT INTO `strand_tbl` (`str_id`, `str_ref_id`, `str_name`, `grade`, `str_active`) VALUES
+(21, '166227803542308', 'ABM', 11, 0),
+(22, '166227806926885', 'ABM', 12, 1),
+(23, '166227807734104', 'STEM', 11, 1);
 
 -- --------------------------------------------------------
 
@@ -351,7 +353,7 @@ ALTER TABLE `instructor_tbl`
 -- AUTO_INCREMENT for table `strand_tbl`
 --
 ALTER TABLE `strand_tbl`
-  MODIFY `str_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `str_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `student_tbl`

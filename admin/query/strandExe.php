@@ -7,15 +7,58 @@ extract($_POST);
 $action = $_GET['action'];
 
 switch ($action) {
-    case 'add':
-        $id= get_random_figures();
+    case  'toggle':
+        if($status==1)
+        $status = 0;
+      else
+        $status = 1;
+        $data = Array (
+            'str_active' => $status,
+        );
+        $db->where ('str_ref_id', $id);
+        if ($db->update ('strand_tbl', $data))
+            $res = array("res" => true , "status" => $status , 'id' => $id);
+        else
+            $res = array("res" => false);
+        echo json_encode($res);
+        break;
+
+    case 'update':
+       
         $db->where("str_name", $strandName);
         $db->Where("grade", $strandGrade);
 
         if($db->has("strand_tbl")) {
             $res = array("res" => 'exist');
         }else{
-            $data = Array ("str_ref_id" =>  $id,
+            $data = Array (
+                            "str_name" =>  $strandName,
+                            "grade" =>  $strandGrade,
+                            //"date_added" => date('Y-m-d H:i:s')
+                          );
+            $db->Where("str_ref_id", $id);
+            if( $db->update ('strand_tbl', $data))
+                $res = array("res" => true);
+            else
+                $res = array("res" => false);
+        }
+        echo json_encode($res);
+        break;
+
+    case 'getone':
+        $db->where("str_ref_id", test_input($id));
+        $res= $db->getOne ("strand_tbl");
+        echo json_encode($res);
+        break;
+    case 'add':
+        $assignId= get_random_figures();
+        $db->where("str_name", $strandName);
+        $db->Where("grade", $strandGrade);
+
+        if($db->has("strand_tbl")) {
+            $res = array("res" => 'exist');
+        }else{
+            $data = Array ("str_ref_id" =>  $assignId,
                             "str_name" =>  $strandName,
                             "grade" =>  $strandGrade,
                             //"date_added" => date('Y-m-d H:i:s')
@@ -76,9 +119,13 @@ switch ($action) {
             //  eto para sa toggle pra maassign antin yung mga need na id pra pag nag pindot matic na
 
             if($row['str_active'] == 1)
-                $sub_array[] = ' <button type="button" id="'.$row['str_ref_id'].'"  data-status="'.$row['str_active'].'" class="btn btn-sm  btn-toggle__campus btn-danger">Disable</button>';
+                $sub_array[] = ' <button type="button" id="'.$row['str_ref_id'].'"  data-status="'.$row['str_active'].'" class="btn btn-sm  btn-toggle__strand btn-danger">Disable</button>
+                                 <button type="button" id="'.$row['str_ref_id'].'" class="btn btn-sm  btn-update__strand btn-warning">Update</button>
+                               ';
             else
-                $sub_array[] = ' <button type="button" id="'.$row['str_ref_id'].'"  data-status="'.$row['str_active'].'" class="btn btn-sm   btn-toggle__campus btn-sucess">Enable</button>';        
+                $sub_array[] = ' <button type="button" id="'.$row['str_ref_id'].'"  data-status="'.$row['str_active'].'" class="btn btn-sm   btn-toggle__strand btn-success">Enable</button>
+                                 <button type="button" id="'.$row['str_ref_id'].'" class="btn btn-sm  btn-update__strand btn-warning">Update</button>
+                              ';        
            
            
             $data[] = $sub_array;
