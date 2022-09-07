@@ -1,0 +1,130 @@
+.h5-page-title{
+  color: #072f5f;
+}
+
+.tbl-action-btn-update{
+	background-color: #32cd32;
+	color: #ffff;
+	font-size: 12px;
+}
+.tbl-action-btn-update:hover{
+  border-color: 1px solid #072f5f;
+  background-color: #ffff;
+  color: #072f5f;
+  font-size: 12px;
+}
+
+.tbl-action-btn-enable{
+  background-color: #fafa33;
+  color: #000000;
+  font-size: 12px;
+}
+.tbl-action-btn-enable:hover{
+  border-color: 1px solid #072f5f;
+  background-color: #ffff;
+  color: #072f5f;
+  font-size: 12px;
+}
+
+.tbl-action-btn-disable{
+	background-color: #FF0000;
+	color: #ffff;
+	font-size: 12px;
+}
+.tbl-action-btn-disable:hover{
+  border-color: 1px solid #072f5f;
+  background-color: #ffff;
+  color: #072f5f;
+  font-size: 12px;
+}
+
+.tbl-action-btn-assign{
+	background-color: #3895d3;
+	color: #ffff;
+	font-size: 12px;
+}
+.tbl-action-btn-assign:hover{
+  border-color: 1px solid #072f5f;
+  background-color: #ffff;
+  color: #072f5f;
+  font-size: 12px;
+}
+
+.create-prof-btn{
+	border: 1px solid #072f5f;
+	color: #072f5f;
+	border-radius: 5px;
+}
+
+.create-prof-btn:hover{
+	background-color: #072f5f;
+	color: #ffff;
+	border: 1px solid #072f5f;
+	border-radius: 15px;
+}
+
+/*MODAL CSS*/
+
+.modal-btn-add{
+  background-color: #ffffff;
+  border: 1px solid #072f5f;
+  color: #072f5f;
+  padding: 4px 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 40%;
+}
+
+.modal-btn-add:hover{
+  background-color: #072f5f;
+  border: 1px solid #072f5f;
+  color: #ffff;
+  padding: 4px 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 40%;
+}
+
+.modal-btn-close{
+  background-color: #1261a0;
+  border: 1px solid #072f5f;
+  color: #ffff;
+  padding: 4px 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 40%;
+}
+
+.modal-btn-close:hover{
+  background-color: #072f5f;
+  border: 1px solid #072f5f;
+  color: #ffff;
+  padding: 4px 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 40%;
+}

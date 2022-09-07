@@ -4,37 +4,63 @@
 
 body{
 	font-family: 'Montserrat', sans-serif;
+	background: rgb(88,204,237);
+	background: radial-gradient(circle, rgba(88,204,237,1) 29%, rgba(56,149,211,1) 68%, rgba(18,97,160,1) 100%);
 }
 
 .text-label{
 	color: #000033;
 }
 
+.bxs-user-circle{
+	font-size: 45px;
+	color: #1261a0;
+}
+.bxs-lock-open{
+	font-size: 45px;
+	color: #1261a0;
+}
+
 .card{
 	box-shadow: 8px 9px 15px 1px rgba(0,0,0,0.27);
 	-webkit-box-shadow: 8px 9px 15px 1px rgba(0,0,0,0.27);
 	-moz-box-shadow: 8px 9px 15px 1px rgba(0,0,0,0.27);
-	background-color: #f6f8fd;
-	border: none;
+
+		/* From https://css.glass */
+	background: rgba(255, 255, 255, 0.27);
+	border-radius: 16px;
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(3.1px);
+	-webkit-backdrop-filter: blur(3.1px);
+	border: 1px solid rgba(255, 255, 255, 0.22);
+
+	/*background-color: #f6f8fd;
+	border: none;*/
+	width: 40rem;
 }
 
 .card-header{
-	background-color: #f6f8fd;
+	background-color: transparent;
+	/*background-color: #f6f8fd;*/
 	color: #000033;
-	border-bottom: none;
+	border-bottom: 1px solid #ffff;
 }
 
 .btn-submit{
 	width: 300px;
 	color: #f1f1f1;
-	background-color: #3895d3;
+	background-color: #1261a0;
 	border: none;
 }
 
 .btn-submit:hover{
 	color: #ffffff;
-	background-color: #1261a0;
+	background-color: #072f5f;
 	border: none;
+}
+
+.card-footer{
+	background-color: transparent;
 }
 
 .col-img{
@@ -46,24 +72,9 @@ body{
 	color: #ffffff;
 }
 
-.bi-facebook{
-	color: #ffff;
-	font-size: 120%;
-}
-
-.bi-instagram{
-	color: #ffff;
-	font-size: 120%;
-}
-
-.bi-youtube{
-	color: #ffff;
-	font-size: 120%;
-}
-
 .h6-system-title{
-	color: #1261a0;
-	font-size: 130%;
+	color: #f6f8fd;
+	font-size: 180%;
 	font-weight: bold;
 }
 
@@ -73,4 +84,35 @@ body{
 
 .p-footer{
 	font-size: 60%;
+}
+
+@media screen and (max-width: 650px){
+
+.h6-system-title{
+	color: #1261a0;
+	font-size: 90%;
+	font-weight: bold;
+}
+
+.card{
+	box-shadow: 8px 9px 15px 1px rgba(0,0,0,0.27);
+	-webkit-box-shadow: 8px 9px 15px 1px rgba(0,0,0,0.27);
+	-moz-box-shadow: 8px 9px 15px 1px rgba(0,0,0,0.27);
+	background-color: #f6f8fd;
+	border: none;
+	width: 20rem;
+}
+
+.btn-submit{
+	width: 150px;
+	color: #f1f1f1;
+	background-color: #1261a0;
+	border: none;
+}
+
+.btn-submit:hover{
+	color: #ffffff;
+	background-color: #072f5f;
+	border: none;
+}
 }
