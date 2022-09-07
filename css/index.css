@@ -14,11 +14,11 @@ body{
 
 .bxs-user-circle{
 	font-size: 45px;
-	color: #1261a0;
+	color: #072f5f;
 }
 .bxs-lock-open{
 	font-size: 45px;
-	color: #1261a0;
+	color: #072f5f;
 }
 
 .card{
@@ -89,7 +89,7 @@ body{
 @media screen and (max-width: 650px){
 
 .h6-system-title{
-	color: #1261a0;
+	color: #072f5f;
 	font-size: 90%;
 	font-weight: bold;
 }
@@ -98,16 +98,37 @@ body{
 	box-shadow: 8px 9px 15px 1px rgba(0,0,0,0.27);
 	-webkit-box-shadow: 8px 9px 15px 1px rgba(0,0,0,0.27);
 	-moz-box-shadow: 8px 9px 15px 1px rgba(0,0,0,0.27);
-	background-color: #f6f8fd;
-	border: none;
+
+	/* From https://css.glass */
+	background: rgba(255, 255, 255, 0.27);
+	border-radius: 16px;
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(3.1px);
+	-webkit-backdrop-filter: blur(3.1px);
+	border: 1px solid rgba(255, 255, 255, 0.22);
+
+	/*background-color: #f6f8fd;
+	border: none;*/
 	width: 20rem;
 }
+
+.card-header{
+	background-color: transparent;
+	/*background-color: #f6f8fd;*/
+	color: #000033;
+	border-bottom: 1px solid #ffff;
+}
+
 
 .btn-submit{
 	width: 150px;
 	color: #f1f1f1;
 	background-color: #1261a0;
 	border: none;
+}
+
+.card-footer{
+	background-color: transparent;
 }
 
 .btn-submit:hover{
