@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+     
     <!-- online lng gumagana yung box icon -->
-	<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'> -->
-	<link rel="stylesheet" href="../css/sidebar.css">
-	<link rel="stylesheet" href="css/home.css">
-	<link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+ 
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/sidebar.css">
+  <link rel="stylesheet" href="../css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="../css/dataTables.bootstrap5.min.css">
 
+    <link rel="stylesheet" href="css/home.css">
+    
 	<title>Student</title>
 </head>
 <body>

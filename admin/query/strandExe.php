@@ -7,49 +7,49 @@ extract($_POST);
 $action = $_GET['action'];
 
 switch ($action) {
-    case  'toggle':
-        if($status==1)
-        $status = 0;
-      else
-        $status = 1;
-        $data = Array (
-            'str_active' => $status,
-        );
-        $db->where ('str_ref_id', $id);
-        if ($db->update ('strand_tbl', $data))
-            $res = array("res" => true , "status" => $status , 'id' => $id);
-        else
-            $res = array("res" => false);
-        echo json_encode($res);
-        break;
+    // case  'toggle':
+    //     if($status==1)
+    //     $status = 0;
+    //   else
+    //     $status = 1;
+    //     $data = Array (
+    //         'str_active' => $status,
+    //     );
+    //     $db->where ('str_ref_id', $id);
+    //     if ($db->update ('strand_tbl', $data))
+    //         $res = array("res" => true , "status" => $status , 'id' => $id);
+    //     else
+    //         $res = array("res" => false);
+    //     echo json_encode($res);
+    //     break;
 
-    case 'update':
+    // case 'update':
        
-        $db->where("str_name", $strandName);
-        $db->Where("grade", $strandGrade);
+    //     $db->where("str_name", $strandName);
+    //     $db->Where("grade", $strandGrade);
 
-        if($db->has("strand_tbl")) {
-            $res = array("res" => 'exist');
-        }else{
-            $data = Array (
-                            "str_name" =>  $strandName,
-                            "grade" =>  $strandGrade,
-                            //"date_added" => date('Y-m-d H:i:s')
-                          );
-            $db->Where("str_ref_id", $id);
-            if( $db->update ('strand_tbl', $data))
-                $res = array("res" => true);
-            else
-                $res = array("res" => false);
-        }
-        echo json_encode($res);
-        break;
+    //     if($db->has("strand_tbl")) {
+    //         $res = array("res" => 'exist');
+    //     }else{
+    //         $data = Array (
+    //                         "str_name" =>  $strandName,
+    //                         "grade" =>  $strandGrade,
+    //                         //"date_added" => date('Y-m-d H:i:s')
+    //                       );
+    //         $db->Where("str_ref_id", $id);
+    //         if( $db->update ('strand_tbl', $data))
+    //             $res = array("res" => true);
+    //         else
+    //             $res = array("res" => false);
+    //     }
+    //     echo json_encode($res);
+    //     break;
 
-    case 'getone':
-        $db->where("str_ref_id", test_input($id));
-        $res= $db->getOne ("strand_tbl");
-        echo json_encode($res);
-        break;
+    // case 'getone':
+    //     $db->where("str_ref_id", test_input($id));
+    //     $res= $db->getOne ("strand_tbl");
+    //     echo json_encode($res);
+    //     break;
     case 'add':
         $assignId= get_random_figures();
         $db->where("str_name", $strandName);
@@ -71,75 +71,83 @@ switch ($action) {
         echo json_encode($res);
         break;
 
-    case 'get':
-      
-        $output= array();
-        // yung table column na issort
-        $columns = array(
-            0 => 'grade',
-            1 => 'str_name',
-        );
+     case 'addblock':
+        $assignId= get_random_figures();
+        $db->where("block_name", $blockName);
+        $db->Where("str_ref_id", $str_ref);
 
-        //  kung ano yung isesearch
-        if(isset($_POST['search']['value'])){
-            $search_value = $_POST['search']['value'];
-            $db->where ("str_name", '%'.$search_value.'%', 'like');
-        }
-        // pag sort pag clinick yung sa colum na icon
-        if(isset($_POST['order'])) {
-            $column_name = $_POST['order'][0]['column'];
-            $order = $_POST['order'][0]['dir'];    
-            $db->orderBy($columns[$column_name],$order);
-        } 
-        // defeault ordering
-        else
-        {   
-            $db->orderBy("grade",'asc');
-            $db->orderBy("str_name",'asc');
-        }
-        if($_POST['length'] != -1)  {
-            $start = $_POST['start'];
-            $length = $_POST['length'];
-            $limit =  Array ($start, $length);
-        }	else{
-            $limit = null;
-        }
-        
-        //  kung saan tbl mag qquery // pwede din dito yung mga join
-        $outputs  =  $db->get('strand_tbl', $limit);
-        $data = array();
-
-        //  get data , make sure na lahat tama , pati ordering
-        foreach ($outputs as $row) { 
-            $sub_array = array();
-            // $sub_array[] = $count;
-            $sub_array[] = $row['grade'];
-            $sub_array[] = $row['str_name'];
-
-            //  eto para sa toggle pra maassign antin yung mga need na id pra pag nag pindot matic na
-
-            if($row['str_active'] == 1)
-                $sub_array[] = ' <button type="button" id="'.$row['str_ref_id'].'"  data-status="'.$row['str_active'].'" class="btn btn-sm  btn-toggle__strand btn-danger">Disable</button>
-                                 <button type="button" id="'.$row['str_ref_id'].'" class="btn btn-sm  btn-update__strand btn-warning">Update</button>
-                               ';
+        if($db->has("block_tbl")) {
+            $res = array("res" => 'exist');
+        }else{
+            $data = Array ("block_ref_id" =>  $assignId,
+                            "block_name" =>  $blockName,
+                            "str_ref_id" =>  $str_ref,
+                            //"date_added" => date('Y-m-d H:i:s')
+                          );
+            if( $db->insert ('block_tbl', $data))
+                $res = array("res" => true);
             else
-                $sub_array[] = ' <button type="button" id="'.$row['str_ref_id'].'"  data-status="'.$row['str_active'].'" class="btn btn-sm   btn-toggle__strand btn-success">Enable</button>
-                                 <button type="button" id="'.$row['str_ref_id'].'" class="btn btn-sm  btn-update__strand btn-warning">Update</button>
-                              ';        
-           
-           
-            $data[] = $sub_array;
-          
+                $res = array("res" => false);
         }
-
-        $res = array(
-            'draw'=> intval($_POST['draw']),
-            'recordsTotal' =>$db->count ,
-            'recordsFiltered'=>$db->getValue ("strand_tbl", "count(*)"),  // 
-            'data'=>$data,
-        );
         echo json_encode($res);
         break;
+
+        case 'addsub':
+        $assignId= get_random_figures();
+        $db->where("subject_name", $subName);
+        $db->Where("str_ref_id", $str_ref);
+
+        if($db->has("subject_tbl")) {
+            $res = array("res" => 'exist');
+        }else{
+            $data = Array ("subject_ref_id" =>  $assignId,
+                            "subject_name" =>  $subName,
+                            "str_ref_id" =>  $str_ref,
+                            //"date_added" => date('Y-m-d H:i:s')
+                          );
+            if( $db->insert ('subject_tbl', $data))
+                $res = array("res" => true);
+            else
+                $res = array("res" => false);
+        }
+        echo json_encode($res);
+        break;
+
+    // case 'get':
+      
+    //     $output= array();
+    //     // yung table column na issort
+    //     $columns = array(
+    //         0 => 'grade',
+    //         1 => 'str_name',
+    //     );
+        
+    //     //  kung saan tbl mag qquery // pwede din dito yung mga join
+    //     $outputs  =  $db->get('strand_tbl', $limit);
+    //     $data = array();
+
+    //     //  get data , make sure na lahat tama , pati ordering
+    //     foreach ($outputs as $row) { 
+    //         $sub_array = array();
+    //         // $sub_array[] = $count;
+    //         $sub_array[] = $row['grade'];
+    //         $sub_array[] = $row['str_name'];
+
+    //         //  eto para sa toggle pra maassign antin yung mga need na id pra pag nag pindot matic n
+           
+           
+    //         $data[] = $sub_array;
+          
+    //     }
+
+    //     $res = array(
+    //         'draw'=> intval($_POST['draw']),
+    //         'recordsTotal' =>$db->count ,
+    //         'recordsFiltered'=>$db->getValue ("strand_tbl", "count(*)"),  // 
+    //         'data'=>$data,
+    //     );
+    //     echo json_encode($res);
+    //     break;
 
     
    
