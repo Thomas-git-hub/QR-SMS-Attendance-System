@@ -19,12 +19,14 @@
 </head>
 <body>
 
+
 <?php
 include 'includes/topnav.php';
 include 'includes/sidenav.php';
 ?>
 
 <div class="container">
+<div class="body-content">
 
   <div class="row mt-4 mb-5">
     <div class="col d-flex justify-content-center">
@@ -156,7 +158,7 @@ include 'includes/sidenav.php';
 
     </div>
   </div>
-
+</div>
 
 <!-- Modal -->
 
