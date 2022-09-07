@@ -30,21 +30,46 @@ include 'includes/sidenav.php';
     <a href="manage-all.php"><i class='bx bx-arrow-back'></i></a>
   </div>
 
-  <div class="row mt-5">
+  <div class="row mt-5" id="subs">
     <div class="col d-flex justify-content-center mt-5">
       <div class="card card-subject" style="width: 40rem;">
         <div class="card-header card-subject-header d-flex justify-content-center">
           <h6 class="h6-block-name">
-            ABM &nbsp;
-            <small class="h6-small-grade-lvl">11</small>
+
+ <?php 
+ if (!isset($_GET['str_ref'])) {
+  header("Location: manage-all.php");
+ }
+
+    require_once '../includes/conn.php';
+$strand=$_GET['str_ref'];
+   
+$db->where ('str_ref_id', $strand);
+$results = $db->get ('strand_tbl');
+    foreach ($results as $strand) {
+      echo $strand['str_name'];
+?> 
+&nbsp;<small class="h6-small-grade-lvl"> <?php echo $strand['grade'];
+ } ?>
+            </small>
           </h6>
         </div>
         <div class="card-body d-flex justify-content-center">
           <div class="d-flex flex-column">
-            <h6 class=" h6-subject-name"><i class='bx bxs-book'></i>Komunikasyon at Pananaliksik sa Wika at Kulturang Pilipino</h6>
-            <h6 class="h6-subject-name"><i class='bx bxs-book'></i>Oral Communication in Context</h6>
-            <h6 class="h6-subject-name"><i class='bx bxs-book'></i>General Mathematics</h6>
-            <h6 class="h6-subject-name"><i class='bx bxs-book'></i>Earth and Life Science</h6>
+            <?php
+
+            $db->where('str_ref_id', $_GET['str_ref']);
+            $subjects = $db->get ('subject_tbl');
+
+             if ($db->count == 0) {
+                ?>
+                  <h6 class=" h6-subject-name">No subjects Found</h6>
+<?php
+}
+            foreach ($subjects as $sub) {
+?> 
+           <h6 class=" h6-subject-name"><i class='bx bxs-book'></i> <?php echo $sub['subject_name']; ?></h6>
+          <?php } ?>
           </div>
         </div>
         <div class="row d-flex justify-content-center">
@@ -69,9 +94,10 @@ include 'includes/sidenav.php';
         </button>
       </div>
       <div class="modal-body">
-        <form action=""  method="post" id="blockFrm">
+        <form action=""  method="post" id="subFrm">
         <label for="exampleInputEmail1">Input Subject Name</label>
-        <input type="" class="form-control" id="" placeholder="Subject Name" required>
+        <input type="text" name="str_ref" value="<?php echo $_GET['str_ref']; ?>">
+        <input type="" class="form-control" id="" placeholder="Subject Name" name="subName" required>
       </div>
       <div class="modal-footer d-flex justify-content-center">
         <button type="submit" class="modal-btn-add">Add</button>
@@ -103,50 +129,45 @@ include 'includes/sidenav.php';
 <script type="text/javascript" src="../js/dataTables.bootstrap5.min.js"></script>
 
 
-<!-- <script>
+
+
+<script>
 
 $(function() {
 
 
-    function get(){
-        var campusAdminTable=  $('#strand_tbl').DataTable({
-        serverSide: true,
-        processing: true,
-        paging: true,
-        order: [],
-        ajax: {
-            url: './query/strandExe.php?action=get',
-            type: 'post',
-        },
-        });
-    }
-
-    get();
-
-    $(document).on('submit', '#strandFrm', function(event){
+  
+    $(document).on('submit', '#subFrm', function(event){
         event.preventDefault();
+
         $.ajax({
           type: 'POST',
-          url: './query/strandExe.php?action=add',
+          url: `./query/manageAll_Exe.php?action=addsub`,
           dataType: 'JSON',
-          data: $('#strandFrm').serialize(),
+          data: $('#subFrm').serialize(),
           success: function (response) {
             console.log(response);
-            if(response.res){
+            if(response.res=='exist'){
+                alert("Duplicate");
+            }else  if(response.res){
                 alert('success');
-                $("#exampleModal").modal('hide');
+               $('.close').click(); 
+                $('#subFrm').trigger("reset");
+               $("#subs").load(location.href + " #subs");
+              
             }
           }
         });
     });
 
-   
+
 
 
 
 });
      
-</script> -->
+</script>
+
 
 </body>
 </html>

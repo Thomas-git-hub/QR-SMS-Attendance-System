@@ -12,9 +12,9 @@
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-	  <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
     <link rel="stylesheet" href="css/manage-all.css">
-	  <!-- <link rel="stylesheet" href="../css/buttons.dataTables.min.css">
+    <!-- <link rel="stylesheet" href="../css/buttons.dataTables.min.css">
     <link rel="stylesheet" href="../css/dataTables.bootstrap5.min.css"> -->
 </head>
 <body>
@@ -24,7 +24,7 @@ include 'includes/topnav.php';
 include 'includes/sidenav.php';
 ?>
 
-<div class="container">
+<div class="container body-content">
 
   <div class="row mt-4 mb-5">
     <div class="col d-flex justify-content-center">
@@ -39,120 +39,70 @@ include 'includes/sidenav.php';
     </div>
 
     <div class="accordion vh-100 d-flex flex-column" id="accordionExample">
-    <div class="accordion-item overflow-hidden d-flex flex-column">
-      <h2 class="accordion-header" id="headingOne">
-        <button class="accordion-button collapsed " type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseOne" aria-expanded="false">
-          <h6>GRADE <small>11-</small></h6>
-          <h6>ABM</h6>
-        </button>
-      </h2>
-      <div id="collapseOne" class="accordion-collapse collapse overflow-auto" aria-labelledby="headingOne" data-mdb-parent="#accordionExample">
-        <div class="accordion-body overflow-auto">
-          <div class="d-flex flex-column mx-5">
-            <div class="row">
-              <div class="col-6">
-                <button class="create-blk-btn" data-toggle="modal" data-target="#createBlock">Create Block</button>
-              </div>
-              <div class="col-6">
-                <a href="view-subjects.php"><button type="button" class="view-subjects-btn">View Subjects</button></a>
-              </div>
-            </div>
-            <div class="card card-style mt-2">
-              <div class="card-body">
-                <h6 class="h6-block-title">Block<small class="h6-small">A</small></h6>
-              </div>
-            </div>
-            <div class="card card-style mt-2">
-              <div class="card-body">
-                <h6 class="h6-block-title">Block<small class="h6-small">B</small></h6>
-              </div>
-            </div>
-            <div class="card card-style mt-2">
-              <div class="card-body">
-                <h6 class="h6-block-title">Block<small class="h6-small">C</small></h6>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+   
 
-    <div class="accordion-item overflow-hidden d-flex flex-column">
-      <h2 class="accordion-header" id="headingTwo">
-        <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          <h6>GRADE <small>12-</small></h6>
-          <h6>ABM</h6>
-        </button>
-      </h2>
-      <div id="collapseTwo" class="accordion-collapse collapse overflow-auto" aria-labelledby="headingTwo" data-mdb-parent="#accordionExample">
-        <div class="accordion-body overflow-auto">
-          <div class="d-flex flex-column mx-5">
-            <div class="row">
-              <div class="col-6">
-                <button class="create-blk-btn" data-toggle="modal" data-target="#createBlock">Create Block</button>
-              </div>
-              <div class="col-6">
-                <a href="view-subjects.php"><button class="view-subjects-btn">View Subjects</button></a>
-              </div>
-            </div>
-            <div class="card card-style mt-2">
-              <div class="card-body">
-                <h6 class="h6-block-title">Block<small class="h6-small">A</small></h6>
-              </div>
-            </div>
-            <div class="card card-style mt-2">
-              <div class="card-body">
-                <h6 class="h6-block-title">Block<small class="h6-small">B</small></h6>
-              </div>
-            </div>
-            <div class="card card-style mt-2">
-              <div class="card-body">
-                <h6 class="h6-block-title">Block<small class="h6-small">C</small></h6>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <?php 
 
+       require_once '../includes/conn.php';
+        
+    $users = $db->get ("strand_tbl");
+    if ($db->count == 0) {
+        echo "<div>No strands found</div>";
+    }
+    $collapse= 1;
+    foreach ($users as $strand) {
+      $collapse++;
+     $str_ref= $strand['str_ref_id']; 
+?> 
+  
    <div class="accordion-item overflow-hidden d-flex flex-column">
       <h2 class="accordion-header" id="headingThree">
-        <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapseThree" aria-expanded="false">
-          <h6>GRADE <small>11-</small></h6>
-          <h6>STEM</h6>
+  <button class="accordion-button collapsed" type="button" data-mdb-toggle="collapse" data-mdb-target="#collapse<?php echo $collapse ;?>" aria-expanded="false">
+           <h6>GRADE <small><?php echo $strand['grade'] ;?>-</small></h6>
+          <h6><?php echo $strand['str_name'] ;?></h6>
         </button>
       </h2>
-      <div id="collapseThree" class="accordion-collapse collapse overflow-auto" aria-labelledby="headingThree" data-mdb-parent="#accordionExample">
-        <div class="accordion-body overflow-auto">
+      <div id="collapse<?php echo $collapse ;?>" class="accordion-collapse collapse overflow-auto" aria-labelledby="headingThree" data-mdb-parent="#accordionExample">
+        <div class="accordion-body overflow-auto" id="block-card">
           <div class="d-flex flex-column mx-5">
             <div class="row">
               <div class="col-6">
-                <button class="create-blk-btn" data-toggle="modal" data-target="#createBlock">Create Block</button>
+                <button class="create-blk-btn" value="<?php echo $strand['str_ref_id']; ?>" data-toggle="modal" data-target="#createBlock">Create Block</button>
               </div>
               <div class="col-6">
-                <a href="view-subjects.php"><button class="view-subjects-btn">View Subjects</button></a>
+                <a href="view-subjects.php?str_ref=<?php echo $strand['str_ref_id']; ?>"><button class="view-subjects-btn">View Subjects</button></a>
               </div>
             </div>
+
+             <?php
+             $db->where ('str_ref_id', $str_ref );
+             $results = $db->get ('block_tbl');
+             if ($db->count == 0) {
+                ?>
             <div class="card card-style mt-2">
+            <div class="card-body">
+                <h6 class="h6-block-title">No blocks Found</h6>
+            </div>
+            </div>
+            <?php
+            }
+ foreach ($results as $block) {
+
+       ?>
+    
+            <div class="card card-style mt-2" >
               <div class="card-body">
-                <h6 class="h6-block-title">Block<small class="h6-small">A</small></h6>
+                <h6 class="h6-block-title">Block<small class="h6-small">  <?php echo $block['block_name']; ?></small></h6>
               </div>
             </div>
-            <div class="card card-style mt-2">
-              <div class="card-body">
-                <h6 class="h6-block-title">Block<small class="h6-small">B</small></h6>
-              </div>
-            </div>
-            <div class="card card-style mt-2">
-              <div class="card-body">
-                <h6 class="h6-block-title">Block<small class="h6-small">C</small></h6>
-              </div>
-            </div>
+              <?php } ?>
           </div>
         </div>
       </div>
     </div>
-
+<?php
+}
+?>
 
     </div>
   </div>
@@ -200,8 +150,9 @@ include 'includes/sidenav.php';
       </div>
       <div class="modal-body">
         <form action=""  method="post" id="blockFrm">
+          <input type="hidden" class="form-control" id="str_ref_id" placeholder="ref" value="" name="str_ref" required>
         <label for="exampleInputEmail1">Input Block Name</label>
-        <input type="" class="form-control" id="" placeholder="Block Name" required>
+        <input type="texts" class="form-control" id="" placeholder="Block Name" name="blockName" required>
       </div>
       <div class="modal-footer d-flex justify-content-center">
         <button type="submit" class="modal-btn-add">Add</button>
@@ -234,44 +185,69 @@ include 'includes/sidenav.php';
 <script type="text/javascript" src="../js/dataTables.bootstrap5.min.js"></script>
 
 
+<script type="text/javascript">  
+   $(function () {
+        $(".create-blk-btn").click(function () {
+            var my_id_value = $(this).val();
+            $(".modal-body #str_ref_id").val(my_id_value);
+        })
+    });
+ 
+</script>
+
 <script>
 
 $(function() {
 
 
-    function get(){
-        var campusAdminTable=  $('#strand_tbl').DataTable({
-        serverSide: true,
-        processing: true,
-        paging: true,
-        order: [],
-        ajax: {
-            url: './query/strandExe.php?action=get',
-            type: 'post',
-        },
-        });
-    }
-
-    get();
-
+  
     $(document).on('submit', '#strandFrm', function(event){
         event.preventDefault();
+
         $.ajax({
           type: 'POST',
-          url: './query/strandExe.php?action=add',
+          url: `./query/manageAll_Exe.php?action=add`,
           dataType: 'JSON',
           data: $('#strandFrm').serialize(),
           success: function (response) {
             console.log(response);
-            if(response.res){
+            if(response.res=='exist'){
+                alert("Duplicate");
+            }else  if(response.res){
                 alert('success');
-                $("#exampleModal").modal('hide');
+               $('.close').click(); 
+                $('#strandFrm').trigger("reset");
+               $("#accordionExample").load(location.href + " #accordionExample");
+              
             }
           }
         });
     });
 
-   
+
+    $(document).on('submit', '#blockFrm', function(event){
+        event.preventDefault();
+
+        $.ajax({
+          type: 'POST',
+          url: `./query/manageAll_Exe.php?action=addblock`,
+          dataType: 'JSON',
+          data: $('#blockFrm').serialize(),
+          success: function (response) {
+            console.log(response);
+            if(response.res=='exist'){
+                alert("Duplicate");
+            }else  if(response.res){
+                alert('success');
+                $('.close').click(); 
+                $('#blockFrm').trigger("reset");
+              $("#accordionExample").load(location.href + " #accordionExample");
+              
+              
+            }
+          }
+        });
+    });
 
 
 
@@ -281,5 +257,4 @@ $(function() {
 
 </body>
 </html>
-
 
