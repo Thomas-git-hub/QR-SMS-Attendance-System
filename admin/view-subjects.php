@@ -96,7 +96,7 @@ $results = $db->get ('strand_tbl');
       <div class="modal-body">
         <form action=""  method="post" id="subFrm">
         <label for="exampleInputEmail1">Input Subject Name</label>
-        <input type="text" name="str_ref" value="<?php echo $_GET['str_ref']; ?>">
+        <input type="hidden" name="str_ref" value="<?php echo $_GET['str_ref']; ?>">
         <input type="" class="form-control" id="" placeholder="Subject Name" name="subName" required>
       </div>
       <div class="modal-footer d-flex justify-content-center">
