@@ -43,7 +43,7 @@ include 'includes/sidenav.php';
         </div>
     </div> 
     
-    <div class="row table">
+    <div class="row table" id="proftable">
       <table id="datatable" class="table display" >
         <thead>
             <tr>
@@ -57,32 +57,39 @@ include 'includes/sidenav.php';
             </tr>
         </thead>
         <tbody>
+          <?php 
+
+       require_once '../includes/conn.php';
+        
+    $proffesors = $db->get ("instructor_tbl");
+    if ($db->count == 0) {
+        echo "<tr><td> Empty </td></tr>";
+    }
+    foreach ($proffesors as $prof) {
+?> 
             <tr>
-                <td>John Doe</td>
-                <td>2018-BNH-100309</td>
-                <td>instructor1@gmail.com</td>
-                <td>0987654321</td>
-                <td>instructo@gmail.com</td>
-                <td>12345</td>
+                <td><?php echo $prof['ins_fullname'] ;?></td>
+                <td><?php echo $prof['ins_idnumber'] ;?></td>
+                <td><?php echo $prof['username'] ;?></td>
+                <td><?php echo $prof['ins_contact'] ;?></td>
+                <td><?php echo $prof['username'] ;?></td>
+                <td><?php echo $prof['password'] ;?></td>
                 <td>
-                    <button class="btn tbl-action-btn-update" data-toggle="modal" data-target="#updateProf">Update</button>
-                    <button class="btn tbl-action-btn-enable">Enable</button>
-                    <button class="btn tbl-action-btn-disable">Disable</button>
+                    <button   id="<?php echo $prof['ins_ref_id'] ;?>" class="btn tbl-action-btn-update" data-toggle="modal" data-target="#updateProf">Update</button>
+                    <?php
+                    if ($prof['status']==1) { ?>
+
+                             <button type="button" class="btn btn-status tbl-action-btn-enable" id="<?php echo $prof['ins_id'] ;?>" data-status="<?php echo $prof['status'] ;?>" >Enable</button>
+                    <?php  }   
+                   else  {  ?>
+  
+                           <button type="button" class="btn  btn-status tbl-action-btn-disable" id="<?php echo $prof['ins_id'] ;?>" data-status="<?php echo $prof['status'] ;?>" >Disable</button>
+
+                    <?php   }    ?>
+                    
                 </td>
             </tr>
-            <tr>
-                <td>John Doe</td>
-                <td>2018-BNH-100309</td>
-                <td>instructor1@gmail.com</td>
-                <td>0987654321</td>
-                <td>instructo@gmail.com</td>
-                <td>12345</td>
-                <td>
-                    <button class="btn tbl-action-btn-update" data-toggle="modal" data-target="#updateProf">Update</button>
-                    <button class="btn tbl-action-btn-enable">Enable</button>
-                    <button class="btn tbl-action-btn-disable">Disable</button>
-                </td>
-            </tr>
+          <?php } ?>
         </tbody>
         <tfoot>
             <tr>
@@ -116,19 +123,19 @@ include 'includes/sidenav.php';
       </div>
 
       <div class="modal-body">
-        <form action=""  method="post" id="blockFrm" onsubmit="validateForm(event)">
+        <form action=""  method="post" id="profFrm" onsubmit="validateForm(event)">
         <label for="">Name</label>
-        <input type="text" class="form-control mb-2" id="" placeholder="Full Name" required>
+        <input type="text" class="form-control mb-2" id="" name="fullname" placeholder="Full Name" required>
         <label for="">ID No.</label>
-        <input type="" class="form-control mb-2" id="" placeholder="Employee ID No." required>
+        <input type="" class="form-control mb-2" id="" name="employeeid" placeholder="Employee ID No." required>
         <label for="">Contact No.</label>
-        <input type="" class="form-control mb-2" id="" placeholder="Contact No." required>
+        <input type="" class="form-control mb-2" id="" name="contact" placeholder="Contact No." required>
         <label for="exampleInputEmail1">Email Address</label>
-        <input type="" class="form-control mb-2" id="" placeholder="Input Email as Username" required>
+        <input type="email" class="form-control mb-2" id="" name="username" placeholder="Input Email as Username" required>
         <label for="">Password</label>
-        <input type="password" class="form-control mb-2" id="Password" onkeyup='passConfirm();' placeholder="Password" required>
+        <input type="password" class="form-control mb-2" id="Password" name="password" onkeyup='passConfirm();' placeholder="Password" required>
         <label for="">Confirm Password</label>
-        <input type="password" class="form-control mb-2" id="ConfirmPassword" onkeyup='passConfirm();' placeholder="Confirm Password" required>
+        <input type="password" class="form-control mb-2" id="ConfirmPassword" name="cpassword" onkeyup='passConfirm();' placeholder="Confirm Password" required>
         <span id="Message"></span>
       </div>
 
@@ -153,20 +160,23 @@ include 'includes/sidenav.php';
       </div>
 
       <div class="modal-body">
-        <form action=""  method="post" id="blockFrm" onsubmit="validateForm(event)">
+        <form action=""  method="post" id="updateProfFrm" onsubmit="validateForm(event)">
+        <input type="hidden" id="ins_ref_id" name="ins_ref" value="">
+          
         <label for="">Name</label>
-        <input type="text" readonly class="form-control-plaintext mb-2" id="" value="Thomas Allene Escoto">
+        <input type="text" readonly class="form-control-plaintext mb-2" name="fullname" id="" value="">
         <label for="">ID No.</label>
-        <input type="text" readonly class="form-control-plaintext mb-2" id="" value="2018-BNH-100309">
+        <input type="text" readonly class="form-control-plaintext mb-2" name="employeeid" id="" value="">
         <label for="">Contact No.</label>
-        <input type="" class="form-control mb-2" id="" placeholder="Contact No." required>
+        <input type="" class="form-control mb-2" id="" placeholder="Contact No." name="contact" value="" required>
         <label for="">Email Address</label>
-        <input type="email" class="form-control mb-2" id="" placeholder="Email" required>
+        <input type="email" class="form-control mb-2" id="" placeholder="Email" name="username" value="" required>
         <label for="">Update Password</label>
-        <input type="text" class="form-control mb-2" id="pass" onkeyup='passConfirmUpd();' placeholder="Password" required>
+        <input type="text" class="form-control mb-2" id="pass" onkeyup='passConfirmUpd();' name="password" placeholder="Password" required>
         <label for="">Confirm New Password</label>
         <input type="password" class="form-control mb-2" id="conPassword" onkeyup='passConfirmUpd();' placeholder="Confirm Password" required>
         <span id="messageUpd"></span>
+     
       </div>
 
       <div class="modal-footer d-flex justify-content-center">
@@ -222,6 +232,106 @@ include 'includes/sidenav.php';
             document.getElementById("messageUpd").innerHTML = "Passwords DIDN'T match!"
           }
         }
+
+
+     //  gettting the info
+    $(document).on('click', '.tbl-action-btn-update', function(event){
+        event.preventDefault();
+        var ins_ref = this.id;
+        $.ajax({
+          type: 'POST',
+          url: './query/manageProfessorExe.php?action=getone',
+          dataType: 'JSON',
+          data: {"ins_ref":ins_ref},
+          success: function (response) {
+            console.log(response);
+            $("input[name=ins_ref]").val(response.ins_ref_id);
+            $("input[name=fullname]").val(response.ins_fullname);
+            $("input[name=employeeid]").val(response.ins_idnumber);
+            $("input[name=contact]").val(response.ins_contact);
+            $("input[name=username]").val(response.username);
+
+            $("#exampleModal").modal('show');
+          }
+        });
+
+    });
+ 
+
+   $(document).on('submit', '#profFrm', function(event){
+        event.preventDefault();
+
+        $.ajax({
+          type: 'POST',
+          url: `./query/manageProfessorExe.php?action=add`,
+          dataType: 'JSON',
+          data: $('#profFrm').serialize(),
+          success: function (response) {
+            console.log(response);
+            if(response.res=='exist'){
+                alert('Account Already Exist');
+            }else  if(response.res){
+                alert('success');
+               $('.close').click(); 
+                $('#profFrm').trigger("reset");
+               $("#proftable").load(location.href + " #proftable");
+              
+            }
+          }
+        });
+    });
+
+    $(document).on('submit', '#updateProfFrm', function(event){
+        event.preventDefault();
+
+        $.ajax({
+          type: 'POST',
+          url: `./query/manageProfessorExe.php?action=update`,
+          dataType: 'JSON',
+          data: $('#updateProfFrm').serialize(),
+          success: function (response) {
+            console.log(response);
+           if(response.res=='exist'){
+                alert('Email Already Exist');
+            }else  if(response.res){
+                alert('success');
+               $('.close').click(); 
+                $('#updateProfFrm').trigger("reset");
+               $("#proftable").load(location.href + " #proftable");
+              
+            }
+          }
+        });
+    });
+
+
+        $(document).on('click', '.btn-status', function () {
+        var id = this.id;
+        var status = $(this).attr("data-status");
+       $.ajax({
+           type: 'POST',
+           url: './query/manageProfessorExe.php?action=toggle',
+           dataType: 'JSON',
+           data: {
+             'id' : id,
+             'status' :status,
+           },
+           success: function (response) {
+               console.log (response);
+            if(response.res){
+               if(response.status==1)
+                   
+                 $("#" + response.id ).removeClass("tbl-action-btn-disable").addClass("tbl-action-btn-enable").attr("data-status",0).html('Enable');
+               else
+                  $("#" + response.id ).removeClass("tbl-action-btn-enable").addClass("tbl-action-btn-disable").attr("data-status",1).html('Disable');
+            }else{
+               alert('Fail')
+            }
+              
+           }
+       });
+        
+      });
 </script>
 
 

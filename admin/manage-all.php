@@ -212,7 +212,7 @@ $(function() {
           success: function (response) {
             console.log(response);
             if(response.res=='exist'){
-                alert("Duplicate");
+                alert("Strand Already Exists");
             }else  if(response.res){
                 alert('success');
                $('.close').click(); 
@@ -236,7 +236,7 @@ $(function() {
           success: function (response) {
             console.log(response);
             if(response.res=='exist'){
-                alert("Duplicate");
+                alert("Block already exists");
             }else  if(response.res){
                 alert('success');
                 $('.close').click(); 
