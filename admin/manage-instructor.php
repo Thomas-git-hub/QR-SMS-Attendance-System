@@ -319,6 +319,7 @@ include 'includes/sidenav.php';
            success: function (response) {
                console.log (response);
             if(response.res){
+               $("#proftable").load(location.href + " #proftable");
                if(response.status==1)
                    
                  $("#" + response.id ).removeClass("tbl-action-btn-disable").addClass("tbl-action-btn-enable").attr("data-status",0).html('Enable');
