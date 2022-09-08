@@ -22,7 +22,7 @@
        <span class="tooltip">Manage Strand, Block & Subjects</span>
      </li>
      <li>
-       <a href="settings.php">
+       <a href="manage-instructor.php">
          <i class='bx bxs-group'></i>
          <span class="links_name">Manage Instructor</span>
        </a>
