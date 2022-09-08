@@ -128,3 +128,29 @@
   border-radius: 5px;
   width: 40%;
 }
+
+/*assign subject css*/
+
+.tbl-action-btn-view{
+  background-color: #32cd32;
+  color: #ffff;
+  font-size: 12px;
+}
+.tbl-action-btn-view:hover{
+  border-color: 1px solid #072f5f;
+  background-color: #ffff;
+  color: #072f5f;
+  font-size: 12px;
+}
+
+.tbl-action-btn-assign{
+  background-color: #1261a0;
+  color: #ffff;
+  font-size: 12px;
+}
+.tbl-action-btn-assign:hover{
+  border-color: 1px solid #072f5f;
+  background-color: #ffff;
+  color: #072f5f;
+  font-size: 12px;
+}
