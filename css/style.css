@@ -20,7 +20,7 @@ body {
 }
 
 .span-nav-title{
-  color: #1261a0;
+  color: #ffff;
 }
 
 .head__custom-nav button span img {
@@ -34,7 +34,7 @@ body {
 .head__custom-nav #navbarNav .navbar-nav .nav-item .nav-link{
   display: inline-block;
   padding: 8px 22px;
-  color: #1261a0;
+  color: #ffff;
   border: 1px solid transparent;
   text-decoration: none;
   /*transition: 0.5s cubic-bezier(0.785, 0.135, 0.15, 0.86);*/
@@ -50,7 +50,7 @@ body {
 .head__custom-nav #navbarNav .navbar-nav .nav-item .register {
   display: inline-block;
   padding: 8px 22px;
-  color: #1261a0;
+  color: #ffff;
   border: 1px solid transparent;
   border-radius: 10px;
   text-decoration: none;

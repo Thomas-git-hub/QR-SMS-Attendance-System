@@ -29,7 +29,7 @@
        <span class="tooltip">Manage Instructor</span>
      </li>
      <li>
-       <a href="settings.php">
+       <a href="assign-subject.php">
          <i class='bx bx-book-reader'></i>
          <span class="links_name">Assigned Subjects</span>
        </a>
