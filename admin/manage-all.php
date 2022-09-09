@@ -26,11 +26,19 @@ include 'includes/sidenav.php';
 
 <div class="container body-content">
 
-  <div class="row mt-4 mb-5">
-    <div class="col d-flex justify-content-center">
-      <h5 class="h5-page-title">MANAGE STRAND, BLOCK AND SUBJECTS</h5>
+  <div class="row mt-3 mb-5">
+        <div class="col">
+            <div class="card card-title-banner">
+                  <div class="card-body">
+                    <div class="row">
+                        <div class="col d-flex justify-content-center">
+                            <h1 class="h1-card-title">Manage Strand Block, & Subject</h1>
+                        </div>
+                      </div>
+                  </div>
+            </div>
+        </div>
     </div>
-  </div>
 
     <div class="row mt-3 mb-5">
       <div class="col d-flex justify-content-center">

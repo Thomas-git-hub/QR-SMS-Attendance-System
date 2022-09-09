@@ -31,11 +31,19 @@ include 'includes/sidenav.php';
 <div class="container-fluid">
 <div class="body-content">
 
-<div class="row mt-4 mb-5">
-    <div class="col d-flex justify-content-center">
-        <h5 class="h5-page-title">MANAGE INSTRUCTOR</h5>
+    <div class="row mt-3 mb-5">
+        <div class="col">
+            <div class="card card-title-banner">
+                  <div class="card-body">
+                    <div class="row">
+                        <div class="col d-flex justify-content-center">
+                            <h1 class="h1-card-title">Manage Instructors</h1>
+                        </div>
+                      </div>
+                  </div>
+            </div>
+        </div>
     </div>
-</div>
     
     <div class="row mt-5">
         <div class="col d-flex justify-content-end">
@@ -43,8 +51,8 @@ include 'includes/sidenav.php';
         </div>
     </div> 
     
-    <div class="row table" id="proftable">
-      <table id="datatable" class="table display" >
+    <div class="row table" id="proftable" style="overflow-y: hidden; overflow-x: hidden;">
+      <table id="datatable" class="table display">
         <thead>
             <tr>
                 <th>Name</th>
@@ -83,7 +91,7 @@ include 'includes/sidenav.php';
                     <?php  }   
                    else  {  ?>
   
-                           <button type="button" class="btn  btn-status tbl-action-btn-disable" id="<?php echo $prof['ins_id'] ;?>" data-status="<?php echo $prof['status'] ;?>" >Disable</button>
+                           <button type="button" class="btn btn-status tbl-action-btn-disable" id="<?php echo $prof['ins_id'] ;?>" data-status="<?php echo $prof['status'] ;?>" >Disable</button>
 
                     <?php   }    ?>
                     
@@ -319,7 +327,7 @@ include 'includes/sidenav.php';
            success: function (response) {
                console.log (response);
             if(response.res){
-               $("#proftable").load(location.href + " #proftable");
+               // $("#proftable").load(location.href + " #proftable");
                if(response.status==1)
                    
                  $("#" + response.id ).removeClass("tbl-action-btn-disable").addClass("tbl-action-btn-enable").attr("data-status",0).html('Enable');

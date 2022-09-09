@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../css/dataTables.bootstrap5.min.css">
 
     <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/dashboard.css">
     
 
 	<title>Admin</title>
@@ -27,204 +28,116 @@ include 'includes/sidenav.php';
 ?>
 
 <div class="container-fluid">
-<div class="body-content">
-    <div class="title">
-	<h3> Attendance Status </h3>
+<div class="body-content">  
+
+    <div class="row mb-5">
+        <div class="col">
+            <div class="card card-bnhs">
+                  <div class="card-body">
+                    <div class="row">
+                        <div class="col-6 d-flex align-items-center">
+                            <h1 class="h1-card-title">Bacong National High School<small class="h6-small-title mx-3">Ligao City</small></h1>
+                        </div>
+                        <div class="col-6 d-flex justify-content-center">
+                            <img src="assets/png/bnhs.png" width="40%;">
+                        </div>
+                      </div>
+                  </div>
+            </div>
+        </div>
     </div>
-	   
+
+	<div class="row mb-5">
+     <div class="row">
+        <div class="col d-flex justify-content-start">
+            <h3 class="mb-3 mx-2">Grade</h3>
+            <h3>11</h3>
+        </div>    
+     </div>
+
+     <div class="col-4">
+        <div class="card card-content-body">
+          <div class="card-body">
+            <div class="col-6">
+              <h1 class="card-text"><i class='bx bxs-group mx-2'></i>23</h1>
+              <span class="card-text">No. Of Students</span>
+            </div>
+          </div>
+        </div>
+     </div>
+
+     <div class="col-4">
+         <div class="card card-content-body">
+          <div class="card-body">
+            <h1 class="card-text"><i class='bx bx-book-reader mx-2'></i>23</h1>
+            <span class="card-text">No. of Strand</span>
+          </div>
+        </div>
+     </div>
+     <div class="col-4">
+         <div class="card card-content-body">
+          <div class="card-body">
+            <h1 class="card-text"><i class='bx bxs-book-content mx-2'></i>23</h1>
+            <span class="card-text">No. Of Block</span>
+          </div>
+        </div>
+     </div>   
+    </div>
+
+    <div class="row mb-3">
+     <div class="row">
+        <div class="col d-flex justify-content-start">
+            <h3 class="mb-3 mx-2">Grade</h3>
+            <h3>12</h3>
+        </div>    
+     </div>
+
+     <div class="col-4">
+        <div class="card card-content-body">
+          <div class="card-body">
+            <h1 class="card-text"><i class='bx bxs-group mx-2'></i>23</h1>
+            <span class="card-text">No. Of Students</span>
+          </div>
+        </div>
+     </div>
+
+     <div class="col-4">
+         <div class="card card-content-body">
+          <div class="card-body">
+            <h1 class="card-text"><i class='bx bx-book-reader mx-2'></i>23</h1>
+            <span class="card-text">No. of Strand</span>  
+          </div>
+        </div>
+     </div>
+     <div class="col-4">
+         <div class="card card-content-body">
+          <div class="card-body">
+            <h1 class="card-text"><i class='bx bxs-book-content mx-2'></i>23</h1>
+            <span class="card-text">No. Of Block</span>
+          </div>
+        </div>
+     </div>   
+    </div>
+
+    <div class="row mb-5" style="border-top: 1px solid #ff6f2e;">
+        <div class="col d-flex flex-column mt-3">
+            <div class="card card-instructor">
+                <div class="card-body">
+                    <h1 class="instructor-text"><i class='bx bxs-graduation mx-2' ></i>23</h1>
+                    <span class="instructor-text">No. Of Instructors</span>
+                </div>
+            </div>
+        </div>    
+    </div>
+
+    <div class="row mb-4">
+      <div class="col d-flex justify-content-center">
+        <p class="p-footer">Bicol University Polangui Campus 2022/2023&nbsp;</p>
+        <p class="p-footer">@copyright reserved</p>
+      </div>
+    </div>
 	
-		<div class="row table">
-			<table id="datatable" class="table display" >
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Professor</th>
-                <th>Subject</th>
-                <th>Attendance Log</th>
-                <th>Time In/Out</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-            	<td>2011-04-25</td>
-                <td>Tiger Nixon</td>
-                <td>Math</td>
-                <td>8:00 am</td>
-                <td>Time In</td>
-                <td>
-				<span class="badge rounded-pill text-bg-primary">On Time</span>
-				</td>
-            </tr>
-            <tr>
-            	<td>2011-04-25</td>
-                <td>Tiger Nixon</td>
-                <td>Math</td>
-                <td>3:00 pm</td>
-                <td>Time Out</td>
-                <td>
-				<span class="badge rounded-pill text-bg-primary">On Time</span>
-				</td>
-            </tr>
-            <tr>
-            	<td>2022-05-26</td>
-                <td>Karen Karen</td>
-                <td>English</td>
-                <td>8:30 am</td>
-                <td>Time In</td>
-                <td>
-				<span class="badge rounded-pill text-bg-danger">Late</span>
-				</td>
-            </tr>
-             <tr>
-            	<td>2022-05-26</td>
-                <td>Karen Karen</td>
-                <td>English</td>
-                <td>3:00 pm</td>
-                <td>Time Out</td>
-                <td>
-				 <span class="badge rounded-pill text-bg-primary">On Time</span>
-				</td>
-            </tr>
-            <tr>
-            	<td>2011-04-26</td>
-                <td>Tiger Nixon</td>
-                <td>Math</td>
-                <td>8:00 am</td>
-                <td>Time In</td>
-                <td>
-				<span class="badge rounded-pill text-bg-primary">On Time</span>
-				</td>
-            </tr>
-            <tr>
-            	<td>2011-04-26</td>
-                <td>Tiger Nixon</td>
-                <td>Math</td>
-                <td>3:00 pm</td>
-                <td>Time Out</td>
-                <td>
-				<span class="badge rounded-pill text-bg-primary">On Time</span>
-				</td>
-            </tr>
-            <tr>
-            	<td>2022-05-26</td>
-                <td>Karen Karen</td>
-                <td>English</td>
-                <td>8:30 am</td>
-                <td>Time In</td>
-                <td>
-				<span class="badge rounded-pill text-bg-danger">Late</span>
-				</td>
-            </tr>
-             <tr>
-            	<td>2022-05-26</td>
-                <td>Karen Karen</td>
-                <td>English</td>
-                <td>3:00 pm</td>
-                <td>Time Out</td>
-                <td>
-				<span class="badge rounded-pill text-bg-primary">On Time</span>
-				</td>
-            </tr>
-           
-           <tr>
-            	<td>2011-04-27</td>
-                <td>Tiger Nixon</td>
-                <td>Math</td>
-                <td>8:00 am</td>
-                <td>Time In</td>
-                <td>
-				<span class="badge rounded-pill text-bg-primary">On Time</span>
-				</td>
-            </tr>
-            <tr>
-            	<td>2011-04-27</td>
-                <td>Tiger Nixon</td>
-                <td>Math</td>
-                <td>3:00 pm</td>
-                <td>Time Out</td>
-                <td>
-				<span class="badge rounded-pill text-bg-primary">On Time</span>
-				</td>
-            </tr>
-            <tr>
-            	<td>2022-05-26</td>
-                <td>Karen Karen</td>
-                <td>English</td>
-                <td>8:30 am</td>
-                <td>Time In</td>
-                <td>
-				<span class="badge rounded-pill text-bg-danger">Late</span>
-				</td>
-            </tr>
-             <tr>
-            	<td>2022-05-26</td>
-                <td>Karen Karen</td>
-                <td>English</td>
-                <td>3:00 pm</td>
-                <td>Time Out</td>
-                <td>
-				 <span class="badge rounded-pill text-bg-primary">On Time</span>
-				</td>
-            </tr>
-            <tr>
-            	<td>2011-04-25</td>
-                <td>Tiger Nixon</td>
-                <td>Math</td>
-                <td>8:00 am</td>
-                <td>Time In</td>
-                <td>
-				<span class="badge rounded-pill text-bg-primary">On Time</span>
-				</td>
-            </tr>
-            <tr>
-            	<td>2011-04-25</td>
-                <td>Tiger Nixon</td>
-                <td>Math</td>
-                <td>3:00 pm</td>
-                <td>Time Out</td>
-                <td>
-				<span class="badge rounded-pill text-bg-primary">On Time</span>
-				</td>
-            </tr>
-            <tr>
-            	<td>2022-05-26</td>
-                <td>Karen Karen</td>
-                <td>English</td>
-                <td>8:30 am</td>
-                <td>Time In</td>
-                <td>
-				<span class="badge rounded-pill text-bg-danger">Late</span>
-				</td>
-            </tr>
-             <tr>
-            	<td>2022-05-26</td>
-                <td>Karen Karen</td>
-                <td>English</td>
-                <td>3:00 pm</td>
-                <td>Time Out</td>
-                <td>
-				<span class="badge rounded-pill text-bg-primary">On Time</span>
-				</td>
-            </tr>
-        </tbody>
-        <tfoot>
-            <tr>
-                 <th>Date</th>
-                <th>Professor</th>
-                <th>Subject</th>
-                <th>Attendance Log</th>
-                <th>Time In/Out</th>
-                <th>Status</th>
-            </tr>
-        </tfoot>
-    </table>
-		</div>
-	</div>
-
 </div>
-
-
 </div>
 
 
@@ -241,12 +154,6 @@ include 'includes/sidenav.php';
 <script type="text/javascript" src="../js/vfs_fonts.js"></script>
 <script type="text/javascript" src="../js/buttons.html5.min.js"></script>
 <script type="text/javascript" src="../js/dataTables.bootstrap5.min.js"></script>
-<script>
-	$(document).ready(function () {
-        $('#datatable').DataTable();
-    });
-</script>
-
 
 </body>
 </html>
