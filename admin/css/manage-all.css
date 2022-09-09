@@ -1,5 +1,13 @@
-.h5-page-title{
-  color: #072f5f;
+.card-title-banner{
+  background-color: #072f5f;
+  border-radius: 20px;
+}
+
+.h1-card-title{
+  font-size: 45px;
+  background: linear-gradient(90deg, rgba(0,82,193,1) 0%, rgba(0,228,255,1) 50%, rgba(0,255,222,1) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .button {
@@ -19,7 +27,7 @@
 }
 
 .button:hover {
-  background-color: #1261a0;
+  background-color: #072f5f;
   border: 1px solid #072f5f;
   color: #ffff;
   padding: 8px 16px;
@@ -127,9 +135,11 @@ a .bx-arrow-back{
   color: #1261a0;
 }
 .h6-block-name{
-  font-size: 20px;
+  font-size: 30 px;
   font-weight: normal; 
-  color: #072f5f;
+  background: linear-gradient(90deg, rgba(0,82,193,1) 0%, rgba(0,228,255,1) 50%, rgba(0,255,222,1) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .h6-small-grade-lvl{
   font-size: 25px;
@@ -151,7 +161,7 @@ a .bx-arrow-back{
 }
 
 .card-subject-header{
-  background-color: #f6f8fd;
+  background-color: #072f5f;
   border-bottom: none;
 }
 

@@ -31,9 +31,17 @@ include 'includes/sidenav.php';
 <div class="container-fluid">
 <div class="body-content">
 
-    <div class="row mt-4 mb-5">
-        <div class="col d-flex justify-content-center">
-            <h5 class="h5-page-title">VIEWING AND ASSIGNING OF SUBJECTS</h5>
+    <div class="row mt-3 mb-5">
+        <div class="col">
+            <div class="card card-title-banner">
+                  <div class="card-body">
+                    <div class="row">
+                        <div class="col d-flex justify-content-center">
+                            <h1 class="h1-card-title">View and Assign Subjects</h1>
+                        </div>
+                      </div>
+                  </div>
+            </div>
         </div>
     </div>
     
