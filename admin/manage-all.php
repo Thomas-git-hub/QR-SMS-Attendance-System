@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/sidebar.css">
     <link rel="stylesheet" href="css/manage-all.css">
+    <link rel="stylesheet" href="css/home.css">
     <!-- <link rel="stylesheet" href="../css/buttons.dataTables.min.css">
     <link rel="stylesheet" href="../css/dataTables.bootstrap5.min.css"> -->
 </head>
@@ -24,7 +25,8 @@ include 'includes/topnav.php';
 include 'includes/sidenav.php';
 ?>
 
-<div class="container body-content">
+<div class="container-fluid">
+<div class="body-content">
 
   <div class="row mt-3 mb-5">
         <div class="col">
@@ -114,6 +116,7 @@ include 'includes/sidenav.php';
 
     </div>
   </div>
+</div>
 
 
 <!-- Modal -->
