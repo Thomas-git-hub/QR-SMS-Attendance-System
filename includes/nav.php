@@ -19,7 +19,7 @@
         <header class="head my-3">
             <nav class="navbar navbar-expand-lg navbar-light head__custom-nav">
                 <a class="navbar-brand d-flex align-items-center" href="#">
-                    <!-- <img src="assets/png/logo_2.png" alt="website logo"> -->
+                    <img src="assets/png/bnhs.png" alt="BNHS">
                     <span class="span-nav-title">Bicol University Polangui Campus</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
@@ -28,7 +28,7 @@
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="login-cards.php">Login</a>
+                            <a class="nav-link" href="index.php">Login</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link register" href="registration.php">Student Registration</a>

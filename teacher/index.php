@@ -1,1 +1,0 @@
-dito ata yung cards
