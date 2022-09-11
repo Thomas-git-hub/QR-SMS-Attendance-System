@@ -4,8 +4,8 @@
 
 body{
 	font-family: 'Montserrat', sans-serif;
-	background: rgb(88,204,237);
-	background: radial-gradient(circle, rgba(88,204,237,1) 29%, rgba(56,149,211,1) 68%, rgba(18,97,160,1) 100%);
+	background: rgb(0,255,247);
+	background: radial-gradient(circle, rgba(0,255,247,1) 0%, rgba(45,151,233,1) 49%, rgba(0,59,99,1) 100%);
 }
 
 .text-label{
@@ -21,22 +21,28 @@ body{
 	color: #072f5f;
 }
 
-.card{
-	box-shadow: 8px 9px 15px 1px rgba(0,0,0,0.27);
-	-webkit-box-shadow: 8px 9px 15px 1px rgba(0,0,0,0.27);
-	-moz-box-shadow: 8px 9px 15px 1px rgba(0,0,0,0.27);
-
+.card-login{
 		/* From https://css.glass */
-	background: rgba(255, 255, 255, 0.27);
+	background: rgba(61, 61, 61, 0.22);
 	border-radius: 16px;
 	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-	backdrop-filter: blur(3.1px);
-	-webkit-backdrop-filter: blur(3.1px);
-	border: 1px solid rgba(255, 255, 255, 0.22);
+	backdrop-filter: blur(4.7px);
+	-webkit-backdrop-filter: blur(4.7px);
+	border: 1px solid rgba(61, 61, 61, 0.56);
 
-	/*background-color: #f6f8fd;
-	border: none;*/
 	width: 40rem;
+}
+
+.card-registration{
+	/* From https://css.glass */
+	background: rgba(61, 61, 61, 0.22);
+	border-radius: 16px;
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(4.7px);
+	-webkit-backdrop-filter: blur(4.7px);
+	border: 1px solid rgba(61, 61, 61, 0.56);
+
+	width: 60rem;
 }
 
 .card-header{
@@ -44,6 +50,10 @@ body{
 	/*background-color: #f6f8fd;*/
 	color: #000033;
 	border-bottom: 1px solid #ffff;
+}
+
+.lbl-form{
+	color: #fff;
 }
 
 .btn-submit{
@@ -89,32 +99,38 @@ body{
 @media screen and (max-width: 650px){
 
 .h6-system-title{
-	color: #072f5f;
+	color: #ffff;
 	font-size: 90%;
 	font-weight: bold;
 }
 
-.card{
-	box-shadow: 8px 9px 15px 1px rgba(0,0,0,0.27);
-	-webkit-box-shadow: 8px 9px 15px 1px rgba(0,0,0,0.27);
-	-moz-box-shadow: 8px 9px 15px 1px rgba(0,0,0,0.27);
-
-	/* From https://css.glass */
-	background: rgba(255, 255, 255, 0.27);
+.card-login{
+		/* From https://css.glass */
+	background: rgba(61, 61, 61, 0.22);
 	border-radius: 16px;
 	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-	backdrop-filter: blur(3.1px);
-	-webkit-backdrop-filter: blur(3.1px);
-	border: 1px solid rgba(255, 255, 255, 0.22);
+	backdrop-filter: blur(4.7px);
+	-webkit-backdrop-filter: blur(4.7px);
+	border: 1px solid rgba(61, 61, 61, 0.56);
 
-	/*background-color: #f6f8fd;
-	border: none;*/
 	width: 20rem;
 }
 
+.card-registration{
+	/* From https://css.glass */
+	background: rgba(61, 61, 61, 0.22);
+	border-radius: 16px;
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	backdrop-filter: blur(4.7px);
+	-webkit-backdrop-filter: blur(4.7px);
+	border: 1px solid rgba(61, 61, 61, 0.56);
+
+	width: 20rem;
+}
+
+
 .card-header{
 	background-color: transparent;
-	/*background-color: #f6f8fd;*/
 	color: #000033;
 	border-bottom: 1px solid #ffff;
 }
@@ -135,5 +151,11 @@ body{
 	color: #ffffff;
 	background-color: #072f5f;
 	border: none;
+}
+
+.row-reg-form{
+    display: flex;
+  	flex-direction: column;
+  	justify-content: space-between;
 }
 }

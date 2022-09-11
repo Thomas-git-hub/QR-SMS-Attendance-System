@@ -1,0 +1,41 @@
+.body-content{
+	margin-left: 100px;
+	margin-top: 20px;
+	margin-right: 20px;
+
+}
+.title{
+	margin-bottom: 10px;
+}
+#datatable{
+	border: 1px solid #1261A0;
+	border-radius: 20px;
+	width: 100%;
+	padding: 10px;
+
+}
+.table{
+	overflow: scroll;
+}
+.settings{
+	border: 1px solid #1261A0;
+	border-radius: 20px;
+	padding: 10px;
+	width: 100%;
+
+}
+.update{
+	margin-top: 10px;
+	margin-bottom: 15px;
+
+}
+.dropdown-menu a{
+	display: flex;
+	vertical-align: middle;
+}
+
+.topnav_icon{
+	font-size: 1.2rem;
+	margin-left: 10px;
+	padding-top: 1px;
+}
