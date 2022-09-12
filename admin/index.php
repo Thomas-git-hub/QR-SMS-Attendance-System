@@ -59,7 +59,22 @@ include 'includes/sidenav.php';
         <div class="card card-content-body">
           <div class="card-body">
             <div class="col-6">
-              <h1 class="card-text"><i class='bx bxs-group mx-2'></i>23</h1>
+              <h1 class="card-text"><i class='bx bxs-group mx-2'></i>
+  <?php 
+
+       require_once '../includes/conn.php';
+       $db->join("assign_student ass", "ass.student=s.stf_ref_id", "LEFT");
+       $db->join("block_subject bs", "bs.bs_id=ass.bs_id", "LEFT");
+       $db->join("subject_tbl sb", "sb.subject_ref_id=bs.subject_ref_id", "LEFT");
+       $db->join("strand_tbl str", "str.str_ref_id=sb.str_ref_id", "LEFT");
+
+
+        $db->where ("str.grade", 11);
+        $count = $db->getValue ("student_tbl s" , "count(*)");
+        echo "{$count}";
+        ?>
+
+              </h1>
               <span class="card-text">No. Of Students</span>
             </div>
           </div>
@@ -69,7 +84,13 @@ include 'includes/sidenav.php';
      <div class="col-4">
          <div class="card card-content-body">
           <div class="card-body">
-            <h1 class="card-text"><i class='bx bx-book-reader mx-2'></i>23</h1>
+            <h1 class="card-text"><i class='bx bx-book-reader mx-2'></i>
+            <?php 
+
+  $db->where ("grade", 11);    
+$count = $db->getValue ("strand_tbl", "count(*)");
+echo "{$count}";
+?></h1>
             <span class="card-text">No. of Strand</span>
           </div>
         </div>
@@ -77,7 +98,14 @@ include 'includes/sidenav.php';
      <div class="col-4">
          <div class="card card-content-body">
           <div class="card-body">
-            <h1 class="card-text"><i class='bx bxs-book-content mx-2'></i>23</h1>
+            <h1 class="card-text"><i class='bx bxs-book-content mx-2'></i>
+            <?php 
+
+$db->join("strand_tbl s", "s.str_ref_id=b.str_ref_id");
+$db->where("s.grade",11);  
+$count = $db->getValue ("block_tbl b", "count(*)");
+echo "{$count}";
+?></h1>
             <span class="card-text">No. Of Block</span>
           </div>
         </div>
@@ -95,7 +123,20 @@ include 'includes/sidenav.php';
      <div class="col-4">
         <div class="card card-content-body">
           <div class="card-body">
-            <h1 class="card-text"><i class='bx bxs-group mx-2'></i>23</h1>
+            <h1 class="card-text"><i class='bx bxs-group mx-2'></i>
+                <?php 
+                $db->join("assign_student ass", "ass.student=s.stf_ref_id", "LEFT");
+       $db->join("block_subject bs", "bs.bs_id=ass.bs_id", "LEFT");
+       $db->join("subject_tbl sb", "sb.subject_ref_id=bs.subject_ref_id", "LEFT");
+       $db->join("strand_tbl str", "str.str_ref_id=sb.str_ref_id", "LEFT");
+
+
+        $db->where ("str.grade", 12);
+        $count = $db->getValue ("student_tbl s" , "count(*)");
+        echo "{$count}";
+        ?>
+
+ </h1>
             <span class="card-text">No. Of Students</span>
           </div>
         </div>
@@ -104,7 +145,14 @@ include 'includes/sidenav.php';
      <div class="col-4">
          <div class="card card-content-body">
           <div class="card-body">
-            <h1 class="card-text"><i class='bx bx-book-reader mx-2'></i>23</h1>
+            <h1 class="card-text"><i class='bx bx-book-reader mx-2'></i>
+             <?php 
+
+  $db->where ("grade", 12);    
+$count = $db->getValue ("strand_tbl", "count(*)");
+echo "{$count}";
+?>
+</h1>
             <span class="card-text">No. of Strand</span>  
           </div>
         </div>
@@ -112,7 +160,14 @@ include 'includes/sidenav.php';
      <div class="col-4">
          <div class="card card-content-body">
           <div class="card-body">
-            <h1 class="card-text"><i class='bx bxs-book-content mx-2'></i>23</h1>
+            <h1 class="card-text"><i class='bx bxs-book-content mx-2'></i>
+              <?php 
+
+$db->join("strand_tbl s", "s.str_ref_id=b.str_ref_id");
+$db->where("s.grade",12);  
+$count = $db->getValue ("block_tbl b", "count(*)");
+echo "{$count}";
+?></h1>
             <span class="card-text">No. Of Block</span>
           </div>
         </div>
@@ -123,7 +178,11 @@ include 'includes/sidenav.php';
         <div class="col d-flex flex-column mt-3">
             <div class="card card-instructor">
                 <div class="card-body">
-                    <h1 class="instructor-text"><i class='bx bxs-graduation mx-2' ></i>23</h1>
+                    <h1 class="instructor-text"><i class='bx bxs-graduation mx-2' ></i>
+                        <?php 
+$count = $db->getValue ("instructor_tbl", "count(*)");
+        echo "{$count}";
+                    ?></h1>
                     <span class="instructor-text">No. Of Instructors</span>
                 </div>
             </div>

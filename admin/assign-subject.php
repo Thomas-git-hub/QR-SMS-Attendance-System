@@ -60,73 +60,38 @@ include 'includes/sidenav.php';
                     </tr>
                 </thead>
                 <tbody>
+                       <?php 
+
+       require_once '../includes/conn.php';
+        
+    $proffesors = $db->get ("instructor_tbl");
+    if ($db->count == 0) {
+        echo "<tr><td> Empty </td></tr>";
+    }
+    foreach ($proffesors as $prof) {
+?> 
                     <tr>
-                        <td>John Doe</td>
-                        <td>2018-BNH-100309</td>
+                        <td><?php echo $prof['ins_fullname'] ;?></td>
+                <td><?php echo $prof['ins_idnumber'] ;?></td>
                         <td>
-                            <button class="btn tbl-action-btn-view" id="">View Subs</button>
-                            <button class="btn tbl-action-btn-assign" data-toggle="modal" data-target="#assignSub">Assign Sub</button>
+                            <a class="btn tbl-action-btn-view" href="assigned.php?ins_ref=<?php echo $prof['ins_ref_id'] ; ?>" target="assigned" id="">View Subs</a>
+                            <button class="btn tbl-action-btn-assign" value="<?php echo $prof['ins_ref_id'] ;?>" data-toggle="modal" data-target="#assignSub">Assign Sub</button>
                         </td>
                     </tr>
-                    <tr>
-                        <td>John Doe</td>
-                        <td>2018-BNH-100309</td>
-                        <td>
-                            <button class="btn tbl-action-btn-view" id="">View Subs</button>
-                            <button class="btn tbl-action-btn-assign" data-toggle="modal" data-target="#assignSub">Assign Sub</button>
-                        </td>
-                    </tr>
+                <?php } ?>
+                    
                 </tbody>
             </table>
         </div>
     </div>
 
 
-        <div class="col-5" style="border-left: 1px solid #f1f1f1;">
+        <div class="col-5" style="border-left: 1px solid #f1f1f1;" >
             <div class="row">
                 <h6 class="mb-4">Assigned Subjects</h6>
             </div>
-            <div class="card p-4">
-            <div class="table" style="overflow-y: hidden; overflow-x: hidden;">
-              <table id="" class="table table-striped display">
-                <thead>
-                    <tr>
-                        <th>Year</th>
-                        <th>Strand</th>
-                        <th>Block</th>
-                        <th>Subject</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>11</td>
-                        <td>ABM</td>
-                        <td>A</td>
-                        <td>English</td>
-                    </tr>
-                    <tr>
-                        <td>11</td>
-                        <td>ABM</td>
-                        <td>A</td>
-                        <td>English</td>
-                    </tr>
-                    <tr>
-                        <td>12</td>
-                        <td>ABM</td>
-                        <td>A</td>
-                        <td>English</td>
-                    </tr>
-                    <tr>
-                        <td>12</td>
-                        <td>ABM</td>
-                        <td>A</td>
-                        <td>English</td>
-                    </tr>
-
-                </tbody>
-            </table>
-        </div>
-        </div>
+         
+         <iframe src="assigned.php" id="subframe" name="assigned" title="Assigned Subjects" height="100%" width="100%"></iframe>
         </div>
     </div>
 </div>
@@ -147,31 +112,36 @@ include 'includes/sidenav.php';
       </div>
 
       <div class="modal-body">
-        <form>
-
-            <select class="form-select mb-3"  name="Select Grade Level"  required>
-                    <option selected="true" disabled="disabled">Select Grade Level</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-            </select>
-
-            <select class="form-select mb-3"  name="Select Strand"  required>
-                    <option selected="true" disabled="disabled">Select Strand</option>
-                    <option value="ABM">ABM</option>
-                    <option value="STEM">STEM</option>
-                    <option value="HUMMS">HUMMS</option>
-            </select>
+        <form action="" method="post" id="assignform">
+            <input type="hidden" name="ins" id="ins_id" value="">
 
             <select class="form-select mb-3"  name="strandGrade"  required>
-                    <option selected="true" disabled="disabled">Select Block</option>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
+                    <option selected="true" disabled="disabled">Select Grade/Strand/Block</option>
+                     <?php 
+                     $db->join("strand_tbl str", "str.str_ref_id=bl.str_ref_id", "LEFT");
+                     $db->orderBy("str.str_name","asc");
+                     $db->orderBy("str.grade","asc");
+                      $db->orderBy("bl.block_name","asc");
+                    $block = $db->get ("block_tbl bl", null, "bl.block_ref_id, str.str_name, str.grade, bl.block_name");
+
+                    foreach ($block as $blc) {
+                    ?> 
+                    <option value="<?php echo $blc['block_ref_id'] ;?>"><?php echo $blc['str_name']. " - ". $blc['grade']. " - ". $blc['block_name'];?></option>
+                <?php }?>
             </select>
 
-            <select class="form-select mb-3"  name="strandGrade"  required>
+            <select class="form-select mb-3"  name="subject"  required>
                     <option selected="true" disabled="disabled">Assign Subject</option>
-                    <option value="Math">Math</option>
-                    <option value="English">English</option>
+                     <?php 
+                        $db->join("strand_tbl str", "str.str_ref_id=sub.str_ref_id", "LEFT");
+                        $subject = $db->get ("subject_tbl sub", null, "sub.subject_ref_id, str.str_name, sub.subject_name");
+                        if ($db->count == 0) {
+                            echo "Empty";
+                        }
+                    foreach ($subject as $sub) {
+                    ?> 
+                    <option value="<?php echo $sub['subject_ref_id'] ;?>"><?php echo $sub['str_name']. " - ".$sub['subject_name'];?></option>
+                <?php }?>
             </select>
            
             
@@ -205,8 +175,49 @@ include 'includes/sidenav.php';
   $(document).ready(function () {
         $('#datatable').DataTable();
     });
+
+
 </script>
 
+<script type="text/javascript">  
+   $(function () {
+        $(".tbl-action-btn-assign").click(function () {
+            var my_id_value = $(this).val();
+            $(".modal-body #ins_id").val(my_id_value);
+        })
+    });
+ 
+$(function() {
+
+
+  
+    $(document).on('submit', '#assignform', function(event){
+        event.preventDefault();
+
+        $.ajax({
+          type: 'POST',
+          url: `./query/manageAll_Exe.php?action=assign`,
+          dataType: 'JSON',
+          data: $('#assignform').serialize(),
+          success: function (response) {
+            console.log(response);
+            if(response.res=='exist'){
+                alert("Subject to assign already exists");
+            }else  if(response.res){
+                alert('success');
+               $('.close').click(); 
+                $('#assignform').trigger("reset");
+              var oiframe = document.getElementById('subframe');
+                oiframe.contentWindow.location.reload(true);
+              
+            }
+          }
+        });
+    });
+
+});
+     
+</script>
 
 </body>
 </html>
