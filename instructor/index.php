@@ -21,18 +21,39 @@
 </head>
 <body>
 
-
-
 <?php
 include 'includes/topnav.php';
 ?>
 
-<div class="container">
+<p> galing to sa login Professor  id  :  <?php echo  $ins_ref_id = '166325134125900'  ;?></p>
+
+<?php   require_once '../includes/conn.php';
+
+ $classes = $db->rawQuery('
+ SELECT * FROM  assign_sub ass 
+    JOIN instructor_tbl as i  
+     ON ass.ins_ref_id = i.ins_ref_id
+    JOIN block_subject  as bs
+      ON bs.bs_id  =  ass.bs_id
+    JOIN subject_tbl as subject
+      ON subject.subject_ref_id  = bs.subject_ref_id
+     JOIN block_tbl as block 
+       ON block.block_ref_id =  bs.block_ref_id
+     JOIN strand_tbl as strand 
+       ON strand.str_ref_id =  block.str_ref_id
+     WHERE i.ins_ref_id = ?
+     ORDER BY  strand.grade asc ,strand.str_name Asc , block.block_name ASC , subject.subject_name ASC;
+ ', Array ($ins_ref_id));
+
+?>
+
+
+<div class="container"> 
 <div class="body-content">  
 
     <div class="row mt-3">
         <div class="col">
-            <div class="card card-bnhs">
+            <div class="card card-bnhs" >
                   <div class="card-body">
                     <div class="row banner-align-items">
                         <div class="col d-flex align-items-center ">
@@ -47,141 +68,94 @@ include 'includes/topnav.php';
         </div>
     </div>
 
-    <h3 class="mt-5">Grade 11</h3>
+    
+              <!-- start of grdae 11 -->
 
     <div class="row">
-      <div class="col mt-3">
-          <div class="card card-select">
-            <div class="card-header">
-              <h3 class="card-header-title"><small>Strand&nbsp;</small>ABM</h3>
-            </div>
-            <div class="card-body">
-              <div class="row">
-                  <div class="col col-card-body">
-                    <h5 class="card-title"><small>Subject:&nbsp;</small>English</h5>
-                    <h5 class="card-title"><small>Block:&nbsp;</small>A</h5>
-                  </div>
-                  <div class="col">
-                    <button class="btn btn-scan-now" data-toggle="modal" data-target="#selectTime">Scan Attendance?</button>
-                    <button class="btn btn-manage-subject" onclick="window.location.href='http://localhost/qr-sms-attendance-system/instructor/dashboard.php';">Manage Subjects</button>
-                  </div>
-              </div>
-              
-            </div>
-          </div>
-      </div>
+     
+    <?php 
+        if( $db->count > 0){ ?>
+          <h3 class="mt-5">Grade 11</h3>
+       <?php
+          foreach ($classes as $class){
+              if($class['grade'] == 11){  ?>
+              <!-- start of card -->
+                <div class="col mt-3">
+                    <div class="card card-select">
+                      <div class="card-header">
+                        <h3 class="card-header-title"><?php  echo strtoupper($class['str_name']) ?></h3>
+                      </div>
+                      <div class="card-body">
+                        <div class="row">
+                            <div class="col col-card-body">
+                            <h5 class="card-title"><small>Block:&nbsp;</small><?php  echo ucfirst($class['block_name']) ?></h5>
+                              <h5 class="card-title"><small>Subject:&nbsp;</small><?php  echo ucfirst($class['subject_name']) ?></h5>
+                             
+                            </div>
+                            <div class="col">
+                              <a  href ="scanner.php?id=<?php echo$class['bs_id']?>" class="btn btn-scan-now" >Scan Attendance?</a>
+                              <a class="btn btn-manage-subject" href='dashboard.php' >Manage Subjects</a>
+                            </div>
+                        </div>
+                        
+                      </div>
+                    </div>
+                </div>
+              <!-- end of card -->
+             <?php }
+          }  
+        }else{
+          echo "<h1 class='text-primary' > No Class Foumd </h1>";
+        }
+    
+    ?>
 
-      <div class="col mt-3">
-          <div class="card card-select">
-            <div class="card-header">
-              <h3 class="card-header-title"><small>Strand&nbsp;</small>ABM</h3>
-            </div>
-            <div class="card-body">
-              <div class="row">
-                  <div class="col col-card-body">
-                    <h5 class="card-title"><small>Subject:&nbsp;</small>English</h5>
-                    <h5 class="card-title"><small>Block:&nbsp;</small>A</h5>
-                  </div>
-                  <div class="col">
-                    <button class="btn btn-scan-now" data-toggle="modal" data-target="#selectTime">Scan Attendance?</button>
-                    <button class="btn btn-manage-subject" onclick="window.location.href='http://localhost/qr-sms-attendance-system/instructor/dashboard.php';">Manage Subjects</button>
-                  </div>
-              </div>
-              
-            </div>
-          </div>
-      </div>
-
-      <div class="col mt-3">
-          <div class="card card-select">
-            <div class="card-header">
-              <h3 class="card-header-title"><small>Strand&nbsp;</small>ABM</h3>
-            </div>
-            <div class="card-body">
-              <div class="row">
-                  <div class="col col-card-body">
-                    <h5 class="card-title"><small>Subject:&nbsp;</small>English</h5>
-                    <h5 class="card-title"><small>Block:&nbsp;</small>A</h5>
-                  </div>
-                  <div class="col">
-                    <button class="btn btn-scan-now" data-toggle="modal" data-target="#selectTime">Scan Attendance?</button>
-                    <button class="btn btn-manage-subject" onclick="window.location.href='http://localhost/qr-sms-attendance-system/instructor/dashboard.php';">Manage Subjects</button>
-                  </div>
-              </div>
-              
-            </div>
-          </div>
-      </div>
-
-    </div> <!-- end of first row -->
-
-    <h3 class="mt-5">Grade 12</h3>
-
+    </div> 
+    
+   
     <div class="row">
-      <div class="col mt-3">
-          <div class="card card-select">
-            <div class="card-header">
-              <h3 class="card-header-title"><small>Strand&nbsp;</small>ABM</h3>
-            </div>
-            <div class="card-body">
-              <div class="row">
-                  <div class="col col-card-body">
-                    <h5 class="card-title"><small>Subject:&nbsp;</small>English</h5>
-                    <h5 class="card-title"><small>Block:&nbsp;</small>A</h5>
-                  </div>
-                  <div class="col">
-                    <button class="btn btn-scan-now" data-toggle="modal" data-target="#selectTime">Scan Attendance?</button>
-                    <button class="btn btn-manage-subject" onclick="window.location.href='http://localhost/qr-sms-attendance-system/instructor/dashboard.php';">Manage Subjects</button>
-                  </div>
-              </div>
-              
-            </div>
-          </div>
-      </div>
+    
 
-      <div class="col mt-3">
-          <div class="card card-select">
-            <div class="card-header">
-              <h3 class="card-header-title"><small>Strand&nbsp;</small>ABM</h3>
-            </div>
-            <div class="card-body">
-              <div class="row">
-                  <div class="col col-card-body">
-                    <h5 class="card-title"><small>Subject:&nbsp;</small>English</h5>
-                    <h5 class="card-title"><small>Block:&nbsp;</small>A</h5>
-                  </div>
-                  <div class="col">
-                    <button class="btn btn-scan-now" data-toggle="modal" data-target="#selectTime">Scan Attendance?</button>
-                    <button class="btn btn-manage-subject" onclick="window.location.href='http://localhost/qr-sms-attendance-system/instructor/dashboard.php';">Manage Subjects</button>
-                  </div>
-              </div>
-              
-            </div>
-          </div>
-      </div>
+    <?php 
+        if( $db->count > 0){ ?>
+            <h3 class="mt-5">Grade 12</h3>
+         <?php
+          
+          foreach ($classes as $class){
+              if($class['grade'] == 12){  ?>
+              <!-- start of card -->
+                <div class="col mt-3">
+                    <div class="card card-select">
+                      <div class="card-header">
+                        <h3 class="card-header-title"><small>Strand&nbsp;</small>ABM</h3>
+                      </div>
+                      <div class="card-body">
+                        <div class="row">
+                            <div class="col col-card-body">
+                              <h5 class="card-title"><small>Subject:&nbsp;</small>English</h5>
+                              <h5 class="card-title"><small>Block:&nbsp;</small>A</h5>
+                            </div>
+                            <div class="col">
+                              <button class="btn btn-scan-now" data-toggle="modal" data-target="#selectTime">Scan Attendance?</button>
+                              <button class="btn btn-manage-subject" onclick="window.location.href='http://localhost/qr-sms-attendance-system/instructor/dashboard.php';">Manage Subjects</button>
+                            </div>
+                        </div>
+                        
+                      </div>
+                    </div>
+                </div>
+              <!-- end of card -->
+             <?php }
+          }  
+        }else{
+          echo "<h1 class='text-primary' > No Class Foumd </h1>";
+        }
+    
+    ?>
 
-      <div class="col mt-3">
-          <div class="card card-select">
-            <div class="card-header">
-              <h3 class="card-header-title"><small>Strand&nbsp;</small>ABM</h3>
-            </div>
-            <div class="card-body">
-              <div class="row">
-                  <div class="col col-card-body">
-                    <h5 class="card-title"><small>Subject:&nbsp;</small>English</h5>
-                    <h5 class="card-title"><small>Block:&nbsp;</small>A</h5>
-                  </div>
-                  <div class="col">
-                    <button class="btn btn-scan-now" data-toggle="modal" data-target="#selectTime">Scan Attendance?</button>
-                    <button class="btn btn-manage-subject" onclick="window.location.href='http://localhost/qr-sms-attendance-system/instructor/dashboard.php';">Manage Subjects</button>
-                  </div>
-              </div>
-              
-            </div>
-          </div>
-      </div>
+    </div> 
 
-    </div> <!-- end of 2nd row -->
+</div>
       
 
     <div class="row mt-5   mb-4">
@@ -198,7 +172,7 @@ include 'includes/topnav.php';
 <!-- modal -->
 
 <!-- Time In Time Out Modal -->
-<div class="modal fade" id="selectTime" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="selectTime" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -221,7 +195,7 @@ include 'includes/topnav.php';
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 
 

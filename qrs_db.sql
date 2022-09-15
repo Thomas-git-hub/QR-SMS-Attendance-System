@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 08, 2022 at 03:20 PM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.1
+-- Generation Time: Sep 15, 2022 at 07:48 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 7.4.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -61,17 +61,18 @@ INSERT INTO `admin_tbl` (`admin_id`, `admin_username`, `admin_password`) VALUES
 --
 
 CREATE TABLE `assign_student` (
-  `bs_id` varchar(50) NOT NULL,
-  `student` varchar(50) NOT NULL
+  `as_id` int(11) NOT NULL,
+  `block_ref_id` varchar(50) NOT NULL,
+  `student_ref_id` varchar(50) NOT NULL,
+  `as_ref_id` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `assign_student`
 --
 
-INSERT INTO `assign_student` (`bs_id`, `student`) VALUES
-('bs1', 's1'),
-('bs2', 's2');
+INSERT INTO `assign_student` (`as_id`, `block_ref_id`, `student_ref_id`, `as_ref_id`) VALUES
+(4, '166325122077309', '166326295692452', '166326295637200');
 
 -- --------------------------------------------------------
 
@@ -90,9 +91,14 @@ CREATE TABLE `assign_sub` (
 --
 
 INSERT INTO `assign_sub` (`as_id`, `ins_ref_id`, `bs_id`) VALUES
-(1, 'ins1', 'bs1'),
-(2, 'ins2', 'bs2'),
-(3, 'ins1', 'bs3');
+(6, '166325134125900', '166325150367167'),
+(7, '166325134125900', '166325151115237'),
+(8, '166325134125900', '166325152522910'),
+(9, '166325138016285', '166325166819778'),
+(10, '166325138016285', '166325168596930'),
+(12, '166325134125900', '166325329091751'),
+(13, '166325138016285', '166325332649120'),
+(14, '166325134125900', '166325568711201');
 
 -- --------------------------------------------------------
 
@@ -111,10 +117,15 @@ CREATE TABLE `block_subject` (
 --
 
 INSERT INTO `block_subject` (`bs_id`, `block_ref_id`, `subject_ref_id`) VALUES
-('bs1', 'str1', 'sub1'),
-('bs2', 'str1', 'sub2'),
-('bs3', 'str2', 'sub1'),
-('bs4', 'str2', 'sub2');
+('166325150367167', '166325121047278', '166325144432900'),
+('166325151115237', '166325121047278', '166325145762881'),
+('166325152522910', '166325126342432', '166325145762881'),
+('166325166819778', '166325157721004', '166325162689713'),
+('166325168596930', '166325157721004', '166325163474475'),
+('166325169653793', '166325157721004', '166325144432900'),
+('166325329091751', '166325122077309', '166325144432900'),
+('166325332649120', '166325157721004', '166325162689713'),
+('166325568711201', '166325122077309', '166325145762881');
 
 -- --------------------------------------------------------
 
@@ -134,13 +145,15 @@ CREATE TABLE `block_tbl` (
 --
 
 INSERT INTO `block_tbl` (`block_id`, `block_ref_id`, `block_name`, `str_ref_id`) VALUES
-(1, 'B1', 'A', 'str1'),
-(2, 'B2', 'B', 'str1'),
-(3, 'B3', 'A', 'str2'),
-(4, 'B4', 'B', 'str2'),
-(7, '166253081867683', 'A', 'str3'),
-(12, '166253119785730', 'B', 'str3'),
-(13, '166253145071565', 'C', 'str3');
+(26, '166325119087168', 'BlocK A', ''),
+(27, '166325121047278', 'A', '166325116999112'),
+(28, '166325122077309', 'B', '166325116999112'),
+(29, '166325125663327', 'A', ''),
+(30, '166325126342432', 'A', '166325125087586'),
+(31, '166325129965591', 'B', '166325125087586'),
+(32, '166325156839854', 'A', '166325155272404'),
+(33, '166325157721004', 'B', '166325155272404'),
+(34, '166325776169449', 'D', '166325155272404');
 
 -- --------------------------------------------------------
 
@@ -165,9 +178,8 @@ CREATE TABLE `instructor_tbl` (
 --
 
 INSERT INTO `instructor_tbl` (`ins_id`, `ins_ref_id`, `ins_fullname`, `ins_idnumber`, `ins_contact`, `ins_position`, `username`, `password`, `status`) VALUES
-(1, 'ins1', 'Juan Tamad', 116262, 9888888887, 'Teacher1', 'hjjhgy@gmail.com', 'qwerty', 0),
-(2, 'ins2', 'bsvdgfsd', 116262, 45456, 'Teacher3', 'yrtyetey@gmail.com', 'qwerty', 1),
-(3, '166262988469100', 'Mary JOy Elquiero', 116262, 9888888887, '', 'fgfjhfsdsghjf@gmail.com', 'qwerty', 0);
+(5, '166325134125900', 'Anallyn Borlasas', 0, 9219657947, '', 'analyn@gmail.com', '123', 0),
+(6, '166325138016285', 'Arnold Platon', 0, 9219657947, '', 'platon@gmail.com', '12345', 0);
 
 -- --------------------------------------------------------
 
@@ -188,9 +200,10 @@ CREATE TABLE `strand_tbl` (
 --
 
 INSERT INTO `strand_tbl` (`str_id`, `str_ref_id`, `str_name`, `grade`, `str_active`) VALUES
-(21, 'str1', 'ABM', 11, 0),
-(22, 'str2', 'HUMMS', 11, 0),
-(23, 'str3', 'STEM', 11, 1);
+(40, '166325116999112', 'STEM', 11, 1),
+(41, '166325125087586', 'STEM', 12, 1),
+(43, '166325155272404', 'GAS', 11, 1),
+(44, '166325777380006', 'ABM', 11, 1);
 
 -- --------------------------------------------------------
 
@@ -200,11 +213,11 @@ INSERT INTO `strand_tbl` (`str_id`, `str_ref_id`, `str_name`, `grade`, `str_acti
 
 CREATE TABLE `student_tbl` (
   `sdt_id` int(11) NOT NULL,
-  `stf_ref_id` varchar(50) NOT NULL,
+  `sdt_ref_id` varchar(50) NOT NULL,
   `sdt_fullname` varchar(50) NOT NULL,
   `sdt_gender` varchar(50) NOT NULL,
   `sdt_address` varchar(100) NOT NULL,
-  `sdt_parentNumber` bigint(20) NOT NULL,
+  `sdt_parentNumber` varchar(20) NOT NULL,
   `qr_id` varchar(50) NOT NULL,
   `sdt_username` varchar(50) NOT NULL,
   `sdt_password` varchar(50) NOT NULL
@@ -214,9 +227,8 @@ CREATE TABLE `student_tbl` (
 -- Dumping data for table `student_tbl`
 --
 
-INSERT INTO `student_tbl` (`sdt_id`, `stf_ref_id`, `sdt_fullname`, `sdt_gender`, `sdt_address`, `sdt_parentNumber`, `qr_id`, `sdt_username`, `sdt_password`) VALUES
-(1, 's1', 'Vice Ganda', 'Female', 'Polangui, Albay', 9777777777, 'qr001', 'viceganda', 'vice123456'),
-(2, 's2', 'Anne Curtis', 'Female', 'Polangui, Albay', 9666666666, 'qr002', 'annecurtis', 'anne123456');
+INSERT INTO `student_tbl` (`sdt_id`, `sdt_ref_id`, `sdt_fullname`, `sdt_gender`, `sdt_address`, `sdt_parentNumber`, `qr_id`, `sdt_username`, `sdt_password`) VALUES
+(9, '166326295692452', 'dasdasd', 'Male', '123456', '09219657947', '', '123456@gmail.com', '123456');
 
 -- --------------------------------------------------------
 
@@ -242,7 +254,13 @@ INSERT INTO `subject_tbl` (`subject_id`, `subject_ref_id`, `subject_name`, `str_
 (4, 'sub4', 'English', 'str2'),
 (5, 'sub5', 'T.L.E', 'str2'),
 (6, '166253616615995', 'Filipino', 'str1'),
-(7, '166253618289231', 'Filipino', 'str2');
+(7, '166253618289231', 'Filipino', 'str2'),
+(8, '166288469616629', 'math', '166288465496476'),
+(9, '166288470496980', 'science', '166288465496476'),
+(10, '166325144432900', 'Physics1', '166325116999112'),
+(11, '166325145762881', 'Math Advance', '166325116999112'),
+(12, '166325162689713', 'Philosophy', '166325155272404'),
+(13, '166325163474475', 'English1', '166325155272404');
 
 -- --------------------------------------------------------
 
@@ -279,6 +297,12 @@ INSERT INTO `transaction_tbl` (`trans_id`, `ins_ref_id`, `bsi_id`, `stf_ref_id`,
 --
 ALTER TABLE `admin_tbl`
   ADD PRIMARY KEY (`admin_id`);
+
+--
+-- Indexes for table `assign_student`
+--
+ALTER TABLE `assign_student`
+  ADD PRIMARY KEY (`as_id`);
 
 --
 -- Indexes for table `assign_sub`
@@ -339,40 +363,46 @@ ALTER TABLE `admin_tbl`
   MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `assign_student`
+--
+ALTER TABLE `assign_student`
+  MODIFY `as_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `assign_sub`
 --
 ALTER TABLE `assign_sub`
-  MODIFY `as_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `as_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `block_tbl`
 --
 ALTER TABLE `block_tbl`
-  MODIFY `block_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `block_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `instructor_tbl`
 --
 ALTER TABLE `instructor_tbl`
-  MODIFY `ins_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `ins_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `strand_tbl`
 --
 ALTER TABLE `strand_tbl`
-  MODIFY `str_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `str_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `student_tbl`
 --
 ALTER TABLE `student_tbl`
-  MODIFY `sdt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `sdt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `subject_tbl`
 --
 ALTER TABLE `subject_tbl`
-  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `transaction_tbl`
