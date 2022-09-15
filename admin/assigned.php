@@ -41,11 +41,11 @@
                 	 <?php 
 
        require_once '../includes/conn.php';
-    $db->join("assign_sub asub", "asub.ins_ref_id=ins.ins_ref_id", "LEFT");
-    $db->join("block_subject bs", "bs.bs_id=asub.bs_id", "LEFT");
-    $db->join("block_tbl bl", "bl.block_ref_id=bs.block_ref_id", "LEFT");
-    $db->join("subject_tbl sub", "sub.subject_ref_id=bs.subject_ref_id", "LEFT");
-    $db->join("strand_tbl str", "bl.str_ref_id=str.str_ref_id", "LEFT");
+    $db->join("assign_sub asub", "asub.ins_ref_id=ins.ins_ref_id");
+    $db->join("block_subject bs", "bs.bs_id=asub.bs_id");
+    $db->join("block_tbl bl", "bl.block_ref_id=bs.block_ref_id");
+    $db->join("subject_tbl sub", "sub.subject_ref_id=bs.subject_ref_id");
+    $db->join("strand_tbl str", "bl.str_ref_id=str.str_ref_id");
 
 	$db->where("ins.ins_ref_id", $_GET['ins_ref']);
     $assigned = $db->get ("instructor_tbl ins", null, "str.grade, str.str_name, bl.block_name, sub.subject_name");
