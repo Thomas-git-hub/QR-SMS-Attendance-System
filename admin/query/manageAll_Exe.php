@@ -72,31 +72,21 @@ switch ($action) {
 
        case 'assign':
         $assignId= get_random_figures();
-        
-        // $db->join("block_subject bl", "ins.bs_id=bl.bs_id", "LEFT");
-        // // $block = $db->get ("instructor_tbl ins", null, "bl.block_ref_id, bl.subject_ref_id");
-        // $db->where("ins.ins_ref_id", $ins);
-        // $db->Where("bl.block_ref_id", $strandGrade);
-        // $db->Where("bl.subject_ref_id", $subject);
 
-        // if($db->has("instructor_tbl ins")) {
-        //     $res = array("res" => 'exist');
-        // }else{
             $data = Array ("bs_id" =>  $assignId,
-                            "block_ref_id" =>  $strandGrade,
+                            "block_ref_id" =>  $block,
                             "subject_ref_id" =>  $subject,
-                            //"date_added" => date('Y-m-d H:i:s')
+                           
                           );
             $data2 = Array ( "ins_ref_id" =>  $ins,
                             "bs_id" =>  $assignId,
-                            //"date_added" => date('Y-m-d H:i:s')
+                          
                           );
             if( $db->insert ('block_subject', $data)&& $db->insert ('assign_sub', $data2))
 
                 $res = array("res" => true);
             else
                 $res = array("res" => false);
-        // }
         echo json_encode($res);
         break;
    

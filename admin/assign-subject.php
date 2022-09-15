@@ -114,34 +114,22 @@ include 'includes/sidenav.php';
       <div class="modal-body">
         <form action="" method="post" id="assignform">
             <input type="hidden" name="ins" id="ins_id" value="">
+        <select class="form-select mb-3" id="grade"  name="grade"  required>
+                    <option selected="true" disabled="disabled">Select Grade</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+        </select>
 
-            <select class="form-select mb-3"  name="strandGrade"  required>
-                    <option selected="true" disabled="disabled">Select Grade/Strand/Block</option>
-                     <?php 
-                     $db->join("strand_tbl str", "str.str_ref_id=bl.str_ref_id", "LEFT");
-                     $db->orderBy("str.str_name","asc");
-                     $db->orderBy("str.grade","asc");
-                      $db->orderBy("bl.block_name","asc");
-                    $block = $db->get ("block_tbl bl", null, "bl.block_ref_id, str.str_name, str.grade, bl.block_name");
-
-                    foreach ($block as $blc) {
-                    ?> 
-                    <option value="<?php echo $blc['block_ref_id'] ;?>"><?php echo $blc['str_name']. " - ". $blc['grade']. " - ". $blc['block_name'];?></option>
-                <?php }?>
+             <select class="form-select mb-3"  name="strand" id="strand"  required>
+                    <option selected="true" disabled="disabled">Select Grade First</option>
             </select>
+             <select class="form-select mb-3"  name="block" id="block"  required>
+                    <option selected="true" disabled="disabled">Select Strand First</option>
+            </select>
+        
 
-            <select class="form-select mb-3"  name="subject"  required>
-                    <option selected="true" disabled="disabled">Assign Subject</option>
-                     <?php 
-                        $db->join("strand_tbl str", "str.str_ref_id=sub.str_ref_id", "LEFT");
-                        $subject = $db->get ("subject_tbl sub", null, "sub.subject_ref_id, str.str_name, sub.subject_name");
-                        if ($db->count == 0) {
-                            echo "Empty";
-                        }
-                    foreach ($subject as $sub) {
-                    ?> 
-                    <option value="<?php echo $sub['subject_ref_id'] ;?>"><?php echo $sub['str_name']. " - ".$sub['subject_name'];?></option>
-                <?php }?>
+            <select class="form-select mb-3"  name="subject"  id="subject" required>
+                    <option selected="true" disabled="disabled"> Select Strand First</option>
             </select>
            
             
@@ -175,6 +163,73 @@ include 'includes/sidenav.php';
   $(document).ready(function () {
         $('#datatable').DataTable();
     });
+
+ $("#grade").change(function(){
+    var id =  this.value;
+    $.ajax({
+      type: 'POST',
+      url: './query/getAll.php?action=getstrand',
+      dataType: 'JSON',
+      data: {
+          'id':id,
+      },
+     success: function (items) {
+        console.log(items);
+        $("#strand").empty().append("<option selected='true' disabled='disabled'>Select Strand</option>");
+        
+        $.each(items, function(i, item) {
+          $("#strand")
+               .append($("<option>", { value : item.str_ref_id })
+               .text(item.str_name));
+         });
+      }
+    });
+  });
+
+  $("#strand").change(function(){
+    var id =  this.value;
+    $.ajax({
+      type: 'POST',
+      url: './query/getAll.php?action=getblock',
+      dataType: 'JSON',
+      data: {
+          'id':id,
+      },
+     success: function (items) {
+        console.log(items);
+        $("#block").empty().append("<option selected='true' disabled='disabled'>Select Block</option>");
+        
+        $.each(items, function(i, item) {
+          $("#block")
+               .append($("<option>", { value : item.block_ref_id })
+               .text(item.block_name));
+         });
+      }
+    });
+  });
+
+
+  $("#strand").change(function(){
+    var id =  this.value;
+    $.ajax({
+      type: 'POST',
+      url: './query/getAll.php?action=getsubject',
+      dataType: 'JSON',
+      data: {
+          'id':id,
+      },
+     success: function (items) {
+        console.log(items);
+        $("#subject").empty().append("<option selected='true' disabled='disabled'>Select Subject</option>");
+        
+        $.each(items, function(i, item) {
+          $("#subject")
+               .append($("<option>", { value : item.subject_ref_id })
+               .text(item.subject_name));
+         });
+      }
+    });
+  });
 
 
 </script>
@@ -217,7 +272,10 @@ $(function() {
 
 });
      
+    
 </script>
+
+
 
 </body>
 </html>
