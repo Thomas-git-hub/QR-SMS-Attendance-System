@@ -38,3 +38,11 @@ function randomPassword() {
     }
     return implode($pass); //turn the array into a string
 }
+
+
+function sessionSet(){
+    if (!isset($_SESSION)) {
+        session_start();
+    }
+    return true;
+ }
