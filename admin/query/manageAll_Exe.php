@@ -33,7 +33,6 @@ switch ($action) {
         $assignId= get_random_figures();
         $db->where("block_name", $blockName);
         $db->Where("str_ref_id", $str_ref);
-
         if($db->has("block_tbl")) {
             $res = array("res" => 'exist');
         }else{
@@ -71,8 +70,25 @@ switch ($action) {
         echo json_encode($res);
         break;
 
-  
-    
+       case 'assign':
+        $assignId= get_random_figures();
+
+            $data = Array ("bs_id" =>  $assignId,
+                            "block_ref_id" =>  $block,
+                            "subject_ref_id" =>  $subject,
+                           
+                          );
+            $data2 = Array ( "ins_ref_id" =>  $ins,
+                            "bs_id" =>  $assignId,
+                          
+                          );
+            if( $db->insert ('block_subject', $data)&& $db->insert ('assign_sub', $data2))
+
+                $res = array("res" => true);
+            else
+                $res = array("res" => false);
+        echo json_encode($res);
+        break;
    
 }
 

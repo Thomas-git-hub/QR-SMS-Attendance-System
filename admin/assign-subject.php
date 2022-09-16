@@ -60,73 +60,38 @@ include 'includes/sidenav.php';
                     </tr>
                 </thead>
                 <tbody>
+                       <?php 
+
+       require_once '../includes/conn.php';
+        
+    $proffesors = $db->get ("instructor_tbl");
+    if ($db->count == 0) {
+        echo "<tr><td> Empty </td></tr>";
+    }
+    foreach ($proffesors as $prof) {
+?> 
                     <tr>
-                        <td>John Doe</td>
-                        <td>2018-BNH-100309</td>
+                        <td><?php echo $prof['ins_fullname'] ;?></td>
+                <td><?php echo $prof['ins_idnumber'] ;?></td>
                         <td>
-                            <button class="btn tbl-action-btn-view" id="">View Subs</button>
-                            <button class="btn tbl-action-btn-assign" data-toggle="modal" data-target="#assignSub">Assign Sub</button>
+                            <a class="btn tbl-action-btn-view" href="assigned.php?ins_ref=<?php echo $prof['ins_ref_id'] ; ?>" target="assigned" id="">View Subs</a>
+                            <button class="btn tbl-action-btn-assign" value="<?php echo $prof['ins_ref_id'] ;?>" data-toggle="modal" data-target="#assignSub">Assign Sub</button>
                         </td>
                     </tr>
-                    <tr>
-                        <td>John Doe</td>
-                        <td>2018-BNH-100309</td>
-                        <td>
-                            <button class="btn tbl-action-btn-view" id="">View Subs</button>
-                            <button class="btn tbl-action-btn-assign" data-toggle="modal" data-target="#assignSub">Assign Sub</button>
-                        </td>
-                    </tr>
+                <?php } ?>
+                    
                 </tbody>
             </table>
         </div>
     </div>
 
 
-        <div class="col-5" style="border-left: 1px solid #f1f1f1;">
+        <div class="col-5" style="border-left: 1px solid #f1f1f1;" >
             <div class="row">
                 <h6 class="mb-4">Assigned Subjects</h6>
             </div>
-            <div class="card p-4">
-            <div class="table" style="overflow-y: hidden; overflow-x: hidden;">
-              <table id="" class="table table-striped display">
-                <thead>
-                    <tr>
-                        <th>Year</th>
-                        <th>Strand</th>
-                        <th>Block</th>
-                        <th>Subject</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>11</td>
-                        <td>ABM</td>
-                        <td>A</td>
-                        <td>English</td>
-                    </tr>
-                    <tr>
-                        <td>11</td>
-                        <td>ABM</td>
-                        <td>A</td>
-                        <td>English</td>
-                    </tr>
-                    <tr>
-                        <td>12</td>
-                        <td>ABM</td>
-                        <td>A</td>
-                        <td>English</td>
-                    </tr>
-                    <tr>
-                        <td>12</td>
-                        <td>ABM</td>
-                        <td>A</td>
-                        <td>English</td>
-                    </tr>
-
-                </tbody>
-            </table>
-        </div>
-        </div>
+         
+         <iframe src="assigned.php" id="subframe" name="assigned" title="Assigned Subjects" height="100%" width="100%"></iframe>
         </div>
     </div>
 </div>
@@ -147,31 +112,24 @@ include 'includes/sidenav.php';
       </div>
 
       <div class="modal-body">
-        <form>
-
-            <select class="form-select mb-3"  name="Select Grade Level"  required>
-                    <option selected="true" disabled="disabled">Select Grade Level</option>
+        <form action="" method="post" id="assignform">
+            <input type="hidden" name="ins" id="ins_id" value="">
+        <select class="form-select mb-3" id="grade"  name="grade"  required>
+                    <option selected="true" disabled="disabled">Select Grade</option>
                     <option value="11">11</option>
                     <option value="12">12</option>
-            </select>
+        </select>
 
-            <select class="form-select mb-3"  name="Select Strand"  required>
-                    <option selected="true" disabled="disabled">Select Strand</option>
-                    <option value="ABM">ABM</option>
-                    <option value="STEM">STEM</option>
-                    <option value="HUMMS">HUMMS</option>
+             <select class="form-select mb-3"  name="strand" id="strand"  required>
+                    <option selected="true" disabled="disabled">Select Grade First</option>
             </select>
-
-            <select class="form-select mb-3"  name="strandGrade"  required>
-                    <option selected="true" disabled="disabled">Select Block</option>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
+             <select class="form-select mb-3"  name="block" id="block"  required>
+                    <option selected="true" disabled="disabled">Select Strand First</option>
             </select>
+        
 
-            <select class="form-select mb-3"  name="strandGrade"  required>
-                    <option selected="true" disabled="disabled">Assign Subject</option>
-                    <option value="Math">Math</option>
-                    <option value="English">English</option>
+            <select class="form-select mb-3"  name="subject"  id="subject" required>
+                    <option selected="true" disabled="disabled"> Select Strand First</option>
             </select>
            
             
@@ -205,7 +163,118 @@ include 'includes/sidenav.php';
   $(document).ready(function () {
         $('#datatable').DataTable();
     });
+
+ $("#grade").change(function(){
+    var id =  this.value;
+    $.ajax({
+      type: 'POST',
+      url: './query/getAll.php?action=getstrand',
+      dataType: 'JSON',
+      data: {
+          'id':id,
+      },
+     success: function (items) {
+        console.log(items);
+        $("#strand").empty().append("<option selected='true' disabled='disabled'>Select Strand</option>");
+        
+        $.each(items, function(i, item) {
+          $("#strand")
+               .append($("<option>", { value : item.str_ref_id })
+               .text(item.str_name));
+         });
+      }
+    });
+  });
+
+  $("#strand").change(function(){
+    var id =  this.value;
+    $.ajax({
+      type: 'POST',
+      url: './query/getAll.php?action=getblock',
+      dataType: 'JSON',
+      data: {
+          'id':id,
+      },
+     success: function (items) {
+        console.log(items);
+        $("#block").empty().append("<option selected='true' disabled='disabled'>Select Block</option>");
+        
+        $.each(items, function(i, item) {
+          $("#block")
+               .append($("<option>", { value : item.block_ref_id })
+               .text(item.block_name));
+         });
+      }
+    });
+  });
+
+
+  $("#strand").change(function(){
+    var id =  this.value;
+    $.ajax({
+      type: 'POST',
+      url: './query/getAll.php?action=getsubject',
+      dataType: 'JSON',
+      data: {
+          'id':id,
+      },
+     success: function (items) {
+        console.log(items);
+        $("#subject").empty().append("<option selected='true' disabled='disabled'>Select Subject</option>");
+        
+        $.each(items, function(i, item) {
+          $("#subject")
+               .append($("<option>", { value : item.subject_ref_id })
+               .text(item.subject_name));
+         });
+      }
+    });
+  });
+
+
 </script>
+
+<script type="text/javascript">  
+   $(function () {
+        $(".tbl-action-btn-assign").click(function () {
+            var my_id_value = $(this).val();
+            $(".modal-body #ins_id").val(my_id_value);
+        })
+    });
+ 
+$(function() {
+
+
+  
+    $(document).on('submit', '#assignform', function(event){
+        event.preventDefault();
+
+        $.ajax({
+          type: 'POST',
+          url: `./query/manageAll_Exe.php?action=assign`,
+          dataType: 'JSON',
+          data: $('#assignform').serialize(),
+          success: function (response) {
+            console.log(response);
+            if(response.res=='exist'){
+                alert("Subject to assign already exists");
+            }else  if(response.res){
+                alert('success');
+               $('.close').click(); 
+                $('#assignform').trigger("reset");
+              var oiframe = document.getElementById('subframe');
+                oiframe.contentWindow.location.reload(true);
+              
+            }
+          }
+        });
+    });
+
+});
+     
+    
+</script>
+
 
 
 </body>
