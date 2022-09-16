@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="css/instructor-card.css">
     
 
-	<title>Professor</title>
+	<title>Instructor</title>
 </head>
 <body>
 
@@ -94,7 +94,7 @@ include 'includes/topnav.php';
                             </div>
                             <div class="col">
                               <a  href ="scanner.php?id=<?php echo$class['bs_id']?>" class="btn btn-scan-now" >Scan Attendance?</a>
-                              <a class="btn btn-manage-subject" href='dashboard.php' >Manage Subjects</a>
+                              <a class="btn btn-manage-subject" href='dashboard.php' >Enter Class</a>
                             </div>
                         </div>
                         
@@ -137,7 +137,7 @@ include 'includes/topnav.php';
                             </div>
                             <div class="col">
                               <button class="btn btn-scan-now" data-toggle="modal" data-target="#selectTime">Scan Attendance?</button>
-                              <button class="btn btn-manage-subject" onclick="window.location.href='http://localhost/qr-sms-attendance-system/instructor/dashboard.php';">Manage Subjects</button>
+                              <button class="btn btn-manage-subject" onclick="window.location.href='http://localhost/qr-sms-attendance-system/instructor/dashboard.php';">Enter Class</button>
                             </div>
                         </div>
                         

@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../css/dataTables.bootstrap5.min.css">
 
     <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/index.css">
     
 	<title>Student</title>
 </head>
@@ -25,8 +26,19 @@ include 'includes/sidenav.php';
 ?>
 <div class="container-fluid">
 <div class="body-content">
-    <div class="title">
-	<h3> Attendance Status </h3>
+    
+    <div class="row mt-3 mb-5">
+        <div class="col">
+            <div class="card card-title-banner">
+                  <div class="card-body">
+                    <div class="row">
+                        <div class="col d-flex justify-content-center">
+                            <h1 class="h1-card-title">View Attendance</h1>
+                        </div>
+                      </div>
+                  </div>
+            </div>
+        </div>
     </div>
 	   
 	

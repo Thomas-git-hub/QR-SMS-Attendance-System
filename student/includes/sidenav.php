@@ -8,25 +8,18 @@
     <div class="nav-list">
       
       <li>
+       <a href="profile.php">
+         <i class='bx bx-user-circle'></i>
+         <span class="links_name">Profile Management</span>
+       </a>
+       <span class="tooltip">Profile Management</span>
+     </li>
+      <li>
        <a href="index.php">
          <i class='bx bx-table' ></i>
          <span class="links_name">Attendance Status</span>
        </a>
        <span class="tooltip">Attendance Status</span>
-     </li>
-     <li>
-       <a href="activities.php">
-       <i class='bx bxs-file'></i>
-         <span class="links_name">Activities</span>
-       </a>
-       <span class="tooltip">Activities</span>
-     </li>
-     <li>
-       <a href="settings.php">
-         <i class='bx bx-cog' ></i>
-         <span class="links_name">Settings</span>
-       </a>
-       <span class="tooltip">Settings</span>
      </li>
    
     </div>
