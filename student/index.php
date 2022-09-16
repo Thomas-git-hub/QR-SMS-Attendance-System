@@ -1,3 +1,12 @@
+<?php
+    require_once '../includes/func.php';
+
+
+
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>

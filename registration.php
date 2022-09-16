@@ -249,8 +249,12 @@ $("#registerForm").validate({
 			success: function (response) {
 			console.log(response);
 
-			if(response.res){
-				alert ('succes');
+			if(response.res == 'exist'){
+				alert ('email exist');
+			}else if(response.res){
+				alert ('success');
+			}else {
+				alert('somethingWentWrong');
 			}
 			
 			}
