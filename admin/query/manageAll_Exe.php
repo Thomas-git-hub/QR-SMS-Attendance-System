@@ -73,6 +73,13 @@ switch ($action) {
        case 'assign':
         $assignId= get_random_figures();
 
+        $db->where("block_ref_id", $block);
+        $db->Where("subject_ref_id", $subject);
+
+        if($db->has("block_subject")) {
+            $res = array("res" => 'exist');
+        }else{
+
             $data = Array ("bs_id" =>  $assignId,
                             "block_ref_id" =>  $block,
                             "subject_ref_id" =>  $subject,
@@ -87,6 +94,7 @@ switch ($action) {
                 $res = array("res" => true);
             else
                 $res = array("res" => false);
+        }
         echo json_encode($res);
         break;
    

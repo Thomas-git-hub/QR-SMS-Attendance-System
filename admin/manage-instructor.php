@@ -335,6 +335,9 @@ include 'includes/sidenav.php';
                else
                   $("#" + response.id ).removeClass("tbl-action-btn-enable").addClass("tbl-action-btn-disable").attr("data-status",1).html('Disable');
 
+               location.reload();
+              
+
             }else{
                alert('Fail')
             }
