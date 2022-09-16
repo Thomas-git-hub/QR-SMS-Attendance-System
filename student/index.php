@@ -14,7 +14,6 @@
 
     <link rel="stylesheet" href="css/home.css">
     
-
 	<title>Student</title>
 </head>
 <body>
@@ -208,7 +207,7 @@ include 'includes/sidenav.php';
         </tbody>
         <tfoot>
             <tr>
-                 <th>Date</th>
+                <th>Date</th>
                 <th>Professor</th>
                 <th>Subject</th>
                 <th>Attendance Log</th>
@@ -239,6 +238,7 @@ include 'includes/sidenav.php';
 <script type="text/javascript" src="../js/vfs_fonts.js"></script>
 <script type="text/javascript" src="../js/buttons.html5.min.js"></script>
 <script type="text/javascript" src="../js/dataTables.bootstrap5.min.js"></script>
+
 <script>
 	$(document).ready(function () {
         $('#datatable').DataTable();

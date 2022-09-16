@@ -20,39 +20,62 @@
 <body>
 	<?php include_once('includes/nav.php') ?>
 
-	<div class="container-fluid">
+<div class="container">
 
-		<div class="row d-flex justify-content-center mt-1">
-				<div class="card card-login text-center">
-				  <div class="card-header">
-				  	<img src="assets/png/bnhs.png" alt="website logo" style="width: 10%;">
-				    <h6 class="h6-system-title mt-3">QR Code Attendance Monitoring System</h6>
-				    <h6 class="h6-system-title">w/ SMS Notification</h6>
-				  </div>
-				  <div class="card-body">
-				    <form>
-					  <div class="form-group mb-3">
-					  	<i class='bx bxs-user-circle d-flex justify-content-center mx-4 mb-1 mt-2'></i>
-					    <!-- <label for="exampleInputEmail1">Email address</label> -->
-					    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email Address">
-					  </div>
-					  <div class="form-group mb-3">
-					  	<i class='bx bxs-lock-open	wq d-flex justify-content-center mx-4 mb-1'></i>
-					    <!-- <label for="exampleInputPassword1">Password</label> -->
-					    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-					  </div>
-					  <button type="submit" class="btn btn-primary btn-submit">Login</button>
-					</form>
-				  </div>
-				  <div class="card-footer text-muted">
-				  	<img src="assets/png/bupc.png" width="7%;">
-				  	<img src="assets/png/bu.png" width="7%;">
-				    <p class="p-footer mt-2">Bicol University Polangui Campus</p>
-			 		<p class="p-footer">@2022/2023</p>
-				  </div>
-				</div>
+	<div class="row mt-5">
+		<div class="col d-flex justify-content-center mt-3">
+			<div class="d-flex flex-column">
+				<h3 class="login-title d-flex justify-content-center">QR Code Attendance Monitoring System</h3>
+				<h3 class="login-title d-flex justify-content-center">w/ SMS Notification</h3>
 			</div>
 		</div>
+	</div>
+
+	<div class="row row-login-card mt-5">
+		<!-- start student login card -->
+		<div class="col d-flex justify-content-center mb-5">
+			<a href="login/student-login.php" class="a-card">
+			<div class="card card-type-login">
+			  <div class="card-header card-header-login d-flex justify-content-center">
+			    <i class='bx bx-user-circle' ></i>
+			  </div>
+			  <div class="card-body d-flex justify-content-center">
+			    <h3 class="login-card-title">S T U D E N T L O G I N</h3>
+			  </div>
+			</div>
+			</a>
+		</div>
+		<!-- card end -->
+
+		<!-- start instructor login card -->
+		<div class="col d-flex justify-content-center mb-5">
+			<a href="login/instructor-login.php" class="a-card">
+			<div class="card card-type-login">
+			  <div class="card-header card-header-login d-flex justify-content-center">
+			    <i class='bx bxs-graduation' ></i>
+			  </div>
+			  <div class="card-body d-flex justify-content-center">
+			    <h3 class="login-card-title">I N S T R U C T O R L O G I N</h3>
+			  </div>
+			</div>
+			</a>
+		</div>
+		<!-- card end -->
+
+		<!-- start instructor login card -->
+		<div class="col d-flex justify-content-center mb-5">
+			<a href="login/admin-login.php" class="a-card">
+			<div class="card card-type-login">
+			  <div class="card-header card-header-login d-flex justify-content-center">
+			    <i class='bx bx-street-view'></i>
+			  </div>
+			  <div class="card-body d-flex justify-content-center">
+			    <h3 class="login-card-title">A D M I N L O G I N</h3>
+			  </div>
+			</div>
+			</a>
+		</div>
+		<!-- card end -->
 	</div>
 
 </div>

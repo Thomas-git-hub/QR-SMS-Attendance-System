@@ -4,10 +4,62 @@
 
 body{
 	font-family: 'Montserrat', sans-serif;
-	background: rgb(0,255,247);
-	background: radial-gradient(circle, rgba(0,255,247,1) 0%, rgba(45,151,233,1) 49%, rgba(0,59,99,1) 100%);
+	background-color: #f8f6fd;
+	/*background: rgb(0,255,247);
+	background: radial-gradient(circle, rgba(0,255,247,1) 0%, rgba(45,151,233,1) 49%, rgba(0,59,99,1) 100%);*/
 }
 
+/*login card*/
+.card-header-login{
+	background: rgb(0,82,193);
+	background: linear-gradient(90deg, rgba(0,82,193,1) 0%, rgba(0,228,255,1) 50%, rgba(0,255,222,1) 100%);	
+	border-radius: 16px;
+}
+
+.card-type-login:hover{
+	box-shadow: -1px -1px 15px 5px rgba(0,9,255,0.27);
+	-webkit-box-shadow: -1px -1px 15px 5px rgba(0,9,255,0.27);
+	-moz-box-shadow: -1px -1px 15px 5px rgba(0,9,255,0.27);
+}
+
+
+/*end of login card*/
+
+.a-card{
+	width: 25rem;
+	text-decoration: none;
+	box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
+	-webkit-box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
+	-moz-box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
+}
+.bx-user-circle{
+	font-size: 100px;
+	color: #ffff;
+	box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
+	-webkit-box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
+	-moz-box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
+}
+
+.bxs-graduation{
+	font-size: 100px;
+	color: #ffff;
+	box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
+	-webkit-box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
+	-moz-box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
+}
+
+.bx-street-view{
+	font-size: 100px;
+	color: #ffff;
+	box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
+	-webkit-box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
+	-moz-box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
+}
+
+.login-card-title{
+	color: #1261a0;
+	font-size: 100%;
+}
 .text-label{
 	color: #000033;
 }
@@ -22,34 +74,37 @@ body{
 }
 
 .card-login{
-		/* From https://css.glass */
-	background: rgba(61, 61, 61, 0.22);
-	border-radius: 16px;
-	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-	backdrop-filter: blur(4.7px);
-	-webkit-backdrop-filter: blur(4.7px);
-	border: 1px solid rgba(61, 61, 61, 0.56);
-
+	background-color: #ffff;
+	box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
+	-webkit-box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
+	-moz-box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
 	width: 40rem;
 }
 
+.bx-arrow-back{
+	font-size: 35px;
+	color: #3895d3 !important;
+}
+.bx-arrow-back:hover{
+	color: #072f5f !important;
+	font-size: 35px;
+}
+
 .card-registration{
-	/* From https://css.glass */
-	background: rgba(61, 61, 61, 0.22);
-	border-radius: 16px;
-	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-	backdrop-filter: blur(4.7px);
-	-webkit-backdrop-filter: blur(4.7px);
-	border: 1px solid rgba(61, 61, 61, 0.56);
+	background-color: #ffff;
+	box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
+	-webkit-box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
+	-moz-box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
 
 	width: 60rem;
 }
 
 .card-header{
 	background-color: transparent;
-	/*background-color: #f6f8fd;*/
+	/*background: linear-gradient(90deg, rgba(0,82,193,1) 0%, rgba(0,228,255,1) 50%, rgba(0,255,222,1) 100%);	*/
 	color: #000033;
-	border-bottom: 1px solid #ffff;
+	border-bottom: 1px solid #3895d3;
+
 }
 
 .lbl-form{
@@ -59,18 +114,19 @@ body{
 .btn-submit{
 	width: 300px;
 	color: #f1f1f1;
-	background-color: #1261a0;
+	background: linear-gradient(90deg, rgba(0,82,193,1) 0%, rgba(0,228,255,1) 50%, rgba(0,255,222,1) 100%);
 	border: none;
 }
 
 .btn-submit:hover{
-	color: #ffffff;
+	color: #000000;
 	background-color: #072f5f;
-	border: none;
+	border: 1px solid #000000;
 }
 
 .card-footer{
 	background-color: transparent;
+	border-top: 1px solid #3895d3
 }
 
 .col-img{
@@ -83,7 +139,7 @@ body{
 }
 
 .h6-system-title{
-	color: #f6f8fd;
+	color: #072f5f;
 	font-size: 180%;
 	font-weight: bold;
 }
@@ -98,32 +154,64 @@ body{
 
 @media screen and (max-width: 650px){
 
-.h6-system-title{
+.row-login-card{
+	display: flex;
+  	flex-direction: column;
+  	justify-content: space-between;
+}
+.a-card{
+	width: 50rem;
+	text-decoration: none;
+	box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
+	-webkit-box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
+	-moz-box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
+}
+
+.bx-user-circle{
+	font-size: 50px;
 	color: #ffff;
+	box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
+	-webkit-box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
+	-moz-box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
+}
+
+.bxs-graduation{
+	font-size: 50px;
+	color: #ffff;
+	box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
+	-webkit-box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
+	-moz-box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
+}
+
+.bx-street-view{
+	font-size: 50px;
+	color: #ffff;
+	box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
+	-webkit-box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
+	-moz-box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
+}
+
+.h6-system-title{
+	color: #072f5f;
 	font-size: 90%;
 	font-weight: bold;
 }
 
 .card-login{
 		/* From https://css.glass */
-	background: rgba(61, 61, 61, 0.22);
-	border-radius: 16px;
-	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-	backdrop-filter: blur(4.7px);
-	-webkit-backdrop-filter: blur(4.7px);
-	border: 1px solid rgba(61, 61, 61, 0.56);
-
+	background-color: #ffff;
+	box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
+	-webkit-box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
+	-moz-box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
 	width: 20rem;
 }
 
 .card-registration{
 	/* From https://css.glass */
-	background: rgba(61, 61, 61, 0.22);
-	border-radius: 16px;
-	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-	backdrop-filter: blur(4.7px);
-	-webkit-backdrop-filter: blur(4.7px);
-	border: 1px solid rgba(61, 61, 61, 0.56);
+	background-color: #ffff;
+	box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
+	-webkit-box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
+	-moz-box-shadow: 10px 10px 14px -5px rgba(0,0,0,0.42);
 
 	width: 20rem;
 }
@@ -132,7 +220,7 @@ body{
 .card-header{
 	background-color: transparent;
 	color: #000033;
-	border-bottom: 1px solid #ffff;
+	border-bottom: 1px solid #3895d3;
 }
 
 
