@@ -257,7 +257,7 @@ $(function() {
           success: function (response) {
             console.log(response);
             if(response.res=='exist'){
-                alert("Subject to assign already exists");
+                alert("Duplicate");
             }else  if(response.res){
                 alert('success');
                $('.close').click(); 
