@@ -20,7 +20,7 @@
             <nav class="navbar navbar-expand-lg navbar-light head__custom-nav">
                 <a class="navbar-brand d-flex align-items-center" href="#">
                     <img src="assets/png/bnhs.png" alt="BNHS">
-                    <span class="span-nav-title">Bicol University Polangui Campus</span>
+                    <span class="span-nav-title">Bacong National High School</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
                     <span><img src="assets/icons/burger_icon.png" alt=""></span>
