@@ -63,8 +63,8 @@ include 'includes/sidenav.php';
   <?php 
 
        require_once '../includes/conn.php';
-       $db->join("assign_student ass", "ass.student=s.stf_ref_id", "LEFT");
-       $db->join("block_subject bs", "bs.bs_id=ass.bs_id", "LEFT");
+       $db->join("assign_student ass", "ass.student_ref_id=s.sdt_ref_id", "LEFT");
+       $db->join("block_subject bs", "bs.bs_id=ass.as_ref_id", "LEFT");
        $db->join("subject_tbl sb", "sb.subject_ref_id=bs.subject_ref_id", "LEFT");
        $db->join("strand_tbl str", "str.str_ref_id=sb.str_ref_id", "LEFT");
 
@@ -125,11 +125,10 @@ echo "{$count}";
           <div class="card-body">
             <h1 class="card-text"><i class='bx bxs-group mx-2'></i>
                 <?php 
-                $db->join("assign_student ass", "ass.student=s.stf_ref_id", "LEFT");
-       $db->join("block_subject bs", "bs.bs_id=ass.bs_id", "LEFT");
+       $db->join("assign_student ass", "ass.student_ref_id=s.sdt_ref_id", "LEFT");
+       $db->join("block_subject bs", "bs.bs_id=ass.as_ref_id", "LEFT");
        $db->join("subject_tbl sb", "sb.subject_ref_id=bs.subject_ref_id", "LEFT");
        $db->join("strand_tbl str", "str.str_ref_id=sb.str_ref_id", "LEFT");
-
 
         $db->where ("str.grade", 12);
         $count = $db->getValue ("student_tbl s" , "count(*)");
