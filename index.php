@@ -34,7 +34,7 @@
 	<div class="row row-login-card mt-5">
 		<!-- start student login card -->
 		<div class="col d-flex justify-content-center mb-5">
-			<a href="login/student-login.php" class="a-card">
+			<a href="./login.php?user=student" class="a-card">
 			<div class="card card-type-login">
 			  <div class="card-header card-header-login d-flex justify-content-center">
 			    <i class='bx bx-user-circle' ></i>
@@ -49,7 +49,7 @@
 
 		<!-- start instructor login card -->
 		<div class="col d-flex justify-content-center mb-5">
-			<a href="login/instructor-login.php" class="a-card">
+		  <a href="./login.php?user=instructor" class="a-card">
 			<div class="card card-type-login">
 			  <div class="card-header card-header-login d-flex justify-content-center">
 			    <i class='bx bxs-graduation' ></i>
@@ -64,7 +64,7 @@
 
 		<!-- start instructor login card -->
 		<div class="col d-flex justify-content-center mb-5">
-			<a href="login/admin-login.php" class="a-card">
+			<a href="./login.php?user=admin" class="a-card">
 			<div class="card card-type-login">
 			  <div class="card-header card-header-login d-flex justify-content-center">
 			    <i class='bx bx-street-view'></i>

@@ -1,9 +1,6 @@
 <?php
+    require_once '../includes/conn.php';
     require_once '../includes/func.php';
-
-
-
-
 ?>
 
 
@@ -29,8 +26,8 @@
 <body>
 
 
-
-<?php include 'includes/topnav.php';
+<?php
+ include 'includes/topnav.php';
 include 'includes/sidenav.php';
 ?>
 <div class="container-fluid">

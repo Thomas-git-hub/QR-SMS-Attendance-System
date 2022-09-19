@@ -23,7 +23,7 @@
         <!-- <a class="btn dropdown-toggle topbtn" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           Account Name
         </a> -->
-        <a class="a-logout" href="#">Log Out<i class='bx bx-log-out mx-2'></i></a>
+        <a class="a-logout" href="../query/logoutExe.php">Log Out<i class='bx bx-log-out mx-2'></i></a>
 
         <!-- <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="#">Profile <i class='bx bx-user-circle topnav_icon'></i></a></li>

@@ -1,5 +1,6 @@
 
   <div class="sidebar">
+   
     <div class="logo-details">
       <i class='bx bx-qr-scan icon'></i>
         <div class="logo_name">Attendance System</div>

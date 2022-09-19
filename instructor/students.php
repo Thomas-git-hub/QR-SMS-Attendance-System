@@ -1,3 +1,20 @@
+
+<?php 
+  
+  require_once '../includes/conn.php';
+  require_once '../includes/func.php';
+ 
+  sessionSet();
+  if(!isset($_SESSION['classId'])){
+    header('location: index.php');
+  }
+
+
+
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,9 +44,25 @@ include 'includes/topnav.php';
 include 'includes/sidenav.php';
 ?>
 
+<?php   
+
+ $students = $db->rawQuery('
+            SELECT * FROM student_tbl as student 
+              JOIN assign_student as a_s
+                  ON a_s.student_ref_id = student.sdt_ref_id
+                    WHERE block_ref_id = ?
+ ', Array ($_SESSION['classId']));
+
+
+ var_dump($students);
+
+?>
+
+
 <div class="container-fluid">
 <div class="body-content">  
 
+<p><?php echo  $_SESSION['classId'] ?></p>
     <div class="row mt-3 mb-5">
         <div class="col">
             <div class="card card-title-banner">
