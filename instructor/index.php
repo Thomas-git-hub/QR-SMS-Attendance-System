@@ -1,3 +1,18 @@
+
+<?php
+require_once '../includes/conn.php';
+require_once '../includes/func.php';
+
+include 'includes/topnav.php';
+sessionSet();
+if(!isset( $_SESSION['userId'] )){
+   header('location: ../index.php');
+  
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,14 +35,9 @@
 	<title>Professor</title>
 </head>
 <body>
+<p> galing to sa login Professor  id  :  <?php  echo  $ins_ref_id = $_SESSION['userId']  ;?></p>
 
-<?php
-include 'includes/topnav.php';
-?>
-
-<p> galing to sa login Professor  id  :  <?php echo  $ins_ref_id = '166325134125900'  ;?></p>
-
-<?php   require_once '../includes/conn.php';
+<?php   
 
  $classes = $db->rawQuery('
  SELECT * FROM  assign_sub ass 
@@ -83,6 +93,7 @@ include 'includes/topnav.php';
                 <div class="col mt-3">
                     <div class="card card-select">
                       <div class="card-header">
+                      <?php echo$class['block_ref_id']?>
                         <h3 class="card-header-title"><?php  echo strtoupper($class['str_name']) ?></h3>
                       </div>
                       <div class="card-body">
@@ -94,7 +105,7 @@ include 'includes/topnav.php';
                             </div>
                             <div class="col">
                               <a  href ="scanner.php?id=<?php echo$class['bs_id']?>" class="btn btn-scan-now" >Scan Attendance?</a>
-                              <a class="btn btn-manage-subject" href='dashboard.php' >Manage Subjects</a>
+                              <a class="btn btn-manage-subject" href='dashboard.php?id=<?php echo$class['block_ref_id']?> ' >Manage Subjects</a>
                             </div>
                         </div>
                         
@@ -122,22 +133,25 @@ include 'includes/topnav.php';
          <?php
           
           foreach ($classes as $class){
+             
               if($class['grade'] == 12){  ?>
-              <!-- start of card -->
-                <div class="col mt-3">
+               <!-- start of card -->
+               <div class="col mt-3">
                     <div class="card card-select">
                       <div class="card-header">
-                        <h3 class="card-header-title"><small>Strand&nbsp;</small>ABM</h3>
+                      <?php echo$class['block_ref_id']?>
+                        <h3 class="card-header-title"><?php  echo strtoupper($class['str_name']) ?></h3>
                       </div>
                       <div class="card-body">
                         <div class="row">
                             <div class="col col-card-body">
-                              <h5 class="card-title"><small>Subject:&nbsp;</small>English</h5>
-                              <h5 class="card-title"><small>Block:&nbsp;</small>A</h5>
+                            <h5 class="card-title"><small>Block:&nbsp;</small><?php  echo ucfirst($class['block_name']) ?></h5>
+                              <h5 class="card-title"><small>Subject:&nbsp;</small><?php  echo ucfirst($class['subject_name']) ?></h5>
+                             
                             </div>
                             <div class="col">
-                              <button class="btn btn-scan-now" data-toggle="modal" data-target="#selectTime">Scan Attendance?</button>
-                              <button class="btn btn-manage-subject" onclick="window.location.href='http://localhost/qr-sms-attendance-system/instructor/dashboard.php';">Manage Subjects</button>
+                              <a  href ="scanner.php?id=<?php echo$class['block_ref_id']?>" class="btn btn-scan-now" >Scan Attendance?</a>
+                              <a class="btn btn-manage-subject" href='dashboard.php?id=<?php echo$class['block_ref_id']?>' >Manage Subjects</a>
                             </div>
                         </div>
                         

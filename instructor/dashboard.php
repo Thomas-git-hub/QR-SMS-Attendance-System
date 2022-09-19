@@ -1,3 +1,23 @@
+
+<?php 
+    
+    require_once '../includes/conn.php';
+    require_once '../includes/func.php';
+    if(isset($_GET['id'])){
+      sessionSet();
+      $_SESSION['classId'] = $_GET['id'];
+    }else{
+
+      header('location: index.php');
+
+    }
+
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,6 +49,8 @@ include 'includes/sidenav.php';
 
 <div class="container-fluid">
 <div class="body-content">  
+
+   </p>  class id : <?php  echo  $_SESSION['classId'] ?> </p>
 
     <div class="row mb-5">
         <div class="col">

@@ -5,10 +5,10 @@
 
     extract($_POST);
 
-    $userType ='admin';
-    $username  ='admin';
-    $password  ='admin123';
-
+    // $userType ='instructor';
+    // $username ='analyn@gmail.com';
+    // $password = '123';
+   
     if($userType == 'admin'){
         $usernameColumn = 'admin_username';
         $passwordColumn = 'admin_password';
@@ -17,7 +17,7 @@
         $usernameColumn = 'sdt_username';
         $passwordColumn = 'sdt_password';
         $idColumn = 'std_ref_id';
-    }else {  // ins
+    }else if($userType == 'instructor'){  // ins
         $usernameColumn = 'username';
         $passwordColumn = 'password';
         $idColumn = 'ins_ref_id';
@@ -31,9 +31,10 @@
           if(!isset($_SESSION['userType'])){
             $_SESSION['userType'] = $userType;
             $_SESSION['userId'] = $user[$idColumn];
-
             // temporay
             $res = Array ('res' =>  true ,'userType' => $userType);
+          }else{
+            $res = Array ('res' =>  'already' ,'userType' => $userType);
           }
        }
     }else
