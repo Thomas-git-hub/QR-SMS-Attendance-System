@@ -93,8 +93,8 @@ include 'includes/topnav.php';
                              
                             </div>
                             <div class="col">
-                              <a  href ="scanner.php?id=<?php echo$class['bs_id']?>" class="btn btn-scan-now" >Scan Attendance?</a>
-                              <a class="btn btn-manage-subject" href='dashboard.php' >Enter Class</a>
+                            <a  href ="scanner.php?id=<?php echo$class['block_ref_id']?>" class="btn btn-scan-now" >Scan Attendance</a>
+                              <a class="btn btn-manage-subject"  href='dashboard.php?id=<?php echo$class['block_ref_id']?> ' >Enter this  Class</a>
                             </div>
                         </div>
                         
@@ -136,8 +136,8 @@ include 'includes/topnav.php';
                               <h5 class="card-title"><small>Block:&nbsp;</small>A</h5>
                             </div>
                             <div class="col">
-                              <button class="btn btn-scan-now" data-toggle="modal" data-target="#selectTime">Scan Attendance?</button>
-                              <button class="btn btn-manage-subject" onclick="window.location.href='http://localhost/qr-sms-attendance-system/instructor/dashboard.php';">Enter Class</button>
+                            <a  href ="scanner.php?id=<?php echo$class['block_ref_id']?>" class="btn btn-scan-now" >Scan Attendance Now</a>
+                              <a class="btn btn-manage-subject"  href='dashboard.php?id=<?php echo$class['block_ref_id']?> ' >Enter this  Class</a>
                             </div>
                         </div>
                         
