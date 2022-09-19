@@ -71,6 +71,7 @@ if(!isset( $_SESSION['userId'] )){
                         </div>
                         <div class="col d-flex justify-content-center">
                             <img src="assets/png/bnhs.png" class="img-banner" width="30%;">
+                            <p>remove ths</p>
                         </div>
                     </div>
                   </div>
@@ -104,9 +105,9 @@ if(!isset( $_SESSION['userId'] )){
                              
                             </div>
                             <div class="col">
-                              <a  href ="scanner.php?id=<?php echo$class['bs_id']?>" class="btn btn-scan-now" >Scan Attendance?</a>
+                              <a  href ="scanner.php?id=<?php echo$class['bs_id']?>" class="btn btn-scan-now" >Scan Attendance Now</a>
                             
-                               <a class="btn btn-manage-subject"  href='dashboard.php?id=<?php echo$class['block_ref_id']?> ' >Enter Class</a>
+                               <a class="btn btn-manage-subject"  href='dashboard.php?id=<?php echo$class['block_ref_id']?> ' >Enter  this Class</a>
                             </div>
                         </div>
                         
@@ -151,8 +152,8 @@ if(!isset( $_SESSION['userId'] )){
                              
                             </div>
                             <div class="col">
-                              <a  href ="scanner.php?id=<?php echo$class['block_ref_id']?>" class="btn btn-scan-now" >Scan Attendance ?</a>
-                              <a class="btn btn-manage-subject"  href='dashboard.php?id=<?php echo$class['block_ref_id']?> ' >Enter Class</a>
+                              <a  href ="scanner.php?id=<?php echo$class['block_ref_id']?>" class="btn btn-scan-now" >Scan Attendance Now</a>
+                              <a class="btn btn-manage-subject"  href='dashboard.php?id=<?php echo$class['block_ref_id']?> ' >Enter this  Class</a>
                             </div>
                         </div>
                         
