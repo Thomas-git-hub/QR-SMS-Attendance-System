@@ -151,7 +151,7 @@ if(!isset( $_SESSION['userId'] )){
                              
                             </div>
                             <div class="col">
-                              <a  href ="scanner.php?id=<?php echo$class['block_ref_id']?>" class="btn btn-scan-now" >Scan Attendance?</a>
+                              <a  href ="scanner.php?id=<?php echo$class['block_ref_id']?>" class="btn btn-scan-now" >Scan Attendance ?</a>
                               <a class="btn btn-manage-subject"  href='dashboard.php?id=<?php echo$class['block_ref_id']?> ' >Enter Class</a>
                             </div>
                         </div>
