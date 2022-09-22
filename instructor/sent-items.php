@@ -1,3 +1,43 @@
+
+<?php 
+  
+  require_once '../includes/conn.php';
+  require_once '../includes/func.php';
+ 
+  sessionSet();
+  if(!isset($_SESSION['classId'])){
+    header('location: index.php');
+  }
+  
+
+
+
+?>
+
+
+<?php
+    
+        $trans = $db->rawQuery('SELECT * FROM `transaction_tbl` as trans 
+        JOIN block_subject as bs 
+            ON trans.bs_id = bs.bs_id 
+        JOIN subject_tbl as subj 
+            ON bs.subject_ref_id = subj.subject_ref_id 
+        JOIN assign_sub as a_s 
+            ON bs.bs_id = a_s.bs_id 
+        JOIN instructor_tbl as i 
+            ON i.ins_ref_id = a_s.ins_ref_id 
+        JOIN student_tbl as student 
+            ON student.sdt_ref_id = trans.std_ref_id
+        WHERE trans.bs_id  = ?
+      
+                                                                   
+                                
+               ', Array ($_SESSION['classId']));
+
+
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,6 +66,10 @@
 include 'includes/topnav.php';
 include 'includes/sidenav.php';
 ?>
+
+
+
+
 
 <div class="container-fluid">
 <div class="body-content">  
@@ -56,27 +100,26 @@ include 'includes/sidenav.php';
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>09123456789</td>
-                <td>SMS Provider</td>
-                <td>Mr. John Doe has <small>&nbsp;ENTERED&nbsp;</small> the class at <small>&nbsp;8:30am&nbsp;</small></td>
-                <td>09/11/2022</td>
-                <td>8:30am</td>
-            </tr>
-            <tr>
-                <td>09123456789</td>
-                <td>SMS Provider</td>
-                <td>Mr. Philip Doe <small>&nbsp;LEAVE&nbsp;</small> the class at <small>&nbsp;10:30am&nbsp;</small></td>
-                <td>09/11/2022</td>
-                <td>8:30am</td>
-            </tr>
-            <tr>
-                <td>09123456789</td>
-                <td>SMS Provider</td>
-                <td>Ms. Aly Doe was <small>&nbsp;EXCUSED&nbsp;</small>, QR Scanned at<small>&nbsp;10:30am&nbsp;</small></td>
-                <td>09/11/2022</td>
-                <td>8:30am</td>
-            </tr>
+           
+
+
+            <?php
+
+                    foreach ($trans as $tran) { ?>
+
+                        <tr>
+                            <td><?php   echo ($tran['sdt_parentNumber']) ?></td>
+                            <td><?php   echo ($tran['sender']) ?></td>
+                            <td><?php   echo ($tran['trans_message']) ?></td>
+                            <td ><?php echo date('M d , Y', strtotime($tran['trans_datetime'])) ?></td>
+                            <td><?php echo date('h:s a', strtotime($tran['trans_datetime'])) ?></td>
+                        </tr>
+                        
+                    <?php }
+
+
+                ?>
+           
         </tbody>
         <tfoot>
             <tr>
@@ -110,7 +153,9 @@ include 'includes/sidenav.php';
 <script type="text/javascript" src="../js/dataTables.bootstrap5.min.js"></script>
 <script>
   $(document).ready(function () {
-        $('#datatable').DataTable();
+        $('#datatable').DataTable({
+            order: [[4, 'asc']],
+        });
     });
 </script>
 

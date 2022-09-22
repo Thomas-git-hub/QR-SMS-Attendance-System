@@ -252,7 +252,7 @@ $("#registerForm").validate({
 			if(response.res == 'exist'){
 				alert ('email exist');
 			}else if(response.res){
-				alert ('success');
+				window.location.href = './login.php?user=student'; 
 			}else {
 				alert('somethingWentWrong');
 			}

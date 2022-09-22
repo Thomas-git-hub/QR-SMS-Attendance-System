@@ -2,8 +2,8 @@
 <?php  
 
      require_once './includes/func.php';
-
-     
+    sessionSet();
+	
 
     if(isset($_GET['user'])){
 
@@ -14,6 +14,19 @@
         }else if($_GET['user']=='instructor'){
             $userName = 'Instructor';
         }
+
+
+		if(isset($_SESSION['userId'])){
+			if($_GET['user']=='admin'){
+				 header('location: ./admin/');
+			}else if($_GET['user']=='student'){
+				header('location: ./student/');
+				
+			}else if($_GET['user']=='instructor'){
+				header('location: ./instructor/');
+				
+			}
+		}
 
     }else{
         // temp
@@ -128,23 +141,25 @@ $("#loginFrm").validate({
 	submitHandler: function(form,event) { 
 	event.preventDefault();
 
-	 console.log($('#loginFrm').serialize());
+
 		$.ajax({
 			type: 'POST',
 			url: './query/loginExe.php',
 			dataType: 'JSON',
 			data: $('#loginFrm').serialize(),
 			success: function (response) {
+
+		
 			console.log(response);
 
 			if(response.res == 'already'){
 				alert ('loggined from anothet accoutn');
 			}else if(response.res){
-                 if(response.userType == 'admin')
+                 if(response.userType.trim() == 'admin')
                     window.location.href = './admin/';
-                 else if (response.userType  == 'student')
-                     window.location.userType  = './student/';
-                 else if (response.userType  == 'instructor')
+                 else if (response.userType.trim()  == 'student')
+                     window.location.href  = './student';
+                 else if (response.userType.trim()  == 'instructor')
                      window.location.href = './instructor/';
                  
 			}else {

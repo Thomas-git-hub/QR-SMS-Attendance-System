@@ -1,3 +1,14 @@
+
+<?php   
+
+require_once '../includes/conn.php'; 
+require_once '../includes/func.php';
+sessionSet();
+
+
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +32,8 @@
     
 
 	<title>Scanner</title>
+
+
 </head>
 <body>
 
@@ -38,66 +51,156 @@ include 'includes/topnav.php';
 
     <div class="row">
         <div class="col">
-            <div class="alert alert-success" role="alert">
+            <div class="alert alert-success" role="alert" id="success">
               S U C C E S F U L
             </div>
-            <div class="alert alert-danger" role="alert">
-              F A I L E D
+            <div class="alert alert-danger" role="alert" id="failed">
+              F A I L E D  - Something went wrong.
+            </div>
+            <div class="alert alert-danger" role="alert" id="userNotFound">
+              U S E R &nbsp;  N O T &nbsp;F O U N D
+            </div>
+
+            <div class="alert alert-danger" role="alert" id="invalidClass">
+              U S E R &nbsp;  N O T  &nbsp; I N   &nbsp;   C L A S S
             </div>
         </div>
     </div>
 
     <div class="row">
         <div class="col d-flex justify-content-center mt-5">
-            <div class="card" style="width: 18rem;">
-              <div class="card-body d-flex justify-content-center">
-                <i class='bx bxs-camera' style="font-size: 150px;"></i>
-              </div>
-            </div>
+                <div  id="reader" class="mt-4">Result Here</div>
         </div>
     </div>
 
     <div class="row mt-5 p-5">
-        <div class="col">
-            <select class="form-select mb-3" id="grade"  name="grade"  required>
-                    <option selected="true" disabled="disabled">TimeIn/TimeOut</option>
-                    <option value="Time In">Time In</option>
-                    <option value="Time Out">Time Out</option>
-            </select>
-        </div>
+
         <div class="col">
             <!-- magshoshow lang to kapag sa pinindot lang ang Time In -->
-            <select class="form-select mb-3" id="grade"  name="grade"  required>
-                    <option selected="true" disabled="disabled">Select Type</option>
-                    <option value="On Time">On Time</option>
-                    <option value="Late">Late</option>
-                    <option value="Excuse">Excuse</option>
+            <select class="form-select mb-3" id="type"   required>
+                
+                    <option value="1">On Time</option>
+                    <option value="2">Late</option>
+                    <option value="3">Excuse</option>
             </select>
         </div>
     </div>
 
 <script src="../js/jquery.min.js"></script>
 <script src="../js/popper.min.js"></script>
-<script src="../js/sidebar.js"></script>
 <script src="../js/bootstrap.min.js"></script>  
-
-<script type="text/javascript" src="../js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="../js/dataTables.buttons.min.js"></script>
-<script type="text/javascript" src="../js/buttons.print.min.js"></script>
-<script type="text/javascript" src="../js/jszip.min.js"></script>
-<script type="application/json" src="../js/pdfmake.min.js.map"></script>
-<script type="text/javascript" src="../js/pdfmake.min.js"></script>
-
-<script type="text/javascript" src="../js/vfs_fonts.js"></script>
-<script type="text/javascript" src="../js/buttons.html5.min.js"></script>
-<script type="text/javascript" src="../js/dataTables.bootstrap5.min.js"></script>
+<script src="../js/html5-qrcode.min.js"></script>  
 
 <script>
-        $(document).ready(function () {
-            $("#btn").click(function () {
-                $.alert("This is an alert message!");
+        
+$(function() {
+
+const toTitleCase = (phrase) => {
+  return phrase
+    .toLowerCase()
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+};
+  // standby
+
+  $('#success').hide();
+  $('#failed').hide();
+  $('#userNotFound').hide();
+  $('#invalidClass').hide();
+
+var flag = true;
+
+function onScanSuccess(qrCodeMessage) {
+      
+        var  type = $('#type').val();
+        var  ins_ref_id =<?php echo json_encode($_SESSION['userId']); ?>;
+        var  bs_id =<?php echo json_encode($_GET['bsid']); ?>;
+        var  block_ref_id =<?php echo json_encode($_GET['blockid']); ?>;
+        var  std_ref_id =   qrCodeMessage.trim();
+
+  
+
+        if(flag){
+          
+            $.ajax({
+              type: 'POST',
+              url: 'query/scanExe.php',
+              dataType: 'JSON',
+              data: {
+                    'type': type,
+                    'ins_ref_id':ins_ref_id,
+                    'bs_id' : bs_id,
+                    'std_ref_id': std_ref_id,
+                    'block_ref_id':block_ref_id
+                    },
+              beforeSend: function() {      
+                    
+                
+              },
+              error: function() { // if error occured
+                  // alert("Error occured.please try again");
+              },
+              success: function (data) {
+
+                $('.alert').hide();
+                
+                console.log(data);
+
+                if(data.res=='invalidClass'){
+
+                    $('#invalidClass').show();
+
+                    }
+                else if(data.res=='notexist'){
+
+                  $('#userNotFound').show();
+                
+                }
+                else if(data.res =='error'){
+
+                 alert('Contact The developer ,')
+
+                }
+                else if(data.res =='failed'){
+                  $('#failed').show();
+                }
+
+                else if(data.res == 'success'){
+
+                  $('#success').show();
+                  
+                }
+
+
+                    
+                
+              }
             });
-        });
+              // 
+              flag = false;
+              setTimeout(()=>flag=true, 1000);
+        }
+
+
+
+   }
+
+  function onScanFailure(error) {
+    // console.log(error);
+    // handle scan failure, usually better to ignore and keep scanning.
+    // for example:
+    // console.warn(`Code scan error = ${error}`);
+  }
+  
+  let html5QrcodeScanner = new Html5QrcodeScanner(
+    "reader",
+    { fps: 10, qrbox: {width: 250, height: 250} },
+    /* verbose= */ false);
+  html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+
+
+});
 
     </script>
 

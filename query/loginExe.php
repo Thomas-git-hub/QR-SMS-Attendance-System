@@ -5,9 +5,14 @@
 
     extract($_POST);
 
-    // $userType ='instructor';
-    // $username ='analyn@gmail.com';
-    // $password = '123';
+    // $userType ='student';
+    // $username ='test@gmail.com ';
+    // $password = '123456';
+
+
+    test_input($username);
+    test_input($password);
+    test_input($userType);
    
     if($userType == 'admin'){
         $usernameColumn = 'admin_username';
@@ -16,7 +21,7 @@
     }else if($userType == 'student'){
         $usernameColumn = 'sdt_username';
         $passwordColumn = 'sdt_password';
-        $idColumn = 'std_ref_id';
+        $idColumn = 'sdt_ref_id';
     }else if($userType == 'instructor'){  // ins
         $usernameColumn = 'username';
         $passwordColumn = 'password';
@@ -27,15 +32,15 @@
     $db->where($passwordColumn,$password);
     if($user =$db->getOne($userType."_tbl")){
        if($db->count > 0){
+
+    
           sessionSet();
-          if(!isset($_SESSION['userType'])){
-            $_SESSION['userType'] = $userType;
-            $_SESSION['userId'] = $user[$idColumn];
+      
+          $_SESSION['userType'] = $userType;
+          $_SESSION['userId'] = $user[$idColumn];
             // temporay
             $res = Array ('res' =>  true ,'userType' => $userType);
-          }else{
-            $res = Array ('res' =>  'already' ,'userType' => $userType);
-          }
+         
        }
     }else
          $res = Array ('res' =>  false );

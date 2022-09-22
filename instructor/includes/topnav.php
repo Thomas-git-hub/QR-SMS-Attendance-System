@@ -17,12 +17,17 @@
   <div class="container-fluid">
     <a class="navbar-brand"></a>
     <div class="d-flex" role="search">
+      <p  class="h6 text-primary" style="margin-right: 10px;"> <?php  $db->where ("ins_ref_id", $_SESSION['userId']);
+                                                                      $user = $db->getOne ("instructor_tbl");
+                                                                       echo  ucwords($user['ins_fullname']);  ?></p>
       <div class="name">
       <div class="dropdown">
 
         <!-- <a class="btn dropdown-toggle topbtn" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           Account Name
         </a> -->
+
+      
         <a class="a-logout" href="../query/logoutExe.php">Log Out<i class='bx bx-log-out mx-2'></i></a>
 
         <!-- <ul class="dropdown-menu">

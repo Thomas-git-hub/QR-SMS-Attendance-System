@@ -1,3 +1,46 @@
+
+<?php 
+  
+  require_once '../includes/conn.php';
+  require_once '../includes/func.php';
+ 
+  sessionSet();
+  if(!isset($_SESSION['classId'])){
+    header('location: index.php');
+  }
+  
+
+
+
+?>
+
+
+
+<?php
+        $db->orderBy("trans.trans_datetime","Desc");
+        $trans = $db->rawQuery('SELECT * FROM `transaction_tbl` as trans 
+        JOIN block_subject as bs 
+            ON trans.bs_id = bs.bs_id 
+        JOIN subject_tbl as subj 
+            ON bs.subject_ref_id = subj.subject_ref_id 
+        JOIN assign_sub as a_s 
+            ON bs.bs_id = a_s.bs_id 
+        JOIN instructor_tbl as i 
+            ON i.ins_ref_id = a_s.ins_ref_id 
+        JOIN student_tbl as student 
+            ON student.sdt_ref_id = trans.std_ref_id
+        WHERE trans.bs_id  = ?
+         order by  trans.trans_datetime DESC;
+                                                                   
+                                
+               ', Array ($_SESSION['classId']));
+
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,9 +70,11 @@ include 'includes/topnav.php';
 include 'includes/sidenav.php';
 ?>
 
+
+
 <div class="container-fluid">
 <div class="body-content">  
-
+  <?php  echo $_SESSION['classId'] ?>
     <div class="row mt-3 mb-5">
         <div class="col">
             <div class="card card-title-banner">
@@ -51,21 +96,45 @@ include 'includes/sidenav.php';
                 <th>Date</th>
                 <th>Name</th>
                 <th>Attendance Log</th>
-                <th>TimeIn/TimeOut</th>
+
                 <th>Status</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>09/10/22</td>
-                <td>John Doe</td>
-                <td>8:30am</td>
-                <td>Time In</td>
-                <td>
-                    <span class="badge badge-on-time">On time</span>
-                </td>
-            </tr>
-            <tr>
+
+          <?php 
+
+            foreach ($trans as $tran) { ?>
+
+                 <tr>
+                     <td data-sort="<?php   echo $tran['trans_datetime']?>"><?php echo date('M d , Y', strtotime($tran['trans_datetime'])) ?></td>
+                     <td><?php   echo ucwords($tran['sdt_fullname']) ?></td>
+                     <td><?php echo date('h:s a', strtotime($tran['trans_datetime'])) ?></td>
+                    
+                     <td>
+                              <?php
+                                    
+                                    if($tran['type'] == 'ON-TIME') {
+                                        echo ' <span class="badge rounded-pill text-bg-primary">On Time</span>';
+                                    } else if($tran['type']== 'LATE') {
+                                        echo ' <span class="badge rounded-pill text-bg-danger">LATE</span>';
+                                    } elseif ($tran['type']=== 'EXCUSE'){
+                                        echo ' <span class="badge rounded-pill text-bg-warning">EXCUSE</span>';
+                                    }
+
+
+
+                                ?>
+                     </td>
+                </tr>
+                
+            <?php }
+
+
+
+                ?>
+          
+            <!-- <tr>
                 <td>09/10/22</td>
                 <td>John Doe</td>
                 <td>9:30am</td>
@@ -82,7 +151,7 @@ include 'includes/sidenav.php';
                 <td>
                     <span class="badge badge-excuse">Excuse</span>
                 </td>
-            </tr>
+            </tr> --> 
         </tbody>
         <tfoot>
             <tr>

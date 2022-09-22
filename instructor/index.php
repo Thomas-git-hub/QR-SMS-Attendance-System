@@ -1,3 +1,29 @@
+<?php   
+
+require_once '../includes/conn.php'; 
+require_once '../includes/func.php';
+sessionSet();
+ $classes = $db->rawQuery('
+ SELECT * FROM  assign_sub ass 
+    JOIN instructor_tbl as i  
+     ON ass.ins_ref_id = i.ins_ref_id
+    JOIN block_subject  as bs
+      ON bs.bs_id  =  ass.bs_id
+    JOIN subject_tbl as subject
+      ON subject.subject_ref_id  = bs.subject_ref_id
+     JOIN block_tbl as block 
+       ON block.block_ref_id =  bs.block_ref_id
+     JOIN strand_tbl as strand 
+       ON strand.str_ref_id =  block.str_ref_id
+     WHERE i.ins_ref_id = ?
+     ORDER BY  strand.grade asc ,strand.str_name Asc , block.block_name ASC , subject.subject_name ASC;
+ ', Array ($_SESSION['userId']));
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,27 +51,6 @@
 include 'includes/topnav.php';
 ?>
 
-<p> galing to sa login Professor  id  :  <?php echo  $ins_ref_id = '166325134125900'  ;?></p>
-
-<?php   require_once '../includes/conn.php';
-
- $classes = $db->rawQuery('
- SELECT * FROM  assign_sub ass 
-    JOIN instructor_tbl as i  
-     ON ass.ins_ref_id = i.ins_ref_id
-    JOIN block_subject  as bs
-      ON bs.bs_id  =  ass.bs_id
-    JOIN subject_tbl as subject
-      ON subject.subject_ref_id  = bs.subject_ref_id
-     JOIN block_tbl as block 
-       ON block.block_ref_id =  bs.block_ref_id
-     JOIN strand_tbl as strand 
-       ON strand.str_ref_id =  block.str_ref_id
-     WHERE i.ins_ref_id = ?
-     ORDER BY  strand.grade asc ,strand.str_name Asc , block.block_name ASC , subject.subject_name ASC;
- ', Array ($ins_ref_id));
-
-?>
 
 
 <div class="container"> 
@@ -93,8 +98,8 @@ include 'includes/topnav.php';
                              
                             </div>
                             <div class="col">
-                            <a  href ="scanner.php?id=<?php echo$class['block_ref_id']?>" class="btn btn-scan-now" >Scan Attendance</a>
-                              <a class="btn btn-manage-subject"  href='dashboard.php?id=<?php echo$class['block_ref_id']?> ' >Enter this  Class</a>
+                            <a  href ="scanner.php?bsid=<?php echo $class['bs_id']?>&blockid=<?php echo $class['block_ref_id']?>" class="btn btn-scan-now" >Scan Attendance</a>
+                              <a class="btn btn-manage-subject"  href='dashboard.php?id=<?php echo$class['bs_id']?>&grade=<?php echo  $class['grade']?>&strand=<?php  echo strtoupper($class['str_name']) ?>&block=<?php  echo ucfirst($class['block_name'])?>&subject=<?php  echo ucfirst($class['subject_name']) ?>' >Enter this  Class</a>
                             </div>
                         </div>
                         
@@ -105,7 +110,7 @@ include 'includes/topnav.php';
              <?php }
           }  
         }else{
-          echo "<h1 class='text-primary' > No Class Foumd </h1>";
+          echo "<h1 class='text-primary' > No Class on Grade 11 </h1>";
         }
     
     ?>
@@ -123,21 +128,22 @@ include 'includes/topnav.php';
           
           foreach ($classes as $class){
               if($class['grade'] == 12){  ?>
-              <!-- start of card -->
-                <div class="col mt-3">
+                 <!-- start of card -->
+                 <div class="col mt-3">
                     <div class="card card-select">
                       <div class="card-header">
-                        <h3 class="card-header-title"><small>Strand&nbsp;</small>ABM</h3>
+                        <h3 class="card-header-title"><?php  echo strtoupper($class['str_name']) ?></h3>
                       </div>
                       <div class="card-body">
                         <div class="row">
                             <div class="col col-card-body">
-                              <h5 class="card-title"><small>Subject:&nbsp;</small>English</h5>
-                              <h5 class="card-title"><small>Block:&nbsp;</small>A</h5>
+                            <h5 class="card-title"><small>Block:&nbsp;</small><?php  echo ucfirst($class['block_name']) ?></h5>
+                              <h5 class="card-title"><small>Subject:&nbsp;</small><?php  echo ucfirst($class['subject_name']) ?></h5>
+                             
                             </div>
                             <div class="col">
-                            <a  href ="scanner.php?id=<?php echo$class['block_ref_id']?>" class="btn btn-scan-now" >Scan Attendance Now</a>
-                              <a class="btn btn-manage-subject"  href='dashboard.php?id=<?php echo$class['block_ref_id']?> ' >Enter this  Class</a>
+                            <a  href ="scanner.php?bsid=<?php echo $class['bs_id']?>&blockid=<?php echo $class['block_ref_id']?>" class="btn btn-scan-now" >Scan Attendance</a>
+                              <a class="btn btn-manage-subject"  href='dashboard.php?id=<?php echo$class['bs_id']?>&grade=<?php echo  $class['grade']?>&strand=<?php  echo strtoupper($class['str_name']) ?>&block=<?php  echo ucfirst($class['block_name'])?>&subject=<?php  echo ucfirst($class['subject_name']) ?>' >Enter this  Class</a>
                             </div>
                         </div>
                         
@@ -148,7 +154,7 @@ include 'includes/topnav.php';
              <?php }
           }  
         }else{
-          echo "<h1 class='text-primary' > No Class Foumd </h1>";
+          echo "<h1 class='text-primary' > No Class on Grade 12 </h1>";
         }
     
     ?>

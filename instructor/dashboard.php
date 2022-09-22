@@ -52,37 +52,16 @@ include 'includes/sidenav.php';
 
    </p>  class id : <?php  echo  $_SESSION['classId'] ?> </p>
 
-    <div class="row mb-5">
-        <div class="col">
-            <div class="card card-bnhs">
-                  <div class="card-body">
-                    <div class="row">
-                        <div class="col-6 d-flex align-items-center">
-                            <h1 class="h1-card-title">Bacong National High School<small class="h6-small-title mx-3">Ligao City</small></h1>
-                        </div>
-                        <div class="col-6 d-flex justify-content-center">
-                            <img src="assets/png/bnhs.png" width="40%;">
-                        </div>
-                      </div>
-                  </div>
-            </div>
-        </div>
-    </div>
 
 	<div class="row mb-5">
-     <div class="row">
-        <div class="col d-flex justify-content-start">
-            <h3 class="mb-3 mx-2">Grade</h3>
-            <h3>11</h3>
-        </div>    
-     </div>
+     
 
      <div class="col-4">
         <div class="card card-content-body">
           <div class="card-body">
             <div class="col-6">
-              <h1 class="card-text"><i class='bx bxs-group mx-2'></i>23</h1>
-              <span class="card-text">No. Of Students</span>
+              <h1 class="card-text"><i class='bx bxs-group mx-2'></i><?php   echo $_GET['grade']?>   <?php   echo $_GET['strand']?></h1>
+              <span class="card-text">Grade and Strand</span>
             </div>
           </div>
         </div>
@@ -91,66 +70,22 @@ include 'includes/sidenav.php';
      <div class="col-4">
          <div class="card card-content-body">
           <div class="card-body">
-            <h1 class="card-text"><i class='bx bx-book-reader mx-2'></i>23</h1>
-            <span class="card-text">No. of Strand</span>
+            <h1 class="card-text"><i class='bx bx-book-reader mx-2'></i><?php   echo $_GET['block']?></h1>
+            <span class="card-text">Block</span>
           </div>
         </div>
      </div>
      <div class="col-4">
          <div class="card card-content-body">
           <div class="card-body">
-            <h1 class="card-text"><i class='bx bxs-book-content mx-2'></i>23</h1>
-            <span class="card-text">No. Of Block</span>
+            <h1 class="card-text"><i class='bx bxs-book-content mx-2'></i><?php   echo $_GET['subject']?></h1>
+            <span class="card-text">Subject</span>
           </div>
         </div>
      </div>   
     </div>
 
-    <div class="row mb-3">
-     <div class="row">
-        <div class="col d-flex justify-content-start">
-            <h3 class="mb-3 mx-2">Grade</h3>
-            <h3>12</h3>
-        </div>    
-     </div>
-
-     <div class="col-4">
-        <div class="card card-content-body">
-          <div class="card-body">
-            <h1 class="card-text"><i class='bx bxs-group mx-2'></i>23</h1>
-            <span class="card-text">No. Of Students</span>
-          </div>
-        </div>
-     </div>
-
-     <div class="col-4">
-         <div class="card card-content-body">
-          <div class="card-body">
-            <h1 class="card-text"><i class='bx bx-book-reader mx-2'></i>23</h1>
-            <span class="card-text">No. of Strand</span>  
-          </div>
-        </div>
-     </div>
-     <div class="col-4">
-         <div class="card card-content-body">
-          <div class="card-body">
-            <h1 class="card-text"><i class='bx bxs-book-content mx-2'></i>23</h1>
-            <span class="card-text">No. Of Block</span>
-          </div>
-        </div>
-     </div>   
-    </div>
-
-    <div class="row mb-5" style="border-top: 1px solid #ff6f2e;">
-        <div class="col d-flex flex-column mt-3">
-            <div class="card card-instructor">
-                <div class="card-body">
-                    <h1 class="instructor-text"><i class='bx bxs-graduation mx-2' ></i>23</h1>
-                    <span class="instructor-text">No. Of Instructors</span>
-                </div>
-            </div>
-        </div>    
-    </div>
+   
 
     <div class="row mb-4">
       <div class="col d-flex justify-content-center">

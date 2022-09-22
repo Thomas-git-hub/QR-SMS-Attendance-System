@@ -8,11 +8,30 @@
   if(!isset($_SESSION['classId'])){
     header('location: index.php');
   }
-
+  
 
 
 
 ?>
+
+
+
+<?php   
+
+ $students = $db->rawQuery('  SELECT * FROM student_tbl as student 
+                              JOIN assign_student as a_s
+                                  ON a_s.student_ref_id = student.sdt_ref_id
+                              join block_subject  as b_s
+                                    on a_s.block_ref_id =b_s.block_ref_id
+                               WHERE b_s.bs_id = ?
+ ', Array ($_SESSION['classId']));
+
+
+ //var_dump($students);
+
+?>
+
+
 
 
 <!DOCTYPE html>
@@ -36,7 +55,8 @@
 	<title>Manage Attendance</title>
 </head>
 <body>
-
+ <?php 
+ //echo $_SESSION['classId']; ?>
 
 
 <?php
@@ -44,19 +64,6 @@ include 'includes/topnav.php';
 include 'includes/sidenav.php';
 ?>
 
-<?php   
-
- $students = $db->rawQuery('
-            SELECT * FROM student_tbl as student 
-              JOIN assign_student as a_s
-                  ON a_s.student_ref_id = student.sdt_ref_id
-                    WHERE block_ref_id = ?
- ', Array ($_SESSION['classId']));
-
-
- var_dump($students);
-
-?>
 
 
 <div class="container-fluid">
@@ -89,30 +96,43 @@ include 'includes/sidenav.php';
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>John Doe</td>
-                <td>09123456789</td>
-                <td>Tabaco, City</td>
-                <td>Male</td>
-                <td>
-                    <!-- <button class="btn tbl-action-btn-qr" data-toggle="modal" data-target="#createQR">Create QR</button> -->
-                    <button class="btn tbl-action-btn-enable" id="">Enable</button>
-                    <button class="btn tbl-action-btn-disable" id="">Disable</button>
+            <?php
+                foreach($students as $student){ ?>
+                    <tr>
+                        <td><?php  echo ucwords($student['sdt_fullname']) ?></td>
+                        <td><?php  echo  $student['sdt_parentNumber'] ?> </td>
+                        <td><?php  echo  $student['sdt_address'] ?> </td>
+                        <td><?php  echo  $student['sdt_gender'] ?> </td>
+                        <td>
+                      
+                            <?php
+                                if( $student['sdt_active']  == 1) { ?>
+                                      <button class="btn tbl-action-btn-disable" id="">Disable</button>
+                                <?php }else{ ?>
+                                  
+                                  <button class="btn tbl-action-btn-enable" id="">Enable</button>
+                            
+                                <?php }
+
+
+
+                              ?>
+                           
+                         
+                           
+                        </td>
+                    </tr>
+
+
                     
-                </td>
-            </tr>
-            <tr>
-                <td>John Doe</td>
-                <td>09123456789</td>
-                <td>Tabaco, City</td>
-                <td>Male</td>
-                <td>
-                    <!-- <button class="btn tbl-action-btn-qr" data-toggle="modal" data-target="#createQR">Create QR</button> -->
-                    <button class="btn tbl-action-btn-enable" id="">Enable</button>
-                    <button class="btn tbl-action-btn-disable" id="">Disable</button>
+
+
                     
-                </td>
-            </tr>
+
+               <?php }
+            ?>
+          
+          
         </tbody>
         <tfoot>
             <tr>
@@ -129,43 +149,7 @@ include 'includes/sidenav.php';
 </div>
 </div>
 
-<div class="modal fade" id="createQR" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Create QR Code</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action=""  method="post" id="">
-            <div class="row">
-                <div class="col-6 d-flex justify-content-center" style="border-right: 1px solid orange;">
-                    <div class="card d-flex justify-content-center">
-                      <img src="assets/png/bnhs.png">
-                    </div>
-                </div>
-                <div class="col-6">
-                    <h6 class="mt-2">Name: <small class="create-qr-content">John Doe</small> </h6>
-                    <h6 class="mt-2">Grade: <small class="create-qr-content">11</small> </h6>
-                    <h6 class="mt-2">Strand: <small class="create-qr-content">ABM</small> </h6>
-                    <h6 class="mt-2">Block: <small class="create-qr-content">B</small> </h6>
-                    <h6 class="mt-2">Guardian Phone No.: <small class="create-qr-content">0912456789</small> </h6>
-                </div>
 
-            </div>
-
-      </div>
-      <div class="modal-footer d-flex justify-content-center">
-        <button type="" class="modal-btn-generate">Generate QR</button>
-        <button type="" class="modal-btn-download">Download</button>
-        <button type="" class="modal-btn-print">Print</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
 
 <script src="../js/jquery.min.js"></script>
 <script src="../js/popper.min.js"></script>

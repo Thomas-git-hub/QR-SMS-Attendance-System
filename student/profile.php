@@ -1,3 +1,60 @@
+
+<?php
+    require_once '../includes/conn.php';
+    require_once '../includes/func.php';
+    require_once './includes/phpqrcode/qrlib.php';
+   sessionSet();
+    
+?>
+
+
+<?php 
+
+        // get student details
+      $db->where('sdt_ref_id',$_SESSION['userId'] );
+      $student =  $db->getOne('student_tbl');
+
+      // get blcok
+      $db->where('student_ref_id',$_SESSION['userId']);
+      $block_ref_id = $db->getOne('assign_student');
+      $block_ref_id = $block_ref_id['block_ref_id'];
+
+      // get grade and strand
+
+      $gradeStrand = $db->rawQueryOne(' SELECT * FROM  block_tbl  b 
+                                JOIN strand_tbl s 
+                                  ON b.str_ref_id= s.str_ref_id
+                                  WHERE b.block_ref_id =?;'
+                                , Array ($block_ref_id));
+
+
+                        
+
+      // get subject and prof
+      $subjects = $db->rawQuery('SELECT * FROM `subject_tbl` as subject 
+          JOIN block_subject as bs 
+              ON subject.subject_ref_id = bs.subject_ref_id 
+          JOIN assign_sub as a_s 
+            ON bs.bs_id = a_s.bs_id 
+          JOIN instructor_tbl as ins 
+            ON ins.ins_ref_id = a_s.ins_ref_id 
+          WHERE bs.block_ref_id = ?;
+      ', Array ($block_ref_id));
+
+
+      // Path where the images will be saved
+        $filepath = './qr/'.test_input($_SESSION['userId']).'.png';
+        // Image (logo) to be drawn
+        $logopath = '../assets/png/bnhs.png';
+        // qr code content
+        $codeContents = test_input($_SESSION['userId']);
+        // Create the file in the providen path
+
+        generateQr($filepath,$logopath,$codeContents);
+          
+ 
+    ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +71,8 @@
 
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/index.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js" integrity="sha512-csNcFYJniKjJxRWRV1R7fvnXrycHP6qDR21mgz1ZP55xY5d+aHLfo9/FcGDQLfn2IfngbAHd8LdfsagcCqgTcQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     
 	<title>Student</title>
 </head>
@@ -27,6 +86,12 @@ include 'includes/sidenav.php';
 
 <div class="container-fluid">
 <div class="body-content">
+
+
+    <?php  echo $_SESSION['userId'] 
+    ?>
+
+    
 
     <div class="row mt-3 mb-5">
         <div class="col">
@@ -54,37 +119,37 @@ include 'includes/sidenav.php';
           </div>
           <div class="row row-profile-data mb-3 p5">
             <div class="col-6">
-              <h6 class="profile-data mx-5">Full name:<small class="small-profile-content">&nbsp;Thomas Allene B. Escoto</small></h6>
+              <h6 class="profile-data mx-5">Full name:<small class="small-profile-content">&nbsp;<?php echo  ucwords($student['sdt_fullname']) ?></small></h6>
             </div>
             <div class="col-6">
-              <h6 class="profile-data">Gender:<small class="small-profile-content">&nbsp;Male</small></h6>
+              <h6 class="profile-data">Gender:<small class="small-profile-content">&nbsp;<?php echo  ucwords($student['sdt_gender']) ?></small></h6>
             </div>
           </div>
           <div class="row row-profile-data mb-3 p5">
             <div class="col">
-              <h6 class="profile-data mx-5">Address:<small class="small-profile-content">&nbsp;Tabaco, City</small></h6>
+              <h6 class="profile-data mx-5">Address:<small class="small-profile-content">&nbsp;<?php echo  ucwords($student['sdt_address']) ?></small></h6>
             </div>
             <div class="col">
-              <h6 class="profile-data">Phone no:<small class="small-profile-content">&nbsp;09156748575</small></h6>
-            </div>
-          </div>
-          <div class="row row-profile-data mb-3 p5">
-            <div class="col">
-              <h6 class="profile-data mx-5">Grade:<small class="small-profile-content">&nbsp;11</small></h6>
-            </div>
-            <div class="col">
-              <h6 class="profile-data mx-5">Strand:<small class="small-profile-content">&nbsp;ABM</small></h6>
-            </div>
-            <div class="col">
-              <h6 class="profile-data">Block:<small class="small-profile-content">&nbsp;B</small></h6>
+              <h6 class="profile-data">Phone no:<small class="small-profile-content">&nbsp;<?php echo  ucwords($student['sdt_parentNumber']) ?></small></h6>
             </div>
           </div>
           <div class="row row-profile-data mb-3 p5">
             <div class="col">
-              <h6 class="profile-data mx-5">Email:<small class="small-profile-content">&nbsp;bnhs@gmail.com</small></h6>
+              <h6 class="profile-data mx-5">Grade:<small class="small-profile-content">&nbsp; <?php echo $gradeStrand['grade'] ?></small></h6>
             </div>
             <div class="col">
-              <h6 class="profile-data">Password:<small class="small-profile-content">&nbsp;*******</small></h6>
+              <h6 class="profile-data mx-5">Strand:<small class="small-profile-content">&nbsp;<?php echo strtoupper( $gradeStrand['str_name'] )?></small></h6>
+            </div>
+            <div class="col">
+              <h6 class="profile-data">Block:<small class="small-profile-content">&nbsp;<?php echo strtoupper( $gradeStrand['block_name'] )?></small></h6>
+            </div>
+          </div>
+          <div class="row row-profile-data mb-3 p5">
+            <div class="col">
+              <h6 class="profile-data mx-5">Email:<small class="small-profile-content">&nbsp;<?php echo  ucwords($student['sdt_username']) ?></small></h6>
+            </div>
+            <div class="col">
+              <h6 class="profile-data">Password:<small class="small-profile-content">&nbsp;<?php echo  ucwords($student['sdt_password']) ?></small></h6>
             </div>
           </div>
 
@@ -95,15 +160,16 @@ include 'includes/sidenav.php';
             </div>
             <div class="row row-profile-data d-flex flex-column mb-3 p5">
               <div class="col">
-                <h6 class="profile-subject mx-5"><i class='bx bxs-book-alt'></i>Math</h6>
+               
+                <?php
+                  foreach ($subjects as $sub) { ?>
+                     <h6 class="profile-subject mx-5"><i class='bx bxs-book-alt'></i><?php echo  ucwords($sub['subject_name']) ?>  - <span ><?php echo  ucwords($sub['ins_fullname']) ?></span></h6>
+                  <?php }
+                
+
+                ?>
               </div>
-              <div class="col">
-                <h6 class="profile-subject mx-5"><i class='bx bxs-book-alt'></i>English</h6>
-              </div>
-              <div class="col">
-                <h6 class="profile-subject mx-5"><i class='bx bxs-book-alt'></i>Science</h6>
-              </div>
-            </div>
+             
 
         </div>
         <div class="card-footer card-footer-profile d-flex justify-content-center">
@@ -130,20 +196,12 @@ include 'includes/sidenav.php';
       </div>
       <div class="modal-body">
         <form action=""  method="post" id="blockFrm">
-        <label for="exampleInputEmail1">Full Name</label>
-        <input type="texts" class="form-control" id="" placeholder="Enter Name" name="" readonly>
-        <label for="exampleInputEmail1">Gender</label>
-        <input type="texts" class="form-control" id="" placeholder="" name="" readonly="">
+        
         <label for="exampleInputEmail1">Address</label>
         <input type="texts" class="form-control" id="" placeholder="Current Address" name="">
-        <label for="exampleInputEmail1">Guradian Phone No.</label>
+        <label for="exampleInputEmail1">Guardian Phone No.</label>
         <input type="texts" class="form-control" id="" placeholder="09-" name="">
-        <label for="exampleInputEmail1">Grade</label>
-        <input type="texts" class="form-control" id="" placeholder="" name="" readonly>
-        <label for="exampleInputEmail1">Strand</label>
-        <input type="texts" class="form-control" id="" placeholder="" name="" readonly>
-        <label for="exampleInputEmail1">Block</label>
-        <input type="texts" class="form-control" id="" placeholder="" name="" readonly>
+        
       </div>
       <div class="modal-footer d-flex justify-content-center">
         <button type="submit" class="btn modal-btn-update">Update</button>
@@ -198,24 +256,23 @@ include 'includes/sidenav.php';
           <div class="col-6 d-flex justify-content-center">
             <div class="card " style="width: 12rem;">
               <div class="card-body d-flex justify-content-center">
-                <i class='bx bx-qr-scan' style="font-size: 100px;"></i>
+              <a href="./qr/<?php  echo $_SESSION['userId'] ?>.png" download>
+                  <img src="./qr/<?php  echo $_SESSION['userId'] ?>.png" alt="W3Schools"  width="90%">
+              </a>
               </div>
             </div>
           </div>
           <div class="col-6 d-flex justify-content-center">
             <div class="card">
               <div class="card-body">
-                <h6 class="profile-data mb-2">Name:&nbsp;<small class="small-profile-content">Thomas Allene B. Escoto</small></h6>
-                <h6 class="profile-data mb-2">Grade:&nbsp;<small class="small-profile-content">11</small></h6>
-                <h6 class="profile-data mb-2">Strand:&nbsp;<small class="small-profile-content">ABM</small></h6>
-                <h6 class="profile-data mb-2">Block:&nbsp;<small class="small-profile-content">B</small></h6>
+                <p>Please Click the image to download  </p>
               </div>
-          </div>
+             </div>
           </div>
         </div>
       </div>
       <div class="modal-footer d-flex justify-content-center">
-        <button type="submit" class="btn modal-btn-update">Download QR</button>
+       
         <button type="button" class="btn modal-btn-close" data-dismiss="modal">Close</button>
         </form>
       </div>
@@ -230,19 +287,14 @@ include 'includes/sidenav.php';
 <script src="../js/jquery.min.js"></script>
 <script src="../js/popper.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
+<script src="../js/FileSaver.min.js"></script>
 
-
-<script type="text/javascript" src="../js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="../js/dataTables.buttons.min.js"></script>
-<script type="text/javascript" src="../js/buttons.print.min.js"></script>
-<script type="text/javascript" src="../js/jszip.min.js"></script>
-<script type="application/json" src="../js/pdfmake.min.js.map"></script>
-<script type="text/javascript" src="../js/pdfmake.min.js"></script>
-
-<script type="text/javascript" src="../js/vfs_fonts.js"></script>
-<script type="text/javascript" src="../js/buttons.html5.min.js"></script>
-<script type="text/javascript" src="../js/dataTables.bootstrap5.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+
 </body>
 </html>
