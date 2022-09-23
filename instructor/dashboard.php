@@ -1,10 +1,24 @@
+<?php 
+
+require_once '../includes/conn.php'; 
+require_once '../includes/func.php';
+sessionSet();
+if($_SESSION['userType'] !== 'instructor') {
+  
+ session_start();
+session_unset();
+session_destroy();
+ header('location: ../login.php?user=instructor');
+ exit();
+}
+ ?>
 
 <?php 
     
     require_once '../includes/conn.php';
     require_once '../includes/func.php';
+    sessionSet();
     if(isset($_GET['id'])){
-      sessionSet();
       $_SESSION['classId'] = $_GET['id'];
     }else{
 
@@ -39,7 +53,6 @@
 	<title>Admin</title>
 </head>
 <body>
-
 
 
 <?php

@@ -1,3 +1,17 @@
+<?php 
+
+require_once '../includes/conn.php'; 
+require_once '../includes/func.php';
+sessionSet();
+if($_SESSION['userType'] !== 'admin') {
+   session_start();
+session_unset();
+session_destroy();
+ header('location: ../login.php?user=admin');
+ exit();
+}
+
+ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +34,6 @@
   <title>Admin</title>
 </head>
 <body>
-
 
 
 <?php
