@@ -4,7 +4,13 @@
     require_once '../includes/func.php';
     require_once './includes/phpqrcode/qrlib.php';
    sessionSet();
-    
+if($_SESSION['userType'] !== 'student') {
+   session_start();
+session_unset();
+session_destroy();
+ header('location: ../login.php?user=student');
+ exit();
+}
 ?>
 
 

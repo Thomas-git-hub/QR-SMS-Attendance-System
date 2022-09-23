@@ -3,8 +3,14 @@
   
   require_once '../includes/conn.php';
   require_once '../includes/func.php';
- 
   sessionSet();
+if($_SESSION['userType'] !== 'instructor') {
+     session_start();
+session_unset();
+session_destroy();
+ header('location: ../login.php?user=instructor');
+ exit();
+}
   if(!isset($_SESSION['classId'])){
     header('location: index.php');
   }

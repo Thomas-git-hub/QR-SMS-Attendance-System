@@ -1,14 +1,16 @@
-<?php
+
+ <?php
     require_once '../includes/conn.php';
     require_once '../includes/func.php';
 
    sessionSet();
-
-   if(!isset($_SESSION['userId'])){
-        header('location:../login.php?user=student');
-        exit();
-   }
-
+if($_SESSION['userType'] !== 'student') {
+     session_start();
+session_unset();
+session_destroy();
+ header('location: ../login.php?user=student');
+ exit();
+}
     
 ?>
 

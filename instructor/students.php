@@ -5,6 +5,13 @@
   require_once '../includes/func.php';
  
   sessionSet();
+if($_SESSION['userType'] !== 'instructor') {
+session_start();
+session_unset();
+session_destroy();
+ header('location: ../login.php?user=instructor');
+ exit();
+}
   if(!isset($_SESSION['classId'])){
     header('location: index.php');
   }
@@ -106,28 +113,18 @@ include 'includes/sidenav.php';
                         <td>
                       
                             <?php
-                                if( $student['sdt_active']  == 1) { ?>
-                                      <button class="btn tbl-action-btn-disable" id="">Disable</button>
-                                <?php }else{ ?>
-                                  
-                                  <button class="btn tbl-action-btn-enable" id="">Enable</button>
-                            
-                                <?php }
+                    if ($student['sdt_active']==0) { ?>
 
+                             <button type="button" class="btn btn-status tbl-action-btn-enable" id="<?php echo $student['sdt_id'] ;?>" data-status="<?php echo $student['sdt_active'] ;?>" >Enable</button>
+                    <?php  }   
+                   else  {  ?>
+  
+                           <button type="button" class="btn btn-status tbl-action-btn-disable" id="<?php echo $student['sdt_id'] ;?>" data-status="<?php echo $student['sdt_active'] ;?>" >Disable</button>
 
-
-                              ?>
-                           
-                         
+                    <?php   }    ?>                  
                            
                         </td>
                     </tr>
-
-
-                    
-
-
-                    
 
                <?php }
             ?>
@@ -170,6 +167,48 @@ include 'includes/sidenav.php';
   $(document).ready(function () {
         $('#datatable').DataTable();
     });
+
+
+   
+</script>
+
+<script>
+     $(document).on('click', '.btn-status', function () {
+        var id = this.id;
+        var status = $(this).attr("data-status");
+       $.ajax({
+           type: 'POST',
+           url: './query/manageStudentExe.php?action=toggle',
+           dataType: 'JSON',
+           data: {
+             'id' : id,
+             'status' :status,
+           },
+           success: function (response) {
+               console.log (response);
+            if(response.res){
+              
+               if(response.status==1)
+                   
+                 $("#" + response.id ).removeClass("tbl-action-btn-disable").addClass("tbl-action-btn-enable").attr("data-status",0).html('Enable');
+
+               else
+                  $("#" + response.id ).removeClass("tbl-action-btn-enable").addClass("tbl-action-btn-disable").attr("data-status",1).html('Disable');
+
+               location.reload();
+              
+
+            }else{
+               alert('Fail')
+            }
+            
+      
+           }
+
+
+       });
+        
+      });
 </script>
 
 </body>
