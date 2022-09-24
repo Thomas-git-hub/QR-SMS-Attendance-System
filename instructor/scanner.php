@@ -49,7 +49,7 @@ include 'includes/topnav.php';
 
     <div class="row">
         <div class="col d-flex justify-content-center mt-5">
-            <div class="card" style="width: 18rem;">
+            <div class="card resize-scanner">
               <div class="card-body d-flex justify-content-center">
                 <i class='bx bxs-camera' style="font-size: 150px;"></i>
               </div>
