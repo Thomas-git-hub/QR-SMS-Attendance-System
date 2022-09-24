@@ -56,7 +56,7 @@ session_destroy();
         $codeContents = test_input($_SESSION['userId']);
         // Create the file in the providen path
 
-        generateQr($filepath,$logopath,$codeContents);
+        // generateQr($filepath,$logopath,$codeContents);
           
  
     ?>
@@ -115,7 +115,7 @@ include 'includes/sidenav.php';
 
 <div class="row">
   <div class="col d-flex justify-content-center">
-    <div class="card card-profile mb-5" style="width: 50rem;">
+    <div class="card card-profile mb-5" style="width: 50rem;" id="profile">
         <img class="card-img-top" src="assets/img//bnhs-banner.jpg" alt="Card image cap">
         <div class="card-body">
           <div class="row mb-4">
@@ -201,12 +201,12 @@ include 'includes/sidenav.php';
         </button>
       </div>
       <div class="modal-body">
-        <form action=""  method="post" id="blockFrm">
-        
+        <form action=""  method="post" id="updateProfileFrm">
+        <input type="hidden" name="sdt_ref_id" value="<?php echo  ucwords($student['sdt_ref_id']) ?>">
         <label for="exampleInputEmail1">Address</label>
-        <input type="texts" class="form-control" id="" placeholder="Current Address" name="">
+        <input type="texts" class="form-control" id="address" placeholder="Current Address" name="address" required>
         <label for="exampleInputEmail1">Guardian Phone No.</label>
-        <input type="texts" class="form-control" id="" placeholder="09-" name="">
+        <input type="texts" class="form-control" id="parentNumber" placeholder="09-" name="parentNumber" required>
         
       </div>
       <div class="modal-footer d-flex justify-content-center">
@@ -229,16 +229,17 @@ include 'includes/sidenav.php';
         </button>
       </div>
       <div class="modal-body">
-        <form action=""  method="post" id="blockFrm">
+        <form action=""  method="post" id="updatePasswordFrm">
+           <input type="hidden" name="sdt_ref_id" value="<?php echo  ucwords($student['sdt_ref_id']) ?>">
         <label for="exampleInputEmail1">Email</label>
-        <input type="texts" class="form-control mb-3" id="" placeholder="Update Email" name="" >
+        <input type="texts" class="form-control mb-3" id=""  placeholder="Update Email" name="email" required>
         <label for="exampleInputEmail1">Password</label>
-        <input type="texts" class="form-control mb-3" id="" placeholder="Password" name="">
+        <input type="texts" class="form-control mb-3" pattern=".{6,}"   required title="6 characters minimum" id="password" placeholder="Password" name="password" required>
         <label for="exampleInputEmail1">Confirm Password</label>
-        <input type="texts" class="form-control mb-3" id="" placeholder="Re-type your Password" name="">
+        <input type="texts" class="form-control mb-3" id="confirmpass" placeholder="Re-type your Password" name="confirmpass" required>
       </div>
       <div class="modal-footer d-flex justify-content-center">
-        <button type="submit" class="btn modal-btn-update">Update</button>
+        <button type="submit" class="btn modal-btn-update" onclick="return Validate()">Update</button>
         <button type="button" class="btn modal-btn-close" data-dismiss="modal">Close</button>
         </form>
       </div>
@@ -299,7 +300,65 @@ include 'includes/sidenav.php';
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
 
 
+<script>
 
+
+function Validate() {
+        var password = document.getElementById("password").value;
+        var confirmpass = document.getElementById("confirmpass").value;
+        if (password != confirmpass) {
+            alert("Passwords do not match.");
+            return false;
+        }
+        return true;
+    }
+
+  $(document).on('submit', '#updateProfileFrm', function(event){
+        event.preventDefault();
+
+        $.ajax({
+          type: 'POST',
+          url: `./query/updatePassword.php?action=updateProfile`,
+          dataType: 'JSON',
+          data: $('#updateProfileFrm').serialize(),
+          success: function (response) {
+            console.log(response);
+            if(response.res){
+                alert('success');
+               $('.close').click(); 
+                $('#updateProfileFrm').trigger("reset");
+               $("#profile").load(location.href + " #profile");
+              
+            }
+          }
+        });
+    });
+
+  $(document).on('submit', '#updatePasswordFrm', function(event){
+        event.preventDefault();
+
+        $.ajax({
+          type: 'POST',
+          url: `./query/updatePassword.php?action=updatePass`,
+          dataType: 'JSON',
+          data: $('#updatePasswordFrm').serialize(),
+          success: function (response) {
+            console.log(response);
+            if(response.res){
+                alert('success');
+               $('.close').click(); 
+                $('#updatePasswordFrm').trigger("reset");
+               $("#profile").load(location.href + " #profile");
+              
+            }
+          }
+        });
+    });
+
+
+
+
+</script>
 
 
 </body>
