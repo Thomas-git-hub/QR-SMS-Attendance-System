@@ -266,7 +266,7 @@ $(function() {
                 alert('success');
                 $('.close').click(); 
                 $('#blockFrm').trigger("reset");
-              $("#accordionExample").load(location.href + " #accordionExample");
+               location.reload();
               
               
             }
