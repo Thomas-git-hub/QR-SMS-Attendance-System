@@ -243,6 +243,7 @@ $(function() {
                $('.close').click(); 
                 $('#strandFrm').trigger("reset");
                $("#accordionExample").load(location.href + " #accordionExample");
+               location.reload();
               
             }
           }
